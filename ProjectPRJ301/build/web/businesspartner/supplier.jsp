@@ -82,7 +82,7 @@
                             <a class="collapse-item" href="#">Đặt Hàng</a>
                             <a class="collapse-item" href="#">Hóa Đơn</a>
                             <a class="collapse-item" href="#">Trả Hàng</a>
-                            <a class="collapse-item" href="#">Nhập Hàng</a>
+                            <a class="collapse-item" href="importproduct">Nhập Hàng</a>
                             <a class="collapse-item" href="#">Trả Hàng Nhập</a>
                         </div>
                     </div>

@@ -8,6 +8,14 @@
         <servlet-name>CustomerController</servlet-name>
         <servlet-class>controller.partner.CustomerController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>importProduct</servlet-name>
+        <servlet-class>controller.transaction.importProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckInventory</servlet-name>
+        <servlet-class>controller.commodity.CheckInventory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SupplierController</servlet-name>
         <url-pattern>/supplier</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>CustomerController</servlet-name>
         <url-pattern>/customer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>importProduct</servlet-name>
+        <url-pattern>/importproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckInventory</servlet-name>
+        <url-pattern>/checkinventory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,9 +1,10 @@
 <%-- 
-    Document   : suppier
-    Created on : Feb 21, 2022, 4:56:13 AM
+    Document   : checkIn
+    Created on : Mar 1, 2022, 10:21:33 PM
     Author     : win
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Supplier"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -31,9 +32,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <link href="static/css/css.css" rel="stylesheet">
         <link href="static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-        <%
-            ArrayList<Supplier> suppliers = (ArrayList<Supplier>) request.getAttribute("suppliers");
-        %>
     </head>
 
     <body id="page-top">
@@ -62,8 +60,8 @@
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="supplier.html">Thiết Lập Giá</a>
-                            <a class="collapse-item" href="checkinventory.html">Kiểm Kho</a>
+                            <a class="collapse-item" href="">Thiết Lập Giá</a>
+                            <a class="collapse-item" href="checkinventory">Kiểm Kho</a>
                         </div>
                     </div>
                 </li>
@@ -99,7 +97,7 @@
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="customer">Khách Hàng</a>
-                            <a class="collapse-item" href="">Nhà cung cấp</a>
+                            <a class="collapse-item" href="supplier">Nhà cung cấp</a>
                         </div>
                     </div>
                 </li>
@@ -163,7 +161,7 @@
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-bell fa-fw"></i>
                                     <!-- Counter - Alerts -->
-                                   
+
                                 </a>
                                 <!-- Dropdown - Alerts -->
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -171,12 +169,12 @@
                                     <h6 class="dropdown-header">
                                         Thông Báo
                                     </h6>
-                                    
+
                                     <a class="dropdown-item text-center small text-gray-500" href="#">Không có thông báo</a>
                                 </div>
                             </li>
 
-                            
+
 
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
@@ -214,22 +212,20 @@
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->
+
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">Nhà phân phối</h1>
-
+                        <h1 class="h3 mb-2 text-gray-700">Kiểm kho</h1>
 
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <div class ="row">
                                     <h6 class="m-0 font-weight-bold text-primary col-md-3 col-md-9">Danh sánh</h6>
-                                    <div class="col-md-3 col-sm-2 text-center">
-                                        <option class=" form-control form-control-sm"> + Thêm mới</option>
-                                    </div>
+
                                 </div>
-                                
+
                             </div>
                             <div class="row ">
                                 <div class="col-sm-12 col-md-6">
@@ -256,8 +252,17 @@
                                     <table class="table table-bordered as" id="dataTable" width="1000%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>MNPP</th>
-                                                <th>Tên nhà phân phối</th>
+                                                <th>Mã sp</th>
+                                                <th>Tên sp</th>
+                                                <th>Loại sp</th>
+                                                <th>Nhà phân phối</th>
+                                                <th>Giá nhập</th>
+                                                <th>Giá bán</th>
+                                                <th>Hạn sử dụng</th>
+                                                <th>Nhà sản xuất</th>
+                                                <th>Số lượng tồn</th>
+                                                <th>Đơn vị</th>
+                                                <th>Trạng thái</th>
                                                 <th></th>
                                                 <th></th>
                                             </tr>
@@ -265,16 +270,40 @@
 
 
 
-                                        <%for (Supplier s : suppliers) {%>
-                                        <tbody>
-                                            <tr>
-                                                <td><%=s.getId()%></td>
-                                                <td><%=s.getName()%></td>
-                                                <td><a href="#">Chỉnh sửa</a> </td>
-                                                <td><a href="#">Xóa</a></td>
-                                            </tr>
-                                        </tbody>
-                                        <%}%>
+                                        <c:forEach items="${requestScope.products}" var="p">
+                                            <tbody>
+                                                <tr>
+                                                    <td>${p.getId()}</td>
+                                                    <td>
+                                                        <c:forEach items="${requestScope.product}" var="pn">
+                                                            ${pn.getProid()==p.getPid()?pn.getPname():""}
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                         <c:forEach items="${requestScope.product}" var="pn">
+                                                             <c:forEach items="${requestScope.producttypes}" var="pt">
+                                                            ${(pn.getProid()==p.getPid()&& pn.getPtid()==pt.getPtid())?pt.getPtname():""}
+                                                             </c:forEach>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                        <c:forEach items="${requestScope.suppliers}" var="s">
+                                                            ${s.getId()==p.getSid()?s.getName():""}
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>${p.getImportprice()}</td>
+                                                    <td>${p.getSaleprice()}</td>
+                                                    <td>${p.getDateexp()}</td>
+                                                    <td>${p.getNsx()}</td>
+                                                    <td>${p.getQuantity()}</td>
+                                                    <td>${p.getUnit()}</td>
+                                                    <td>${p.isStatus()!="1"?"Đang kinh doanh":"Ngừng kinh doanh"}
+                                                    </td>
+                                                    <td><a href="#">Chỉnh sửa</a> </td>
+                                                    <td><a href="#">Xóa</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </c:forEach>
 
 
 
@@ -285,7 +314,6 @@
                         </div>
 
                     </div>
-                    <!-- /.container-fluid -->
 
                 </div>
                 <!-- End of Main Content -->
@@ -327,3 +355,4 @@
                 </body>
 
                 </html>
+
