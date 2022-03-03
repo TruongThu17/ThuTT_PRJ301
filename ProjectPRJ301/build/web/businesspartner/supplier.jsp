@@ -163,7 +163,7 @@
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-bell fa-fw"></i>
                                     <!-- Counter - Alerts -->
-                                   
+
                                 </a>
                                 <!-- Dropdown - Alerts -->
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -171,12 +171,12 @@
                                     <h6 class="dropdown-header">
                                         Thông Báo
                                     </h6>
-                                    
+
                                     <a class="dropdown-item text-center small text-gray-500" href="#">Không có thông báo</a>
                                 </div>
                             </li>
 
-                            
+
 
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
@@ -226,10 +226,12 @@
                                 <div class ="row">
                                     <h6 class="m-0 font-weight-bold text-primary col-md-3 col-md-9">Danh sánh</h6>
                                     <div class="col-md-3 col-sm-2 text-center">
-                                        <option class=" form-control form-control-sm"> + Thêm mới</option>
+                                        <form action="insertsupplier" >
+                                            <input class=" form-control " type="submit" value="+ Thêm mới" />
+                                        </form>
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="row ">
                                 <div class="col-sm-12 col-md-6">
@@ -270,8 +272,8 @@
                                             <tr>
                                                 <td><%=s.getId()%></td>
                                                 <td><%=s.getName()%></td>
-                                                <td><a href="#">Chỉnh sửa</a> </td>
-                                                <td><a href="#">Xóa</a></td>
+                                                <td><a href="editsupplier?id=<%=s.getId()%>">Chỉnh sửa</a> </td>
+                                                <td><a href="deletesupplier?id=<%=s.getId()%>" onclick="return confirm('Bạn có chắc là muốn xóa Nhà Cung cấp này không?')">Xóa</a></td>
                                             </tr>
                                         </tbody>
                                         <%}%>

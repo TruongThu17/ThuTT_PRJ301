@@ -16,6 +16,30 @@
         <servlet-name>CheckInventory</servlet-name>
         <servlet-class>controller.commodity.CheckInventory</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SettingPrice</servlet-name>
+        <servlet-class>controller.commodity.SettingPrice</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>editcustomer</servlet-name>
+        <servlet-class>editcustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditCustommer</servlet-name>
+        <servlet-class>controller.partner.EditCustommer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCustomer</servlet-name>
+        <servlet-class>controller.partner.DeleteCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteSupplier</servlet-name>
+        <servlet-class>controller.partner.DeleteSupplier</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditSupplier</servlet-name>
+        <servlet-class>controller.partner.EditSupplier</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SupplierController</servlet-name>
         <url-pattern>/supplier</url-pattern>
@@ -31,6 +55,26 @@
     <servlet-mapping>
         <servlet-name>CheckInventory</servlet-name>
         <url-pattern>/checkinventory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SettingPrice</servlet-name>
+        <url-pattern>/settingprice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCustommer</servlet-name>
+        <url-pattern>/editcustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCustomer</servlet-name>
+        <url-pattern>/deletecustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteSupplier</servlet-name>
+        <url-pattern>/deletesupplier</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditSupplier</servlet-name>
+        <url-pattern>/editsupplier</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

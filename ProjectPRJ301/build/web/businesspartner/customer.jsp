@@ -113,7 +113,7 @@
                         <span>Quản lý</span>
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                        
+
                     </div>
                 </li>
 
@@ -162,19 +162,19 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-bell fa-fw"></i>
-                                    
+
                                 </a>
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="alertsDropdown">
                                     <h6 class="dropdown-header">
                                         Thông báo
                                     </h6>
-                                    
+
                                     <a class="dropdown-item text-center small text-gray-500" href="#">Không có thông báo</a>
                                 </div>
                             </li>
 
-                           
+
                             <!-- Nav Item - Tài Khoản -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -223,15 +223,18 @@
                                 <div class ="row">
                                     <h6 class="m-0 font-weight-bold text-primary col-md-3 col-md-9">Danh sánh</h6>
                                     <div class="col-md-3 col-sm-2 text-center">
-                                        <option class=" form-control form-control-sm"> + Thêm mới</option>
+                                        <form action="insertsupplier" >
+                                            <input class=" form-control " type="submit" value="+ Thêm mới" />
+                                        </form>
+
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="row ">
                                 <div class="col-sm-12 col-md-6">
                                     <div class="left dataTables_length" id="dataTable_length">
-                                       <label>Show 
+                                        <label>Show 
                                             <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
                                                 <option value="10">10</option>
                                                 <option value="25">25</option>
@@ -243,13 +246,14 @@
                                 <div class=" col-sm-12 col-md-6">
                                     <div id="dataTable_filter" class="right dataTables_filter">
                                         <label>Search:
-                                            <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
+                                            <input type="search" class="form-control" placeholder="" aria-controls="dataTable">
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
+
                                     <table class="table table-bordered as" id="dataTable" width="1000%" cellspacing="0">
                                         <thead>
                                             <tr>
@@ -270,18 +274,14 @@
                                             <tr>
                                                 <td><%=c.getId()%></td>
                                                 <td><%=c.getName()%></td>
-                                                <td><%=c.getPhone() %></td>
-                                                <td><%=c.getAddress() %></td>
-                                                <td><%=c.getNote() %></td>
-                                                <td><a href="#">Chỉnh sửa</a> </td>
-                                                <td><a href="#">Xóa</a></td>
+                                                <td><%=c.getPhone()%></td>
+                                                <td><%=c.getAddress()%></td>
+                                                <td><%=c.getNote()%></td>
+                                                <td><a href="editcustomer?id=<%=c.getId()%>">Chỉnh sửa</a> </td>
+                                                <td><a href="deletecustomer?id=<%=c.getId()%>" onclick="return confirm('Bạn có chắc là muốn xóa khách hàng này không?')">Xóa</a></td>
                                             </tr>
                                         </tbody>
                                         <%}%>
-
-
-
-
                                     </table>
                                 </div>
                             </div>
@@ -308,7 +308,7 @@
                     <i class="fas fa-angle-up"></i>
                 </a>
 
-
+        
 
                 <!-- Bootstrap core JavaScript-->
                 <script src="static/vendor/jquery/jquery.min.js"></script>
@@ -319,6 +319,7 @@
 
                 <!-- Custom scripts for all pages-->
                 <script src="static/js/sb-admin-2.min.js"></script>
+                <script src="static/js/main/businesspartner.js"></script>
 
                 <!-- Page level plugins -->
                 <script src="static/vendor/chart.js/Chart.min.js"></script>

@@ -162,15 +162,15 @@ GO
 CREATE TABLE [dbo].[InforProduct](
 	[code] [varchar](50) NOT NULL,
 	[pid] [varchar](50) NOT NULL,
-	[importprice] [float] NOT NULL,
-	[saleprice] [float] NOT NULL,
-	[dateexpiry] [date] NOT NULL,
-	[nsx] [varchar](150) NOT NULL,
-	[quantityinstock] [int] NOT NULL,
-	[unit] [varchar](150) NOT NULL,
-	[status] [bit] NOT NULL,
-	[sid] [varchar](50) NOT NULL,
-	[Note] [nvarchar](200) NULL,
+	[importprice] [float],
+	[saleprice] [float],
+	[dateexpiry] [date],
+	[nsx] [varchar](150),
+	[quantityinstock] [int],
+	[unit] [varchar](150),
+	[status] [bit],
+	[sid] [varchar](50),
+	[Note] [nvarchar](200),
  CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED 
 (
 	[code] ASC
