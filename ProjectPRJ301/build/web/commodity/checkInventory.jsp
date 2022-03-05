@@ -19,7 +19,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>IM ADMIN - SUPPLIER</title>
+        <title>IM ADMIN - KIỂM KHO</title>
 
         <!-- Custom fonts for this template-->
         <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

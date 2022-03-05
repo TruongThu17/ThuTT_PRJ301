@@ -126,4 +126,38 @@ public class SupplierDBContext extends DBContext {
         }
         return null;
     }
+
+    public void insertSupplier(Supplier s) {
+        PreparedStatement stm = null;
+        try {
+            String sql = "INSERT INTO [dbo].[Supplier]\n"
+                    + "           ([Sid]\n"
+                    + "           ,[SName])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?)";
+
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, s.getId());
+            stm.setString(2, s.getName());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
 }

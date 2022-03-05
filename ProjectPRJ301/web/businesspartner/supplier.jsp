@@ -18,7 +18,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>IM ADMIN - SUPPLIER</title>
+        <title>IM ADMIN - NHÀ PHÂN PHỐI</title>
 
         <!-- Custom fonts for this template-->
         <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -226,8 +226,8 @@
                                 <div class ="row">
                                     <h6 class="m-0 font-weight-bold text-primary col-md-3 col-md-9">Danh sánh</h6>
                                     <div class="col-md-3 col-sm-2 text-center">
-                                        <form action="insertsupplier" >
-                                            <input class=" form-control " type="submit" value="+ Thêm mới" />
+                                        <form action="insertsupplier">
+                                            <input class=" form-control" type="submit" value="+ Thêm mới" />
                                         </form>
                                     </div>
                                 </div>

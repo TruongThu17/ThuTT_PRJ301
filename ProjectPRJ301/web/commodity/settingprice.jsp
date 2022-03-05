@@ -4,7 +4,7 @@
     Author     : win
 --%>
 
-<%@page import="model.Customer"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Supplier"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -19,7 +19,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>IM ADMIN - SUPPLIER</title>
+        <title>IM ADMIN - THIẾT LẬP GIÁ</title>
 
         <!-- Custom fonts for this template-->
         <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -32,9 +32,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <link href="static/css/css.css" rel="stylesheet">
         <link href="static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-        <%
-            ArrayList<Customer> customers = (ArrayList<Customer>) request.getAttribute("customers");
-        %>
     </head>
 
     <body id="page-top">
@@ -42,7 +39,7 @@
             <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                     <div class="sidebar-brand-icon">
-                        <i class="fas fa-home"></i>
+                        <i class="fas fa-cogs"></i>
                     </div>
                     <div class="sidebar-brand-text mx-3">IM ADMIN </div>
                 </a>
@@ -50,7 +47,7 @@
 
                 <li class="nav-item active">
                     <a class="nav-link" href="index.html">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <i class="fas fa-home"></i>
                         <span>TRANG CHỦ</span></a>
                 </li>
 
@@ -63,8 +60,8 @@
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="supplier.html">Thiết Lập Giá</a>
-                            <a class="collapse-item" href="checkinventory.html">Kiểm Kho</a>
+                            <a class="collapse-item" href="">Thiết Lập Giá</a>
+                            <a class="collapse-item" href="checkinventory">Kiểm Kho</a>
                         </div>
                     </div>
                 </li>
@@ -73,7 +70,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-fw fa-wrench"></i>
+                        <i class="fas fa-sync-alt"></i>
                         <span>Giao Dịch</span>
                     </a>
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -93,13 +90,13 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse"
                        aria-expanded="true" aria-controls="collapse">
-                        <i class="fas fa-fw fa-wrench"></i>
+                        <i class="fas fa-user-tie"></i>
                         <span>Đối Tác </span>
                     </a>
                     <div id="collapse" class="collapse" aria-labelledby="heading"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="">Khách Hàng</a>
+                            <a class="collapse-item" href="customer">Khách Hàng</a>
                             <a class="collapse-item" href="supplier">Nhà cung cấp</a>
                         </div>
                     </div>
@@ -113,9 +110,10 @@
                         <span>Quản lý</span>
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                        
                     </div>
                 </li>
+
+
 
                 <!-- Sidebar Toggler (Sidebar) -->
                 <div class="text-center d-none d-md-inline">
@@ -139,7 +137,7 @@
                             <i class="fa fa-bars"></i>
                         </button>
 
-                        <!-- Topbar Tìm kiếm -->
+                        <!-- Topbar Search -->
                         <form
                             class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <div class="input-group">
@@ -157,32 +155,35 @@
                         <ul class="navbar-nav ml-auto">
 
 
-                            <!-- Nav Item - thông báo -->
+                            <!-- Nav Item - Alerts -->
                             <li class="nav-item dropdown no-arrow mx-1">
                                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-bell fa-fw"></i>
-                                    
+                                    <!-- Counter - Alerts -->
+
                                 </a>
+                                <!-- Dropdown - Alerts -->
                                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="alertsDropdown">
                                     <h6 class="dropdown-header">
-                                        Thông báo
+                                        Thông Báo
                                     </h6>
-                                    
+
                                     <a class="dropdown-item text-center small text-gray-500" href="#">Không có thông báo</a>
                                 </div>
                             </li>
 
-                           
-                            <!-- Nav Item - Tài Khoản -->
+
+
+                            <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">Tài Khoản</span>
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 </a>
-                                <!-- Dropdown - Thông tin người dùng -->
+                                <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                      aria-labelledby="userDropdown">
                                     <a class="dropdown-item" href="#">
@@ -211,27 +212,25 @@
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->
+
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">Khách Hàng</h1>
-
+                        <h1 class="h3 mb-2 text-gray-700">Kiểm kho</h1>
 
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <div class ="row">
                                     <h6 class="m-0 font-weight-bold text-primary col-md-3 col-md-9">Danh sánh</h6>
-                                    <div class="col-md-3 col-sm-2 text-center">
-                                        <option class=" form-control form-control-sm"> + Thêm mới</option>
-                                    </div>
+
                                 </div>
-                                
+
                             </div>
                             <div class="row ">
                                 <div class="col-sm-12 col-md-6">
                                     <div class="left dataTables_length" id="dataTable_length">
-                                       <label>Show 
+                                        <label>Show 
                                             <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
                                                 <option value="10">10</option>
                                                 <option value="25">25</option>
@@ -248,11 +247,60 @@
                                     </div>
                                 </div>
                             </div>
-                            
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered as" id="dataTable" width="1000%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Mã sp</th>
+                                                <th>Tên sp</th>
+                                                <th>Giá nhập</th>
+                                                <th>Giá bán</th>
+                                                <th>Nhà sản xuất</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+
+
+
+                                        <c:forEach items="${requestScope.products}" var="p">
+                                            <tbody>
+                                                <tr>
+                                                    <td>${p.getId()}</td>
+                                                    <td>
+                                                        <c:forEach items="${requestScope.product}" var="pn">
+                                                            ${pn.getProid()==p.getPid()?pn.getPname():""}
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                         <c:forEach items="${requestScope.product}" var="pn">
+                                                             <c:forEach items="${requestScope.producttypes}" var="pt">
+                                                            ${(pn.getProid()==p.getPid()&& pn.getPtid()==pt.getPtid())?pt.getPtname():""}
+                                                             </c:forEach>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                        <c:forEach items="${requestScope.suppliers}" var="s">
+                                                            ${s.getId()==p.getSid()?s.getName():""}
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>${p.getImportprice()}</td>
+                                                    <td>${p.getSaleprice()}</td>
+                                                    <td>${p.getDateexp()}</td>
+                                                    <td>${p.getNsx()}</td>
+                                                    <td>${p.getQuantity()}</td>
+                                                    <td>${p.getUnit()}</td>
+                                                </tr>
+                                            </tbody>
+                                        </c:forEach>
+                                            <input type="submit" value="Lưu thông tin" />  
+                                    </table>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
-                    <!-- /.container-fluid -->
 
                 </div>
                 <!-- End of Main Content -->
