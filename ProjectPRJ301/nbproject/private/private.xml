@@ -4,27 +4,40 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/businesspartner/supplier.jsp</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/commodity/settingprice.jsp</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/commodity/CheckInventory.java</file>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/partner/EditSupplier.java</file>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/businesspartner/editsupplier.jsp</file>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/businesspartner/editcustomer.jsp</file>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/businesspartner/customer.jsp</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/index.html</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/dal/CustomerDBContext.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/partner/InsertCustomer.java</file>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/businesspartner/insertcustomer.jsp</file>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/transaction/importProduct.jsp</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/dal/SupplierDBContext.java</file>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/businesspartner/insertsupplier.jsp</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/model/InforProduct.java</file>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/partner/EditCustommer.java</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/combonent/footer.jsp</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/dal/InforProductDBContext.java</file>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/partner/DeleteSupplier.java</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/partner/DeleteCustomer.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/model/Product.java</file>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/combonent/navbar.jsp</file>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/WEB-INF/web.xml</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/commodity/checkInventory.jsp</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/model/Inventory.java</file>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/model/Supplier.java</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/partner/SupplierController.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/dal/ProductDBContext.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/partner/InsertSupplier.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/commodity/SettingPrice.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/dal/ProductTypeDBContext.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/transaction/importProduct.java</file>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/static/js/main/businesspartner.js</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/commodity/settingprice.jsp</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/dal/CustomerDBContext.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/dal/SupplierDBContext.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/combonent/footer.jsp</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/model/ProductType.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/partner/DeleteCustomer.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/commodity/checkInventory.jsp</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/commodity/DeleteProduct.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/partner/SupplierController.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/home.html</file>
         </group>
     </open-files>
 </project-private>

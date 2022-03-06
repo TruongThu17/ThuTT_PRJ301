@@ -6,16 +6,20 @@
 package controller.transaction;
 
 import dal.InforProductDBContext;
+import dal.ProductDBContext;
 import dal.ProductTypeDBContext;
 import dal.SupplierDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.InforProduct;
+import model.Producer;
+import model.Product;
 import model.ProductType;
 import model.Supplier;
 
@@ -61,6 +65,27 @@ public class importProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String id = request.getParameter("id");
+        String barcode = request.getParameter("code");
+        String name = request.getParameter("name");
+        String price = request.getParameter("importprice");
+        float pricep = Float.parseFloat(price);
+        String nsx = request.getParameter("nsx");
+        String hsd = request.getParameter("hsd");
+        Date hsdp = Date.valueOf(hsd);
+        String sl = request.getParameter("sl");
+        int slp = Integer.parseInt(sl);
+        String unit = request.getParameter("unit");
+        String sid = request.getParameter("sid");
+        String note= request.getParameter("note");
+        String ptid = request.getParameter("ptid");
+        Product p = new Product(id, name, nsx, ptid);
+        InforProduct infp = new InforProduct(id, barcode, pricep, 0, hsdp, slp, unit, true, sid, note);
+        ProductDBContext pdb = new ProductDBContext();
+        InforProductDBContext idb = new InforProductDBContext();
+        pdb.insertProduct(p);
+        idb.insertInforProduct(infp);
+        response.sendRedirect("importproduct");
         
     }
 

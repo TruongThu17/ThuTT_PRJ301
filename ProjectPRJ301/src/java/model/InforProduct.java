@@ -18,14 +18,28 @@ public class InforProduct {
     private float importprice;
     private float saleprice;
     private Date dateexp;
-    private String nsx;
     private int quantity;
     private String unit;
     private boolean status;
     private String sid;
-    private String ptid;
     private String note;
 
+    public InforProduct(String id, String pid, float importprice, float saleprice, Date dateexp, int quantity, String unit, boolean status, String sid, String note) {
+        this.id = id;
+        this.pid = pid;
+        this.importprice = importprice;
+        this.saleprice = saleprice;
+        this.dateexp = dateexp;
+        this.quantity = quantity;
+        this.unit = unit;
+        this.status = status;
+        this.sid = sid;
+        this.note = note;
+    }
+
+
+
+    
     public InforProduct() {
     }
 
@@ -62,14 +76,6 @@ public class InforProduct {
         this.dateexp = dateexp;
     }
 
-    public String getNsx() {
-        return nsx;
-    }
-
-    public void setNsx(String nsx) {
-        this.nsx = nsx;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -94,13 +100,6 @@ public class InforProduct {
         this.sid = sid;
     }
 
-    public String getPtid() {
-        return ptid;
-    }
-
-    public void setPtid(String ptid) {
-        this.ptid = ptid;
-    }
 
     public String getNote() {
         return note;

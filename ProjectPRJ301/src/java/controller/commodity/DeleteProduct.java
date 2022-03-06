@@ -5,45 +5,20 @@
  */
 package controller.commodity;
 
-import dal.InforProductDBContext;
 import dal.ProductDBContext;
-import dal.ProductTypeDBContext;
-import dal.SupplierDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.InforProduct;
-import model.Inventory;
-import model.Product;
-import model.ProductType;
-import model.Supplier;
 
 /**
  *
  * @author win
  */
-public class CheckInventory extends HttpServlet {
+public class DeleteProduct extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        InforProductDBContext db = new InforProductDBContext();
-        ArrayList<Inventory> inventoris = db.checkInventory();
-        request.setAttribute("inventoris", inventoris);
-        request.getRequestDispatcher("commodity/checkInventory.jsp").forward(request, response);
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -57,7 +32,11 @@ public class CheckInventory extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String id = request.getParameter("id");
+        ProductDBContext db = new ProductDBContext();
+        db.deleteInforProduct(id);
+        db.deleteProduct(id);
+        response.sendRedirect("checkinventory");
     }
 
     /**
@@ -71,7 +50,7 @@ public class CheckInventory extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**

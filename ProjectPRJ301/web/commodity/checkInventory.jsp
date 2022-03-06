@@ -255,10 +255,7 @@
                                                 <th>Mã sp</th>
                                                 <th>Tên sp</th>
                                                 <th>Loại sp</th>
-                                                <th>Nhà phân phối</th>
-                                                <th>Giá nhập</th>
                                                 <th>Giá bán</th>
-                                                <th>Hạn sử dụng</th>
                                                 <th>Nhà sản xuất</th>
                                                 <th>Số lượng tồn</th>
                                                 <th>Đơn vị</th>
@@ -270,37 +267,20 @@
 
 
 
-                                        <c:forEach items="${requestScope.products}" var="p">
+                                        <c:forEach items="${requestScope.inventoris}" var="i">
                                             <tbody>
                                                 <tr>
-                                                    <td>${p.getId()}</td>
-                                                    <td>
-                                                        <c:forEach items="${requestScope.product}" var="pn">
-                                                            ${pn.getProid()==p.getPid()?pn.getPname():""}
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>
-                                                         <c:forEach items="${requestScope.product}" var="pn">
-                                                             <c:forEach items="${requestScope.producttypes}" var="pt">
-                                                            ${(pn.getProid()==p.getPid()&& pn.getPtid()==pt.getPtid())?pt.getPtname():""}
-                                                             </c:forEach>
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>
-                                                        <c:forEach items="${requestScope.suppliers}" var="s">
-                                                            ${s.getId()==p.getSid()?s.getName():""}
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>${p.getImportprice()}</td>
-                                                    <td>${p.getSaleprice()}</td>
-                                                    <td>${p.getDateexp()}</td>
-                                                    <td>${p.getNsx()}</td>
-                                                    <td>${p.getQuantity()}</td>
-                                                    <td>${p.getUnit()}</td>
-                                                    <td>${p.isStatus()!="1"?"Đang kinh doanh":"Ngừng kinh doanh"}
+                                                    <td>${i.getId()}</td>
+                                                    <td>${i.getName()}</td>
+                                                    <td>${i.getPtname()}</td>
+                                                    <td>${i.getPrice()}</td>
+                                                    <td>${i.getNsx()}</td>
+                                                    <td>${i.getSl()}</td>
+                                                    <td>${i.getUnit()}</td>
+                                                    <td>${i.isStatus()!="1"?"Đang kinh doanh":"Ngừng kinh doanh"}
                                                     </td>
                                                     <td><a href="#">Chỉnh sửa</a> </td>
-                                                    <td><a href="#">Xóa</a></td>
+                                                    <td><a href="deleteproduct?id=${i.getId()}" onclick="return confirm('Bạn có chắc là muốn xóa sản phẩm này không?')">Xóa</a></td>
                                                 </tr>
                                             </tbody>
                                         </c:forEach>

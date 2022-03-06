@@ -150,6 +150,30 @@ CREATE TABLE [dbo].[Supplier](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+/****** Object:  Table [dbo].[Prod]    Script Date: 2/22/2022 12:02:05 AM ******/
+USE [InventoryManage]
+GO
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Prod](
+	[pid] [varchar](50) NOT NULL,
+	[pname] [varchar](150) NOT NULL,
+	[nsx] [varchar](150),
+	[ptid] [varchar](50) NOT NULL,
+	primary key(pid))
+GO
+
+ALTER TABLE [dbo].[Prod]  WITH CHECK ADD  CONSTRAINT [FK_Prod_ProductType] FOREIGN KEY([ptid])
+REFERENCES [dbo].[ProductType] ([ptid])
+GO
+
+ALTER TABLE [dbo].[Prod] CHECK CONSTRAINT [FK_Prod_ProductType]
+GO
 /****** Object:  Table [dbo].[Product]    Script Date: 2/13/2022 11:51:09 PM ******/
 USE [InventoryManage]
 GO
@@ -165,7 +189,7 @@ CREATE TABLE [dbo].[InforProduct](
 	[importprice] [float],
 	[saleprice] [float],
 	[dateexpiry] [date],
-	[nsx] [varchar](150),
+
 	[quantityinstock] [int],
 	[unit] [varchar](150),
 	[status] [bit],
@@ -189,29 +213,6 @@ REFERENCES [dbo].[Prod] ([pid])
 GO
 
 ALTER TABLE [dbo].[InforProduct] CHECK CONSTRAINT [FK_InforProduct_Supplier]
-GO
-
-/****** Object:  Table [dbo].[Prod]    Script Date: 2/22/2022 12:02:05 AM ******/
-USE [InventoryManage]
-GO
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [dbo].[Prod](
-	[pid] [varchar](50) NOT NULL,
-	[pname] [varchar](150) NOT NULL,
-	[ptid] [varchar](50) NOT NULL,
-	primary key(pid))
-GO
-
-ALTER TABLE [dbo].[Prod]  WITH CHECK ADD  CONSTRAINT [FK_Prod_ProductType] FOREIGN KEY([ptid])
-REFERENCES [dbo].[ProductType] ([ptid])
-GO
-
-ALTER TABLE [dbo].[Prod] CHECK CONSTRAINT [FK_Prod_ProductType]
 GO
 
 
@@ -387,66 +388,68 @@ GO
 USE [InventoryManage]
 GO
 
-INSERT INTO [dbo].[Prod]([pid],[pname],[ptid])
-VALUES ('p01','Xi Mang Bim Son PC40','pt01')
+INSERT INTO Prod
+VALUES ('1001','Xi Mang Bim Son PC40','Xi Mang Bim Son','pt01')
 GO
-INSERT INTO [dbo].[Prod]([pid],[pname],[ptid])
-VALUES ('p02','Xi Mang Bim Son PC30','pt01')
+INSERT INTO [dbo].[Prod]
+VALUES ('1002','Xi Mang Bim Son PC30','Xi Mang Bim Son','pt01')
 GO
-INSERT INTO [dbo].[Prod]([pid],[pname],[ptid])
-VALUES ('p03','Xi Mang Cong Thanh PC40','pt01')
+INSERT INTO [dbo].[Prod]
+VALUES ('1003','Xi Mang Cong Thanh PC40','Xi Mang Cong Thanh','pt01')
 GO
-INSERT INTO [dbo].[Prod]([pid],[pname],[ptid])
-VALUES ('p04','Xi Mang Tam Diep PCB30','pt01')
+INSERT INTO [dbo].[Prod]
+VALUES ('1004','Xi Mang Tam Diep PCB30','Xi Mang Tam Diep','pt01')
 GO
-INSERT INTO [dbo].[Prod]([pid],[pname],[ptid])
-VALUES ('p05','Xi Mang But Son PCB40','pt01')
+INSERT INTO [dbo].[Prod]
+VALUES ('1005','Xi Mang But Son PCB40','Xi Mang But Son','pt01')
 GO
-INSERT INTO [dbo].[Prod]([pid],[pname],[ptid])
-VALUES ('p06','	Xi Mang But Son PCB30','pt01')
+INSERT INTO [dbo].[Prod]
+VALUES ('1006','	Xi Mang But Son PCB30','Xi Mang But Son','pt01')
 GO
-INSERT INTO [dbo].[Prod]([pid],[pname],[ptid])
-VALUES ('p07','	Xi Mang Vissai PCB40','pt01')
+INSERT INTO [dbo].[Prod]
+VALUES ('1007','	Xi Mang Vissai PCB40','Xi Mang Vissai','pt01')
 GO
-INSERT INTO [dbo].[Prod]([pid],[pname],[ptid])
-VALUES ('p08','	Xi Mang Vissai PCB30','pt01')
-GO
-INSERT INTO [dbo].[InforProduct]([code],[pid] ,[importprice],[saleprice],[dateexpiry],[nsx],[quantityinstock],[unit],[status],[sid],[Note])
-VALUES('1001','p02',1270000,1350000,'2022-03-22','Xi Mang Bim Son',60,'Tan',1,'S01','')
-GO
-
-INSERT INTO [dbo].[InforProduct]([code],[pid] ,[importprice],[saleprice],[dateexpiry],[nsx],[quantityinstock],[unit],[status],[sid],[Note])
-VALUES('1002','p02',1260000,1350000,'2022-04-22','Xi Mang Bim Son',40,'Tan',1,'S01','')
+INSERT INTO [dbo].[Prod]
+VALUES ('1008','	Xi Mang Vissai PCB30','Xi Mang Vissai','pt01')
 GO
 
 
-INSERT INTO [dbo].[InforProduct]([code],[pid] ,[importprice],[saleprice],[dateexpiry],[nsx],[quantityinstock],[unit],[status],[sid],[Note])
-VALUES('1003','p02',1270000,1350000,'2022-04-20','Xi Mang Bim Son',60,'Tan',1,'S02','')
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1001','1002',1270000,1350000,'2022-03-22',60,'Tan',1,'S01','')
 GO
-INSERT INTO [dbo].[InforProduct]([code],[pid] ,[importprice],[saleprice],[dateexpiry],[nsx],[quantityinstock],[unit],[status],[sid],[Note])
-VALUES('1004','p01',1310000,1460000,'2022-03-07','Xi Mang Bim Son',60,'Tan',1,'S02','')
+
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1002','1002',1260000,1350000,'2022-04-22',40,'Tan',1,'S01','')
 GO
-INSERT INTO [dbo].[InforProduct]([code],[pid] ,[importprice],[saleprice],[dateexpiry],[nsx],[quantityinstock],[unit],[status],[sid],[Note])
-VALUES('1005','p01',1330000,1460000,'2022-03-27','Xi Mang Bim Son',60,'Tan',1,'S02','')
+
+
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1003','1002',1270000,1350000,'2022-04-20',60,'Tan',1,'S02','')
 GO
-INSERT INTO [dbo].[InforProduct]([code],[pid] ,[importprice],[saleprice],[dateexpiry],[nsx],[quantityinstock],[unit],[status],[sid],[Note])
-VALUES('1006','p03',990000,1140000,'2022-04-27','Xi Mang Cong Thanh',90,'Tan',1,'S03','')
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1004','1001',1310000,1460000,'2022-03-07',60,'Tan',1,'S02','')
 GO
-INSERT INTO [dbo].[InforProduct]([code],[pid] ,[importprice],[saleprice],[dateexpiry],[nsx],[quantityinstock],[unit],[status],[sid],[Note])
-VALUES('1007','p04',970000,1170000,'2022-05-22','Xi Mang Tam Diep',60,'Tan',1,'S05','')
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1005','1001',1330000,1460000,'2022-03-27',60,'Tan',1,'S02','')
 GO
-INSERT INTO [dbo].[InforProduct]([code],[pid] ,[importprice],[saleprice],[dateexpiry],[nsx],[quantityinstock],[unit],[status],[sid],[Note])
-VALUES('1008','p04',980000,1170000,'2022-03-22','Xi Mang Tam Diep',40,'Tan',1,'S04','')
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1006','1003',990000,1140000,'2022-04-27',90,'Tan',1,'S03','')
 GO
-INSERT INTO [dbo].[InforProduct]([code],[pid] ,[importprice],[saleprice],[dateexpiry],[nsx],[quantityinstock],[unit],[status],[sid],[Note])
-VALUES('1009','p04',980000,1170000,'2022-04-20','Xi Mang Tam Diep',30,'Tan',1,'S01','')
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1007','1004',970000,1170000,'2022-05-22',60,'Tan',1,'S05','')
 GO
-INSERT INTO [dbo].[InforProduct]([code],[pid] ,[importprice],[saleprice],[dateexpiry],[nsx],[quantityinstock],[unit],[status],[sid],[Note])
-VALUES('1010','p05',990000,1190000,'2022-02-20','Xi Mang But Son',0,'Tan',0,'S01','')
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1008','p04',980000,1170000,'2022-03-22',40,'Tan',1,'S04','')
 GO
-INSERT INTO [dbo].[InforProduct]([code],[pid] ,[importprice],[saleprice],[dateexpiry],[nsx],[quantityinstock],[unit],[status],[sid],[Note])
-VALUES('1011','p07',1270000,1320000,'2021-3-21','Xi Mang Vissai',0,'Tan',0,'S07','')
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1009','1004',980000,1170000,'2022-04-20',30,'Tan',1,'S01','')
 GO
-INSERT INTO [dbo].[InforProduct]([code],[pid] ,[importprice],[saleprice],[dateexpiry],[nsx],[quantityinstock],[unit],[status],[sid],[Note])
-VALUES('1012','p08',1270000,1350000,'2021-02-02','Xi Mang Vissai',0,'Tan',0,'S06','')
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1010','1005',990000,1190000,'2022-02-20',0,'Tan',0,'S01','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1011','1007',1270000,1320000,'2021-3-21',0,'Tan',0,'S07','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1012','1008',1270000,1350000,'2021-02-02',0,'Tan',0,'S06','')
 GO

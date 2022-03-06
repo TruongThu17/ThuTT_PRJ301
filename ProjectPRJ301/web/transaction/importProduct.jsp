@@ -232,8 +232,12 @@
                                                     </select> 
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="id">Mã sản phẩm : </label>
-                                                    <input type="text" class="form-control card" name="code" id="exampleInputEmail1" aria-describedby="prodCode" placeholder="Nhập mã sản phẩm">
+                                                    <label for="id">Mã sản phẩm: </label>
+                                                    <input type="text" class="form-control card" name="id" id="exampleInputEmail1" aria-describedby="prodCode" placeholder="Nhập mã sản phẩm">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="id">Barcode : </label>
+                                                    <input type="text" class="form-control card" name="code" id="exampleInputEmail1" aria-describedby="prodCode" placeholder="Nhập mã vạch">
                                                 </div>
 
                                                 <div class="form-group">
@@ -259,6 +263,10 @@
                                                     <input type="text" class="form-control card" name="sl" id="exampleInputEmail1" aria-describedby="prodsl" placeholder="Số lượng nhập">
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="ụnit">Đơn vị :</label>
+                                                    <input type="text" class="form-control card" name="unit" id="exampleInputEmail1" aria-describedby="prodsl" placeholder="Đơn vị">
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="sid">Nhà phân phối :</label>
                                                     <select  class ="form-control card" name ="sid">
                                                         <c:forEach items="${requestScope.suppliers}" var = "s">
@@ -267,8 +275,6 @@
 
                                                     </select>                                                        
                                                 </div>
-
-
                                                 <div class="form-group">
                                                     <label for="note">Ghi chú :</label>
                                                     <input type="text" class="form-control card" name="note" id="exampleInputEmail1" aria-describedby="prodnote" placeholder="Ghi chú">
