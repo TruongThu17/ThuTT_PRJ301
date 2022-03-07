@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
+    
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,25 +32,53 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <link href="static/css/css.css" rel="stylesheet">
         <link href="static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    </head>
+    <%
+    String raw = (String) request.getAttribute("raw");
+    %>
 
-    <body id="page-top">
+        <body id="page-top">
         <div id="wrapper">
             <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.html">
                     <div class="sidebar-brand-icon">
                         <i class="fas fa-cogs"></i>
+
                     </div>
                     <div class="sidebar-brand-text mx-3">IM ADMIN </div>
                 </a>
                 <hr class="sidebar-divider my-0">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="home.html">
                         <i class="fas fa-home"></i>
                         <span>TRANG CHỦ</span></a>
                 </li>
-
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+                <div class="sidebar-heading">
+                    Dịch Vụ
+                </div>
+                <!-- Nav Item - Hàng hóa -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseT"
+                       aria-expanded="true" aria-controls="collapseT">
+                      <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Dịch vụ</span>
+                    </a>
+                    <div id="collapseT" class="collapse" aria-labelledby="heading" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="">Hóa Đơn</a>
+                            <a class="collapse-item" href="">Trả Hàng</a>
+                            <a class="collapse-item" href="insertcustomer">Thêm Khách Hàng</a>
+                            <a class="collapse-item" href="importproduct">Nhập Hàng Hóa</a>
+                        </div>
+                    </div>
+                </li>
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+                <div class="sidebar-heading">
+                    Quản Lý
+                </div>
                 <!-- Nav Item - Hàng hóa -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -60,7 +88,7 @@
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="">Thiết Lập Giá</a>
+                            <a class="collapse-item" href="settingprice">Thiết Lập Giá</a>
                             <a class="collapse-item" href="checkinventory">Kiểm Kho</a>
                         </div>
                     </div>
@@ -80,7 +108,7 @@
                             <a class="collapse-item" href="#">Đặt Hàng</a>
                             <a class="collapse-item" href="#">Hóa Đơn</a>
                             <a class="collapse-item" href="#">Trả Hàng</a>
-                            <a class="collapse-item" href="importproduct">Nhập Hàng</a>
+                            <a class="collapse-item" href="importproducts">Nhập Hàng</a>
                             <a class="collapse-item" href="#">Trả Hàng Nhập</a>
                         </div>
                     </div>
@@ -97,7 +125,7 @@
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="customer">Khách Hàng</a>
-                            <a class="collapse-item" href="supplier">Nhà cung cấp</a>
+                            <a class="collapse-item" href="supplier">Nhà Phân Phối</a>
                         </div>
                     </div>
                 </li>
@@ -110,10 +138,9 @@
                         <span>Quản lý</span>
                     </a>
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+
                     </div>
                 </li>
-
-
 
                 <!-- Sidebar Toggler (Sidebar) -->
                 <div class="text-center d-none d-md-inline">
@@ -281,7 +308,15 @@
                                                 </div>
                                                 <div class ="text-center mgbt">
                                                     <input class ="bg-primary border-primary flex-column"type="submit" value ="Thêm vào kho" />
+                                                
                                                 </div>
+                                                
+                                                <%if(raw.equals("1") ){%>
+                                                
+                                                <div class="form-group" style="color: green;">
+                                                      Thêm thành công
+                                                </div>
+                                                <%}%>
                                                 <div class="col-md-3"></div>
                                         </div>
                                     </div>

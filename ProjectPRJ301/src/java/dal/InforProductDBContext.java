@@ -33,6 +33,7 @@ public class InforProductDBContext extends DBContext {
                 p.setImportprice(rs.getFloat("importprice"));
                 p.setSaleprice(rs.getFloat("saleprice"));
                 p.setDateexp(rs.getDate("dateexpiry"));
+                 p.setDateimport(rs.getDate("dateimport"));
                 p.setQuantity(rs.getInt("quantityinstock"));
                 p.setUnit(rs.getString("unit"));
                 p.setStatus(rs.getBoolean("status"));
@@ -51,7 +52,7 @@ public class InforProductDBContext extends DBContext {
         ArrayList<Inventory> inventorys = new ArrayList<>();
         try {
             String sql = "select a.pid, a.pname,a.nsx, b.saleprice, sum(b.quantityinstock) as qt, b.status, b.unit, c.ptName  from Prod a inner join InforProduct b on a.pid = b.pid\n"
-                    + "inner join ProductType c on a.ptid = c.ptId\n"
+                    + "inner join ProductType c on a.ptid = c.ptId where b.status = 1\n"
                     + "group by a.pid, a.pname, b.saleprice,a.nsx, b.status, b.unit, a.ptid, c.ptName\n"
                     + "order by a.pid";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -131,5 +132,7 @@ public class InforProductDBContext extends DBContext {
             }
         }
     }
+   
+    
 
 }

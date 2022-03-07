@@ -49,9 +49,13 @@ public class InsertSupplier extends HttpServlet {
             throws ServletException, IOException {
         String id = request.getParameter("id");
         String name = request.getParameter("name");
-        Supplier s  = new Supplier();
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        Supplier s = new Supplier();
         s.setId(id);
         s.setName(name);
+        s.setEmail(email);
+        s.setPhone(phone);
         SupplierDBContext db = new SupplierDBContext();
         db.insertSupplier(s);
         response.sendRedirect("supplier");

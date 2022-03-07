@@ -24,13 +24,15 @@ public class SupplierDBContext extends DBContext {
     public ArrayList<Supplier> getSupplier() {
         ArrayList<Supplier> suppliers = new ArrayList<>();
         try {
-            String sql = "select Sid, SName from Supplier";
+            String sql = "select Sid, SName, Phone, Email from Supplier";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Supplier s = new Supplier();
                 s.setId(rs.getString("Sid"));
                 s.setName(rs.getString("SName"));
+                s.setPhone(rs.getString("Phone"));
+                s.setEmail(rs.getString("Email"));
                 suppliers.add(s);
             }
 
@@ -76,11 +78,15 @@ public class SupplierDBContext extends DBContext {
         try {
             String sql = "UPDATE [dbo].[Supplier]\n"
                     + "   SET [SName] = ?\n"
-                    + " WHERE Sid=?";
+                    + "      ,[Email] = ?\n"
+                    + "      ,[Phone] = ?\n"
+                    + " WHERE Sid =?";
 
             stm = connection.prepareStatement(sql);
-            stm.setString(2, s.getId());
+            stm.setString(4, s.getId());
             stm.setString(1, s.getName());
+            stm.setString(2, s.getEmail());
+            stm.setString(3, s.getPhone());
 
             stm.executeUpdate();
         } catch (SQLException ex) {
@@ -106,8 +112,7 @@ public class SupplierDBContext extends DBContext {
     public Supplier getSupplierId(String id) {
 
         try {
-            String sql = "SELECT [Sid]\n"
-                    + "      ,[SName]\n"
+            String sql = "SELECT Sid, SName, Phone, Email"
                     + "  FROM [dbo].[Supplier] where Sid =?";
 
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -117,7 +122,8 @@ public class SupplierDBContext extends DBContext {
                 Supplier s = new Supplier();
                 s.setId(rs.getString("Sid"));
                 s.setName(rs.getString("Sname"));
-
+                s.setPhone(rs.getString("Phone"));
+                s.setEmail(rs.getString("Email"));
                 return s;
             }
 
@@ -132,14 +138,20 @@ public class SupplierDBContext extends DBContext {
         try {
             String sql = "INSERT INTO [dbo].[Supplier]\n"
                     + "           ([Sid]\n"
-                    + "           ,[SName])\n"
+                    + "           ,[SName]\n"
+                    + "           ,[Email]\n"
+                    + "           ,[Phone])\n"
                     + "     VALUES\n"
                     + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
                     + "           ,?)";
 
             stm = connection.prepareStatement(sql);
             stm.setString(1, s.getId());
             stm.setString(2, s.getName());
+            stm.setString(3, s.getEmail());
+            stm.setString(4, s.getPhone());
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);

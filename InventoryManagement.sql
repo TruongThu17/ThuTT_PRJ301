@@ -123,15 +123,6 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[ProductType](
-	[ptId] [varchar](50) NOT NULL,
-	[ptName] [nvarchar](150) NOT NULL,
- CONSTRAINT [PK_ProductType] PRIMARY KEY CLUSTERED 
-(
-	[ptId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
 /****** Object:  Table [dbo].[Supplier]    Script Date: 2/13/2022 2:05:08 AM ******/
 USE [InventoryManage]
 GO
@@ -144,6 +135,9 @@ GO
 CREATE TABLE [dbo].[Supplier](
 	[Sid] [varchar](50) NOT NULL,
 	[SName] [nvarchar](150) NOT NULL,
+	[Email] [nvarchar](150) NOT NULL,
+	[Phone] [nvarchar](150) NOT NULL,
+	
  CONSTRAINT [PK_Supplier] PRIMARY KEY CLUSTERED 
 (
 	[Sid] ASC
@@ -189,11 +183,11 @@ CREATE TABLE [dbo].[InforProduct](
 	[importprice] [float],
 	[saleprice] [float],
 	[dateexpiry] [date],
-
 	[quantityinstock] [int],
 	[unit] [varchar](150),
 	[status] [bit],
 	[sid] [varchar](50),
+	[dateimport] [date],
 	[Note] [nvarchar](200),
  CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED 
 (
@@ -361,19 +355,19 @@ GO
 USE [InventoryManage]
 GO
 
-INSERT INTO [dbo].[Supplier] ([Sid] ,[SName]) VALUES ('S01','CTy CP DTNL Xay dung Thuong mai Hoang Son')
+INSERT INTO [dbo].[Supplier] VALUES ('S01','CTy CP DTNL Xay dung Thuong mai Hoang Son', 'HoangSonCPTM@gmail.com', '0971333555')
 GO
-INSERT INTO [dbo].[Supplier] ([Sid] ,[SName]) VALUES ('S02','CTy Cuong Quoc')
+INSERT INTO [dbo].[Supplier] VALUES ('S02','CTy Cuong Quoc', 'CuongQuocct@gmail.com', '0972777888')
 GO
-INSERT INTO [dbo].[Supplier] ([Sid] ,[SName]) VALUES ('S03','CTy CP TYT')
+INSERT INTO [dbo].[Supplier] VALUES ('S03','CTy CP TYT', 'CPTYT@gmail.com', '0971333555')
 GO
-INSERT INTO [dbo].[Supplier] ([Sid] ,[SName]) VALUES ('S04','VLXD VietHome')
+INSERT INTO [dbo].[Supplier] VALUES ('S04','VLXD VietHome', 'VietHomevlxd1.2@gmail.com', '0971342252')
 GO
-INSERT INTO [dbo].[Supplier] ([Sid] ,[SName]) VALUES ('S05','VLXD Thien An')
+INSERT INTO [dbo].[Supplier] VALUES ('S05','VLXD Thien An','ThienAnvlxd22@gmail.com', '0971221122')
 GO
-INSERT INTO [dbo].[Supplier] ([Sid] ,[SName]) VALUES ('S06','CTy CP VLXD Song Day')
+INSERT INTO [dbo].[Supplier] VALUES ('S06','CTy CP VLXD Song Day','Songdaycpvlxd@gmail.com', '0972276558')
 GO
-INSERT INTO [dbo].[Supplier] ([Sid] ,[SName]) VALUES ('S07','CTy TNHH Fixmart')
+INSERT INTO [dbo].[Supplier] VALUES ('S07','CTy TNHH Fixmart','Fixmarttnhh@gmail.com', '0972111333')
 GO
 
 USE [InventoryManage]
@@ -381,9 +375,7 @@ GO
 
 INSERT INTO [dbo].[ProductType] ([ptId] ,[ptName])VALUES('pt01','Xi mang')
 GO
-INSERT INTO [dbo].[ProductType] ([ptId] ,[ptName])VALUES('pt02','Sat')
-GO
-INSERT INTO [dbo].[ProductType] ([ptId] ,[ptName])VALUES('pt03','Thep')
+INSERT INTO [dbo].[ProductType] ([ptId] ,[ptName])VALUES('pt02','Sat, Thep')
 GO
 USE [InventoryManage]
 GO
@@ -412,44 +404,157 @@ GO
 INSERT INTO [dbo].[Prod]
 VALUES ('1008','	Xi Mang Vissai PCB30','Xi Mang Vissai','pt01')
 GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1009','D6,8','Hoa Phat','pt02')
+GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1010','D6,8','Viet Duc','pt02')
+GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1011','D8V','Hoa Phat','pt02')
+GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1026','D8V','Viet Duc','pt02')
+GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1012','D10','Hoa Phat','pt02')
+GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1013','D10','Viet Duc','pt02')
+GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1014','D12','Hoa Phat','pt02')
+GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1015','D12','Viet Duc','pt02')
+GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1016','D14','Hoa Phat','pt02')
+GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1017','D14','Viet Duc','pt02')
+GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1018','D16','Hoa Phat','pt02')
+GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1019','D16','Viet Duc','pt02')
+GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1020','D18','Hoa Phat','pt02')
+GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1021','D18','Viet Duc','pt02')
+GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1022','D20','Hoa Phat','pt02')
+GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1023','D20','Viet Duc','pt02')
+GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1024','D22','Hoa Phat','pt02')
+GO
+INSERT INTO [dbo].[Prod]
+VALUES ('1025','D22','Viet Duc','pt02')
+GO
+
+
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1001','1002',1270000,1350000,'2022-03-22',60,'Tan',1,'S01','2022-01-21','')
+GO
+
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1002','1002',1260000,1350000,'2022-04-22',40,'Tan',1,'S01','2022-02-21','')
+GO
 
 
 INSERT INTO [dbo].[InforProduct]
-VALUES('p1001','1002',1270000,1350000,'2022-03-22',60,'Tan',1,'S01','')
+VALUES('p1003','1002',1270000,1350000,'2022-04-20',60,'Tan',1,'S02','2022-01-21','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1004','1001',1310000,1460000,'2022-03-07',60,'Tan',1,'S02','2022-01-21','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1005','1001',1330000,1460000,'2022-03-27',60,'Tan',1,'S02','2022-01-27','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1006','1003',990000,1140000,'2022-04-27',90,'Tan',1,'S03','2022-02-21','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1007','1004',970000,1170000,'2022-05-22',60,'Tan',1,'S05','2022-02-21','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1008','1004',980000,1170000,'2022-03-22',40,'Tan',1,'S04','2022-01-21','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1009','1004',980000,1170000,'2022-04-20',30,'Tan',1,'S01','2022-02-21','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1010','1005',990000,1190000,'2022-02-20',0,'Tan',0,'S01','2021-12-21','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1011','1007',1270000,1320000,'2021-3-21',0,'Tan',0,'S07','2021-01-21','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1012','1008',1270000,1350000,'2021-02-02',0,'Tan',0,'S06','2020-12-21','')
 GO
 
 INSERT INTO [dbo].[InforProduct]
-VALUES('p1002','1002',1260000,1350000,'2022-04-22',40,'Tan',1,'S01','')
+VALUES('p1013','1009',17250,183500,null,1000,'Met',1,'S01','2022-01-21','')
 GO
 
-
 INSERT INTO [dbo].[InforProduct]
-VALUES('p1003','1002',1270000,1350000,'2022-04-20',60,'Tan',1,'S02','')
+VALUES('p1014','1009',17000,183500,null,5000,'Met',1,'S02','2021-02-20','')
 GO
 INSERT INTO [dbo].[InforProduct]
-VALUES('p1004','1001',1310000,1460000,'2022-03-07',60,'Tan',1,'S02','')
+VALUES('p1015','1010',17250,183000,null,8000,'Met',1,'S01','2022-03-01','')
 GO
 INSERT INTO [dbo].[InforProduct]
-VALUES('p1005','1001',1330000,1460000,'2022-03-27',60,'Tan',1,'S02','')
+VALUES('p1016','1011',17200,183000,null,8000,'Met',1,'S01','2022-02-01','')
 GO
 INSERT INTO [dbo].[InforProduct]
-VALUES('p1006','1003',990000,1140000,'2022-04-27',90,'Tan',1,'S03','')
+VALUES('p1017','1026',17200,183000,null,8000,'Met',1,'S01','2022-02-01','')
 GO
 INSERT INTO [dbo].[InforProduct]
-VALUES('p1007','1004',970000,1170000,'2022-05-22',60,'Tan',1,'S05','')
+VALUES('p1018','1012',97000,114000,null,10000,'Cay',1,'S04','2022-01-11','')
 GO
 INSERT INTO [dbo].[InforProduct]
-VALUES('p1008','p04',980000,1170000,'2022-03-22',40,'Tan',1,'S04','')
+VALUES('p1019','1013',96000,113000,null,8000,'Cay',1,'S04','2022-03-01','')
 GO
 INSERT INTO [dbo].[InforProduct]
-VALUES('p1009','1004',980000,1170000,'2022-04-20',30,'Tan',1,'S01','')
+VALUES('p1020','1014',160000,180000,null,10000,'Cay',1,'S04','2022-01-01','')
 GO
 INSERT INTO [dbo].[InforProduct]
-VALUES('p1010','1005',990000,1190000,'2022-02-20',0,'Tan',0,'S01','')
+VALUES('p1032','1015',157000,178000,null,8000,'Cay',1,'S04','2022-03-01','')
 GO
 INSERT INTO [dbo].[InforProduct]
-VALUES('p1011','1007',1270000,1320000,'2021-3-21',0,'Tan',0,'S07','')
+VALUES('p1021','1016',227000,247000,null,10000,'Cay',1,'S04','2022-02-01','')
 GO
 INSERT INTO [dbo].[InforProduct]
-VALUES('p1012','1008',1270000,1350000,'2021-02-02',0,'Tan',0,'S06','')
+VALUES('p1022','1017',22100,245000,null,8000,'Cay',1,'S04','2022-03-01','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1023','1018',289000,313000,null,10000,'Cay',1,'S04','2022-01-01','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1024','1019',287100,311500,null,8000,'Cay',1,'S04','2022-02-01','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1025','1020',381500,408000,null,10000,'Cay',1,'S04','2022-01-01','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1026','1021',380000,405000,null,8000,'Cay',1,'S04','2022-03-01','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1027','1022',485500,506000,null,10000,'Cay',1,'S04','2022-01-01','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1028','1023',470500,499000,null,8000,'Cay',1,'S04','2022-02-01','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1029','1024',590000,610000,null,10000,'Cay',1,'S04','2022-01-01','')
+GO
+INSERT INTO [dbo].[InforProduct]
+VALUES('p1030','1025',585500,605000,null,8000,'Cay',1,'S04','2022-01-01','')
 GO

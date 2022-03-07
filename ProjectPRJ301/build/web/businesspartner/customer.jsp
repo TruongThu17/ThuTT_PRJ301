@@ -37,23 +37,48 @@
         %>
     </head>
 
-    <body id="page-top">
+       <body id="page-top">
         <div id="wrapper">
             <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.html">
                     <div class="sidebar-brand-icon">
-                        <i class="fas fa-home"></i>
+                        <i class="fas fa-cogs"></i>
+
                     </div>
                     <div class="sidebar-brand-text mx-3">IM ADMIN </div>
                 </a>
                 <hr class="sidebar-divider my-0">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <a class="nav-link" href="home.html">
+                        <i class="fas fa-home"></i>
                         <span>TRANG CHỦ</span></a>
                 </li>
-
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+                <div class="sidebar-heading">
+                    Dịch Vụ
+                </div>
+                <!-- Nav Item - Hàng hóa -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseT"
+                       aria-expanded="true" aria-controls="collapseT">
+                      <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Dịch vụ</span>
+                    </a>
+                    <div id="collapseT" class="collapse" aria-labelledby="heading" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="">Hóa Đơn</a>
+                            <a class="collapse-item" href="">Trả Hàng</a>
+                            <a class="collapse-item" href="insertcustomer">Thêm Khách Hàng</a>
+                        </div>
+                    </div>
+                </li>
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+                <div class="sidebar-heading">
+                    Quản Lý
+                </div>
                 <!-- Nav Item - Hàng hóa -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -63,8 +88,8 @@
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="supplier.html">Thiết Lập Giá</a>
-                            <a class="collapse-item" href="checkinventory.html">Kiểm Kho</a>
+                            <a class="collapse-item" href="settingprice">Thiết Lập Giá</a>
+                            <a class="collapse-item" href="checkinventory">Kiểm Kho</a>
                         </div>
                     </div>
                 </li>
@@ -73,7 +98,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                        aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-fw fa-wrench"></i>
+                        <i class="fas fa-sync-alt"></i>
                         <span>Giao Dịch</span>
                     </a>
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -83,7 +108,7 @@
                             <a class="collapse-item" href="#">Đặt Hàng</a>
                             <a class="collapse-item" href="#">Hóa Đơn</a>
                             <a class="collapse-item" href="#">Trả Hàng</a>
-                            <a class="collapse-item" href="importproduct">Nhập Hàng</a>
+                            <a class="collapse-item" href="importproducts">Nhập Hàng</a>
                             <a class="collapse-item" href="#">Trả Hàng Nhập</a>
                         </div>
                     </div>
@@ -93,14 +118,14 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse"
                        aria-expanded="true" aria-controls="collapse">
-                        <i class="fas fa-fw fa-wrench"></i>
+                        <i class="fas fa-user-tie"></i>
                         <span>Đối Tác </span>
                     </a>
                     <div id="collapse" class="collapse" aria-labelledby="heading"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="">Khách Hàng</a>
-                            <a class="collapse-item" href="supplier">Nhà cung cấp</a>
+                            <a class="collapse-item" href="customer">Khách Hàng</a>
+                            <a class="collapse-item" href="supplier">Nhà Phân Phối</a>
                         </div>
                     </div>
                 </li>

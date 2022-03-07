@@ -51,6 +51,8 @@ public class importProduct extends HttpServlet {
         ProductTypeDBContext ptdb = new ProductTypeDBContext();
         ArrayList<ProductType> producttypes = ptdb.getProductType();
         request.setAttribute("producttypes", producttypes);
+        String raw = request.getParameter("raw");
+        request.setAttribute("raw", raw);
         request.getRequestDispatcher("transaction/importProduct.jsp").forward(request, response);
     }
 
@@ -79,13 +81,15 @@ public class importProduct extends HttpServlet {
         String sid = request.getParameter("sid");
         String note= request.getParameter("note");
         String ptid = request.getParameter("ptid");
+        long millis=System.currentTimeMillis(); 
+        java.sql.Date date=new java.sql.Date(millis);
         Product p = new Product(id, name, nsx, ptid);
-        InforProduct infp = new InforProduct(id, barcode, pricep, 0, hsdp, slp, unit, true, sid, note);
+        InforProduct infp = new InforProduct(id, barcode, pricep, 0, hsdp, slp, unit, true, date, sid, note);
         ProductDBContext pdb = new ProductDBContext();
         InforProductDBContext idb = new InforProductDBContext();
         pdb.insertProduct(p);
         idb.insertInforProduct(infp);
-        response.sendRedirect("importproduct");
+        response.sendRedirect("importproduct?raw=1");
         
     }
 

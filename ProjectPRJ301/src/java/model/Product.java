@@ -34,8 +34,6 @@ public class Product {
     }
 
     
-
-    
     public String getProid() {
         return proid;
     }

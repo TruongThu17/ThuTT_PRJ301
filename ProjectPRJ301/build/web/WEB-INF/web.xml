@@ -52,6 +52,14 @@
         <servlet-name>DeleteProduct</servlet-name>
         <servlet-class>controller.commodity.DeleteProduct</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>payImportedProduct</servlet-name>
+        <servlet-class>controller.transaction.payImportedProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>importProducts</servlet-name>
+        <servlet-class>controller.transaction.importProducts</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SupplierController</servlet-name>
         <url-pattern>/supplier</url-pattern>
@@ -99,6 +107,14 @@
     <servlet-mapping>
         <servlet-name>DeleteProduct</servlet-name>
         <url-pattern>/deleteproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>payImportedProduct</servlet-name>
+        <url-pattern>/payimportedproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>importProducts</servlet-name>
+        <url-pattern>/importproducts</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -21,10 +21,11 @@ public class InforProduct {
     private int quantity;
     private String unit;
     private boolean status;
+    private Date dateimport;
     private String sid;
     private String note;
 
-    public InforProduct(String id, String pid, float importprice, float saleprice, Date dateexp, int quantity, String unit, boolean status, String sid, String note) {
+    public InforProduct(String id, String pid, float importprice, float saleprice, Date dateexp, int quantity, String unit, boolean status, Date dateimport, String sid, String note) {
         this.id = id;
         this.pid = pid;
         this.importprice = importprice;
@@ -33,9 +34,20 @@ public class InforProduct {
         this.quantity = quantity;
         this.unit = unit;
         this.status = status;
+        this.dateimport = dateimport;
         this.sid = sid;
         this.note = note;
     }
+
+    public Date getDateimport() {
+        return dateimport;
+    }
+
+    public void setDateimport(Date dateimport) {
+        this.dateimport = dateimport;
+    }
+
+ 
 
 
 
