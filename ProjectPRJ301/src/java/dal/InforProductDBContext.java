@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.InforProduct;
 import model.Inventory;
+import model.SetPrice;
 
 /**
  *
@@ -33,7 +34,7 @@ public class InforProductDBContext extends DBContext {
                 p.setImportprice(rs.getFloat("importprice"));
                 p.setSaleprice(rs.getFloat("saleprice"));
                 p.setDateexp(rs.getDate("dateexpiry"));
-                 p.setDateimport(rs.getDate("dateimport"));
+                p.setDateimport(rs.getDate("dateimport"));
                 p.setQuantity(rs.getInt("quantityinstock"));
                 p.setUnit(rs.getString("unit"));
                 p.setStatus(rs.getBoolean("status"));
@@ -107,7 +108,7 @@ public class InforProductDBContext extends DBContext {
             stm.setFloat(3, infp.getImportprice());
             stm.setFloat(4, infp.getSaleprice());
             stm.setDate(5, infp.getDateexp());
-            stm.setInt(6,infp.getQuantity());
+            stm.setInt(6, infp.getQuantity());
             stm.setString(7, infp.getUnit());
             stm.setBoolean(8, infp.isStatus());
             stm.setString(9, infp.getSid());
@@ -132,7 +133,39 @@ public class InforProductDBContext extends DBContext {
             }
         }
     }
-   
-    
+
+    public void setprices(ArrayList<SetPrice> prices) {
+        PreparedStatement stm = null;
+        for (SetPrice p : prices) {
+            if (p.getPrice() != null) {
+                try {
+                    String sql = "UPDATE [InforProduct]\n"
+                            + "   SET  [saleprice] = ?\n"
+                            + "   where pid =?";
+                    stm = connection.prepareStatement(sql);
+                    stm.setFloat(1, Float.parseFloat(p.getPrice()));
+                    stm.setString(2, p.getId());
+                    stm.executeUpdate();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                } finally {
+                    if (stm != null) {
+                        try {
+                            stm.close();
+                        } catch (SQLException ex) {
+                            Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    if (connection != null) {
+                        try {
+                            connection.close();
+                        } catch (SQLException ex) {
+                            Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 }

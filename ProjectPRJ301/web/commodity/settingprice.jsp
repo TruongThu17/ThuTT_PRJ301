@@ -34,7 +34,7 @@
         <link href="static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     </head>
 
-        <body id="page-top">
+    <body id="page-top">
         <div id="wrapper">
             <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.html">
@@ -60,7 +60,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseT"
                        aria-expanded="true" aria-controls="collapseT">
-                      <i class="fas fa-fw fa-chart-area"></i>
+                        <i class="fas fa-fw fa-chart-area"></i>
                         <span>Dịch vụ</span>
                     </a>
                     <div id="collapseT" class="collapse" aria-labelledby="heading" data-parent="#accordionSidebar">
@@ -242,7 +242,7 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-700">Kiểm kho</h1>
+                        <h1 class="h3 mb-2 text-gray-700">Thiết Lập Giá</h1>
 
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
@@ -255,15 +255,7 @@
                             </div>
                             <div class="row ">
                                 <div class="col-sm-12 col-md-6">
-                                    <div class="left dataTables_length" id="dataTable_length">
-                                        <label>Show 
-                                            <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
-                                                <option value="10">10</option>
-                                                <option value="25">25</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select>
-                                    </div>
+
                                 </div>
                                 <div class=" col-sm-12 col-md-6">
                                     <div id="dataTable_filter" class="right dataTables_filter">
@@ -273,57 +265,49 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered as" id="dataTable" width="1000%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>Mã sp</th>
-                                                <th>Tên sp</th>
-                                                <th>Giá nhập</th>
-                                                <th>Giá bán</th>
-                                                <th>Nhà sản xuất</th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-
-
-
-                                        <c:forEach items="${requestScope.products}" var="p">
-                                            <tbody>
+                                    <form id="searchForm" method="POST" action="settingprice"> 
+                                        <table class="table table-bordered as" id="dataTable" width="1000%" cellspacing="0">
+                                            <thead>
                                                 <tr>
-                                                    <td>${p.getId()}</td>
-                                                    <td>
-                                                        <c:forEach items="${requestScope.product}" var="pn">
-                                                            ${pn.getProid()==p.getPid()?pn.getPname():""}
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>
-                                                         <c:forEach items="${requestScope.product}" var="pn">
-                                                             <c:forEach items="${requestScope.producttypes}" var="pt">
-                                                            ${(pn.getProid()==p.getPid()&& pn.getPtid()==pt.getPtid())?pt.getPtname():""}
-                                                             </c:forEach>
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>
-                                                        <c:forEach items="${requestScope.suppliers}" var="s">
-                                                            ${s.getId()==p.getSid()?s.getName():""}
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>${p.getImportprice()}</td>
-                                                    <td>${p.getSaleprice()}</td>
-                                                    <td>${p.getDateexp()}</td>
-                                                    <td>${p.getNsx()}</td>
-                                                    <td>${p.getQuantity()}</td>
-                                                    <td>${p.getUnit()}</td>
+                                                    <th>Mã sp</th>
+                                                    <th>Tên sp</th>
+                                                    <th>Loại sp</th>
+                                                    <th>Giá bán</th>
+                                                    <th>Nhà sản xuất</th>
+                                                    <th>Số lượng tồn</th>
+                                                    <th>Đơn vị</th>
+                                                    <th></th>
                                                 </tr>
-                                            </tbody>
-                                        </c:forEach>
-                                            <input type="submit" value="Lưu thông tin" />  
-                                    </table>
+                                            </thead>
+
+
+
+                                            <c:forEach items="${requestScope.inventoris}" var="i">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>${i.getId()}</td>
+                                                        <td>${i.getName()}</td>
+                                                        <td>${i.getPtname()}</td>
+                                                        <td><input class=" form-control-plaintext text-center" type="text" value="${i.getPrice()}" name ="${i.getId()}" />  </td>
+                                                        <td>${i.getNsx()}</td>
+                                                        <td>${i.getSl()}</td>
+                                                        <td>${i.getUnit()}</td>
+                                                        <td><a href="#">Chỉnh sửa</a> </td>
+                                                    </tr>
+                                                </tbody>
+                                            </c:forEach>
+
+
+
+
+                                        </table><input type="submit" value="Lưu thông tin" />  
+                                    </form>
                                 </div>
                             </div>
+
                         </div>
 
                     </div>
