@@ -76,6 +76,34 @@ public class InforProductDBContext extends DBContext {
         }
         return inventorys;
     }
+    public ArrayList<Inventory> checkInventoryByID(String id) {
+        ArrayList<Inventory> inventorys = new ArrayList<>();
+        try {
+            String sql = "select a.pid, a.pname,a.nsx, b.saleprice, sum(b.quantityinstock) as qt, b.status, b.unit, c.ptName  from Prod a inner join InforProduct b on a.pid = b.pid\n"
+                    + "inner join ProductType c on a.ptid = c.ptId where b.status = 1 and c.ptid=?\n"
+                    + "group by a.pid, a.pname, b.saleprice,a.nsx, b.status, b.unit, a.ptid, c.ptName\n"
+                    + "order by a.pid";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Inventory i = new Inventory();
+                i.setId(rs.getString("pid"));
+                i.setName(rs.getString("pname"));
+                i.setNsx(rs.getString("nsx"));
+                i.setPrice(rs.getFloat("saleprice"));
+                i.setSl(rs.getInt("qt"));
+                i.setStatus(rs.getBoolean("status"));
+                i.setUnit(rs.getString("unit"));
+                i.setPtname(rs.getString("ptName"));
+                inventorys.add(i);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return inventorys;
+    }
 
     public void insertInforProduct(InforProduct infp) {
         PreparedStatement stm = null;
@@ -136,9 +164,9 @@ public class InforProductDBContext extends DBContext {
 
     public void setprices(ArrayList<SetPrice> prices) {
         PreparedStatement stm = null;
-        for (SetPrice p : prices) {
-            if (p.getPrice() != null) {
+        
                 try {
+                    for (SetPrice p : prices) {
                     String sql = "UPDATE [InforProduct]\n"
                             + "   SET  [saleprice] = ?\n"
                             + "   where pid =?";
@@ -146,6 +174,7 @@ public class InforProductDBContext extends DBContext {
                     stm.setFloat(1, Float.parseFloat(p.getPrice()));
                     stm.setString(2, p.getId());
                     stm.executeUpdate();
+                    }
                 } catch (SQLException ex) {
                     Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 } finally {
@@ -164,8 +193,8 @@ public class InforProductDBContext extends DBContext {
                         }
                     }
                 }
-            }
-        }
+            
+        
     }
 
 }

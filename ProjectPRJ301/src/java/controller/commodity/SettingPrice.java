@@ -6,6 +6,7 @@
 package controller.commodity;
 
 import dal.InforProductDBContext;
+import dal.ProductTypeDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Inventory;
+import model.ProductType;
 import model.SetPrice;
 
 /**
@@ -21,6 +23,26 @@ import model.SetPrice;
  * @author win
  */
 public class SettingPrice extends HttpServlet {
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String raw_did = request.getParameter("did");
+        if (raw_did == null || raw_did.length() == 0||"-1".equals(raw_did)) {
+            InforProductDBContext db = new InforProductDBContext();
+            ArrayList<Inventory> inventoris = db.checkInventory();
+            request.setAttribute("inventoris", inventoris);
+        } else {
+            request.setAttribute("did", raw_did);
+            InforProductDBContext db = new InforProductDBContext();
+            ArrayList<Inventory> inventoris = db.checkInventoryByID(raw_did);
+            request.setAttribute("inventoris", inventoris);
+        }
+        ProductTypeDBContext ptdb = new ProductTypeDBContext();
+        ArrayList<ProductType> producttypes = ptdb.getProductType();
+        request.setAttribute("producttypes", producttypes);
+        request.getRequestDispatcher("commodity/settingprice.jsp").forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -34,10 +56,7 @@ public class SettingPrice extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        InforProductDBContext db = new InforProductDBContext();
-        ArrayList<Inventory> inventoris = db.checkInventory();
-        request.setAttribute("inventoris", inventoris);
-        request.getRequestDispatcher("commodity/settingprice.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -51,18 +70,7 @@ public class SettingPrice extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        InforProductDBContext db = new InforProductDBContext();
-        ArrayList<Inventory> inventoris = db.checkInventory();
-        ArrayList<SetPrice> prices = new ArrayList<>();
-        for (Inventory i : inventoris) {
-            String p = request.getParameter(i.getId());
-            if(p!=null){
-            SetPrice sp = new SetPrice(i.getId(), p);
-            prices.add(sp);
-            }
-        }
-        db.setprices(prices);
-        response.sendRedirect("settingprice");
+        processRequest(request, response);
     }
 
     /**

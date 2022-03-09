@@ -46,6 +46,31 @@ public class ProductDBContext extends DBContext {
         }
         return products;
     }
+    public ArrayList<Product> getProductByPTid(String ptid) {
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            String sql = "SELECT [pid]\n"
+                    + "      ,[pname]\n"
+                    + "      ,[nsx]\n"
+                    + "      ,[ptid]\n"
+                    + "  FROM [dbo].[Prod] where ptid =?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, ptid);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setProid(rs.getString("pid"));
+                p.setPname(rs.getString("pname"));
+                p.setNsx(rs.getString("nsx"));
+                p.setPtid(rs.getString("ptid"));
+                products.add(p);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return products;
+    }
 
     public void insertProduct(Product p) {
         PreparedStatement stm = null;

@@ -27,3 +27,7 @@ and open the template in the editor.
 .mgbt{
     float: left;
 }
+
+#accordionSidebar {
+    height: 100%;
+}

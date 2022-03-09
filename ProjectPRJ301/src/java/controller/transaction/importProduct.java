@@ -52,7 +52,8 @@ public class importProduct extends HttpServlet {
         ArrayList<ProductType> producttypes = ptdb.getProductType();
         request.setAttribute("producttypes", producttypes);
         String raw = request.getParameter("raw");
-        request.setAttribute("raw", raw);
+        if(raw!=null){
+        request.setAttribute("raw", raw);}
         request.getRequestDispatcher("transaction/importProduct.jsp").forward(request, response);
     }
 

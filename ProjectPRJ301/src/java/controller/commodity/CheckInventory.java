@@ -39,9 +39,21 @@ public class CheckInventory extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        InforProductDBContext db = new InforProductDBContext();
-        ArrayList<Inventory> inventoris = db.checkInventory();
-        request.setAttribute("inventoris", inventoris);
+
+        String raw_did = request.getParameter("did");
+        if (raw_did == null || raw_did.length() == 0||"-1".equals(raw_did)) {
+            InforProductDBContext db = new InforProductDBContext();
+            ArrayList<Inventory> inventoris = db.checkInventory();
+            request.setAttribute("inventoris", inventoris);
+        } else {
+            request.setAttribute("did", raw_did);
+            InforProductDBContext db = new InforProductDBContext();
+            ArrayList<Inventory> inventoris = db.checkInventoryByID(raw_did);
+            request.setAttribute("inventoris", inventoris);
+        }
+        ProductTypeDBContext ptdb = new ProductTypeDBContext();
+        ArrayList<ProductType> producttypes = ptdb.getProductType();
+        request.setAttribute("producttypes", producttypes);
         request.getRequestDispatcher("commodity/checkInventory.jsp").forward(request, response);
     }
 
