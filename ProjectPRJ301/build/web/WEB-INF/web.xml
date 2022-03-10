@@ -60,6 +60,14 @@
         <servlet-name>importProducts</servlet-name>
         <servlet-class>controller.transaction.importProducts</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControllerBilled</servlet-name>
+        <servlet-class>controller.transaction.BilledController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>controller.home.HomeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SupplierController</servlet-name>
         <url-pattern>/supplier</url-pattern>
@@ -115,6 +123,14 @@
     <servlet-mapping>
         <servlet-name>importProducts</servlet-name>
         <url-pattern>/importproducts</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerBilled</servlet-name>
+        <url-pattern>/billed</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -132,27 +132,23 @@
 
                 </div>
             </li>
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
 
         </ul>
         <script src="static/vendor/jquery/jquery.min.js"></script>
-                <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-                <!-- Core plugin JavaScript-->
-                <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-                <!-- Custom scripts for all pages-->
-                <script src="static/js/sb-admin-2.min.js"></script>
-                <script src="static/js/main/businesspartner.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="static/js/sb-admin-2.min.js"></script>
+        <script src="static/js/main/businesspartner.js"></script>
 
-                <!-- Page level plugins -->
-                <script src="static/vendor/chart.js/Chart.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="static/vendor/chart.js/Chart.min.js"></script>
 
-                <!-- Page level custom scripts -->
-                <script src="static/js/demo/chart-area-demo.js"></script>
-                <script src="static/js/demo/chart-pie-demo.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="static/js/demo/chart-area-demo.js"></script>
+        <script src="static/js/demo/chart-pie-demo.js"></script>
     </body>
 </html>

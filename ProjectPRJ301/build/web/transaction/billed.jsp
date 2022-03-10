@@ -1,6 +1,6 @@
 <%-- 
-    Document   : importProducts
-    Created on : Mar 7, 2022, 3:13:50 AM
+    Document   : Bill
+    Created on : Mar 10, 2022, 1:12:16 AM
     Author     : win
 --%>
 
@@ -21,7 +21,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>IM ADMIN - KIỂM KHO</title>
+        <title>IM ADMIN - Hóa Đơn</title>
 
         <!-- Custom fonts for this template-->
         <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -35,8 +35,7 @@
         <link href="static/css/css.css" rel="stylesheet">
         <link href="static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     </head>
-
-    <body id="page-top">
+     <body id="page-top">
         <div id="wrapper">
             <div class ="sidebar" >
                 <jsp:include page="../combonent/navbar.jsp" />  
@@ -56,37 +55,33 @@
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->
-
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-700">Nhập Hàng</h1>
+                        <h1 class="h3 mb-2 text-gray-800">Nhà phân phối</h1>
+
 
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <div class ="row">
                                     <h6 class="m-0 font-weight-bold text-primary col-md-3 col-md-9">Danh sánh</h6>
-
+                                    <div class="col-md-3 col-sm-2 text-center">
+                                        <form action="insertbilled">
+                                            <input class=" form-control" type="submit" value="+ Thêm mới" />
+                                        </form>
+                                    </div>
                                 </div>
 
                             </div>
                             <div class="row ">
                                 <div class="col-sm-12 col-md-6">
-                                    <div class="left dataTables_length" id="dataTable_length">
-                                        <label>Show 
-                                            <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
-                                                <option value="10">10</option>
-                                                <option value="25">25</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select>
-                                    </div>
+
                                 </div>
                                 <div class=" col-sm-12 col-md-6">
                                     <div id="dataTable_filter" class="right dataTables_filter">
                                         <label>Search:
-                                            <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
+                                            <input type="search" class="form-control form-control" placeholder="" aria-controls="dataTable">
                                         </label>
                                     </div>
                                 </div>
@@ -96,16 +91,12 @@
                                     <table class="table table-bordered as" id="dataTable" width="1000%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>Mã sp</th>
-                                                <th>Tên sp</th>
-                                                <th>Loại sp</th>
-                                                <th>Giá nhập</th>
-                                                <th>Nhà sản xuất</th>
-                                                <th>Số lượng nhập</th>
-                                                <th>Đơn vị</th>
-                                                <th>Nhà cung cấp</th>
-                                                <th>Ngày nhập</th>
-                                                <th>Trạng thái</th>
+                                                <th>Mã Hóa Đơn</th>
+                                                <th>Tên Khách Hàng</th>
+                                                <th>Tổng Hóa Đơn</th>
+                                                <th>Đã Trả</th>
+                                                <th>Còn Nợ</th>
+                                                <th>Ngày Nhập Đơn</th>
                                                 <th></th>
                                                 <th></th>
                                             </tr>
@@ -113,41 +104,23 @@
 
 
 
-                                        <c:forEach items="${requestScope.products}" var="p">
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        ${p.getId()}
-                                                    </td>
-                                                    <td><c:forEach items="${requestScope.product}" var="pn">
-                                                            ${pn.getProid()==p.getPid()?pn.getPname():""}
-                                                        </c:forEach></td>
-                                                    <td>
-                                                        <c:forEach items="${requestScope.product}" var="pn">
-                                                            <c:forEach items="${requestScope.producttypes}" var="pt">
-                                                                ${(pn.getProid()==p.getPid()&& pn.getPtid()==pt.getPtid())?pt.getPtname():""}
-                                                            </c:forEach>
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>${p.getImportprice()}</td>
-                                                    <td><c:forEach items="${requestScope.product}" var="pn">
-                                                            ${pn.getProid()==p.getPid()?pn.getNsx():""}
-                                                        </c:forEach></td>
-                                                    <td>${p.getQuantity()}</td>
-                                                    <td>${p.getUnit()}</td> 
-                                                    <td><c:forEach items="${requestScope.suppliers}" var="s">
-                                                            ${s.getId()==p.getSid()?s.getName():""}
-                                                        </c:forEach></td>
-                                                    <td>
-                                                        ${p.getDateimport()}
-                                                    </td>
-
-                                                    <td>${p.isStatus()!="1"?"Đang kinh doanh":"Ngừng kinh doanh"}
-                                                    </td>
-                                                    <td><a href="#">Chỉnh sửa</a> </td>
-                                                    <td><a href="deleteproduct?id=${i.getId()}" onclick="return confirm('Bạn có chắc là muốn xóa sản phẩm này không?')">Xóa</a></td>
-                                                </tr>
-                                            </tbody>
+                                        <c:forEach items="${requestScope.billed}" var="b">
+                                        <tbody>
+                                            <tr>
+                                                <td>${b.bid}</td>
+                                                <td>
+                                                    <c:forEach items="${requestScope.customers}" var="c">
+                                                        ${c.id == b.cid?c.name:""}
+                                                    </c:forEach>
+                                                </td>
+                                                <td>${b.total/1000000} tr</td>
+                                                <td>${b.prepayment/1000000} tr</td>
+                                                <td>${b.debt/1000000} tr</td>
+                                                <td>${b.date} </td>
+                                                <td><a href="#">Chi tiết hóa đơn</a> </td>
+                                                <td><a href="deletebilled?id=${s.bid}" onclick="return confirm('Bạn có chắc là muốn xóa hóa đơn này không?')">Xóa</a></td>
+                                            </tr>
+                                        </tbody>
                                         </c:forEach>
 
 
@@ -159,6 +132,7 @@
                         </div>
 
                     </div>
+                    <!-- /.container-fluid -->
 
                 </div>
                 <!-- End of Main Content -->
@@ -196,4 +170,3 @@
                 </body>
 
                 </html>
-
