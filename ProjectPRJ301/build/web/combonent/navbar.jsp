@@ -30,7 +30,7 @@
     </head>
     <body>
         <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="http://localhost:8080/ProjectPRJ301/home.jsp">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="http://localhost:8080/ProjectPRJ301/home">
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-cogs"></i>
 
@@ -40,7 +40,7 @@
             <hr class="sidebar-divider my-0">
 
             <li class="nav-item active">
-                <a class="nav-link" href="http://localhost:8080/ProjectPRJ301/home.jsp">
+                <a class="nav-link" href="http://localhost:8080/ProjectPRJ301/home">
                     <i class="fas fa-home"></i>
                     <span>TRANG CHỦ</span></a>
             </li>
@@ -97,7 +97,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Các Loại Giao Dịch:</h6>
                         <a class="collapse-item" href="#">Đặt Hàng</a>
-                        <a class="collapse-item" href="#">Hóa Đơn</a>
+                        <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/billed">Hóa Đơn</a>
                         <a class="collapse-item" href="#">Trả Hàng</a>
                         <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/importproducts">Nhập Hàng</a>
                         <a class="collapse-item" href="#">Trả Hàng Nhập</a>
@@ -132,6 +132,10 @@
 
                 </div>
             </li>
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
 
         </ul>
         <script src="static/vendor/jquery/jquery.min.js"></script>

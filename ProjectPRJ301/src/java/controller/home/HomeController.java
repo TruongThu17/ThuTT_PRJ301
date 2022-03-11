@@ -6,12 +6,15 @@
 package controller.home;
 
 import dal.BilledDBContext;
+import dal.HomeDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Bill_Month_Day;
 
 /**
  *
@@ -35,9 +38,15 @@ public class HomeController extends HttpServlet {
             BilledDBContext db = new BilledDBContext();
             float totalday = db.getTotalDay();
             float totalmonth = db.getTotalMonth();
+            HomeDBContext hdb = new HomeDBContext();
+            ArrayList<Bill_Month_Day> billOnMonth = hdb.getBillOnMonth();
+            ArrayList<Bill_Month_Day> billOnDay = hdb.getBillOnDay();
+            request.setAttribute("billOnDay", billOnDay);
+            request.setAttribute("billOnMonth", billOnMonth);
             request.setAttribute("totalday", totalday);
             request.setAttribute("totalmonth", totalmonth);
             request.getRequestDispatcher("home.jsp").forward(request, response);
+            
         }
     }
 

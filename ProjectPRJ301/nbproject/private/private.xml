@@ -3,31 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/businesspartner/supplier.jsp</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/businesspartner/editsupplier.jsp</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/businesspartner/customer.jsp</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/businesspartner/editcustomer.jsp</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/dal/BilledDBContext.java</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/businesspartner/insertcustomer.jsp</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/transaction/importProduct.jsp</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/businesspartner/insertsupplier.jsp</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/model/Billed.java</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/static/css/mystyle.css</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/static/css/sb-admin-2.min.css</file>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/combonent/navbar.jsp</file>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/combonent/topbar.jsp</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/businesspartner/customer.jsp</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/dal/BilledDBContext.java</file>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/home.jsp</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/static/css/sb-admin-2.css</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/commodity/settingprice.jsp</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/transaction/payImportedGood.jsp</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/transaction/importProducts.jsp</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/dal/CustomerDBContext.java</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/combonent/footer.jsp</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/partner/CustomerController.java</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/model/Customer.java</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/commodity/checkInventory.jsp</file>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/transaction/BilledController.java</file>
             <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/transaction/billed.jsp</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/combonent/footer.jsp</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/model/Billed.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/partner/CustomerController.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/home/HomeController.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/model/Bill_Month_Day.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/dal/HomeDBContext.java</file>
         </group>
     </open-files>
 </project-private>

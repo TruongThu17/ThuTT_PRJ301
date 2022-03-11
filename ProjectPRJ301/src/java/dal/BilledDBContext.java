@@ -23,12 +23,7 @@ public class BilledDBContext extends DBContext {
     public ArrayList<Billed> getBilled() {
         ArrayList<Billed> billed = new ArrayList<>();
         try {
-            String sql = "select a.bid, b.total, b.prepayment, b.debt,\n"
-                    + "a.cid, a.dateinvoice\n"
-                    + "from Bill a inner join InfBill b\n"
-                    + "on a.bid = b.bid\n"
-                    + "group by a.bid, b.total, b.prepayment, b.debt,\n"
-                    + "a.cid,a.dateinvoice";
+            String sql = "select bid, cid, total, prepayment, debt, dateinvoice from Billed where unit =1";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -51,7 +46,7 @@ public class BilledDBContext extends DBContext {
     public float getTotalDay() {
 
         try {
-            String sql = "select sum(total) as totalday from Bill where dateinvoice= CONVERT(date, GETDATE())";
+            String sql = "select sum(total)as totalday from Billed  where dateinvoice= CONVERT(date, GETDATE())";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
@@ -67,7 +62,7 @@ public class BilledDBContext extends DBContext {
     public float getTotalMonth() {
 
         try {
-            String sql = "select sum(total) as totalmonth from Bill where MONTH(dateinvoice)=  MONTH(GETDATE())\n"
+            String sql = "select sum(total) as totalmonth from Billed where MONTH(dateinvoice)=  MONTH(GETDATE())\n"
                     + "and YEAR(dateinvoice) = Year(GETDATE())";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();

@@ -11,10 +11,20 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   private static java.util.List<String> _jspx_dependants;
 
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_forEach_var_items;
+
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
   public java.util.List<String> getDependants() {
     return _jspx_dependants;
+  }
+
+  public void _jspInit() {
+    _jspx_tagPool_c_forEach_var_items = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+  }
+
+  public void _jspDestroy() {
+    _jspx_tagPool_c_forEach_var_items.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -76,7 +86,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                ");
       org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "combonent/navbar.jsp", out, false);
       out.write("  \n");
-      out.write("                \n");
+      out.write("\n");
       out.write("            </div>\n");
       out.write("            <!-- End of Sidebar -->\n");
       out.write("\n");
@@ -99,7 +109,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("                        <!-- Page Heading -->\n");
       out.write("                        <div class=\"d-sm-flex align-items-center justify-content-between mb-4\">\n");
-      out.write("                            <h1 class=\"h3 mb-0 text-gray-800\">Tổng Quan</h1>\n");
+      out.write("                            <h1 class=\"h3 mb-0 mt-4 text-gray-800\">Tổng Quan</h1>\n");
       out.write("\n");
       out.write("                        </div>\n");
       out.write("\n");
@@ -107,14 +117,16 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <div class=\"row\">\n");
       out.write("\n");
       out.write("                            <!-- Doanh Thu Trong Tháng -->\n");
-      out.write("                            <div class=\"col-xl-3 col-md-6 mb-4\">\n");
+      out.write("                            <div class=\"col-xl-6 col-md-6 mb-4\">\n");
       out.write("                                <div class=\"card border-left-primary shadow h-100 py-2\">\n");
       out.write("                                    <div class=\"card-body\">\n");
       out.write("                                        <div class=\"row no-gutters align-items-center\">\n");
       out.write("                                            <div class=\"col mr-2\">\n");
       out.write("                                                <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">\n");
       out.write("                                                    Doanh Thu(Tháng)</div>\n");
-      out.write("                                                <div class=\"h5 mb-0 font-weight-bold text-gray-800\">$40,000</div>\n");
+      out.write("                                                <div class=\"h5 mb-0 font-weight-bold text-gray-800\">");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${totalmonth/1000000}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(" triệu</div>\n");
       out.write("                                            </div>\n");
       out.write("                                            <div class=\"col-auto\">\n");
       out.write("                                                <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\n");
@@ -125,14 +137,16 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            </div>\n");
       out.write("\n");
       out.write("                            <!-- Earnings (Monthly) Card Example -->\n");
-      out.write("                            <div class=\"col-xl-3 col-md-6 mb-4\">\n");
+      out.write("                            <div class=\"col-xl-6 col-md-6 mb-4\">\n");
       out.write("                                <div class=\"card border-left-success shadow h-100 py-2\">\n");
       out.write("                                    <div class=\"card-body\">\n");
       out.write("                                        <div class=\"row no-gutters align-items-center\">\n");
       out.write("                                            <div class=\"col mr-2\">\n");
       out.write("                                                <div class=\"text-xs font-weight-bold text-success text-uppercase mb-1\">\n");
       out.write("                                                    Doanh Thu (Ngày)</div>\n");
-      out.write("                                                <div class=\"h5 mb-0 font-weight-bold text-gray-800\">$215,000</div>\n");
+      out.write("                                                <div class=\"h5 mb-0 font-weight-bold text-gray-800\">");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${totalday/1000000}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(" triệu</div>\n");
       out.write("                                            </div>\n");
       out.write("                                            <div class=\"col-auto\">\n");
       out.write("                                                <i class=\"fas fa-dollar-sign fa-2x text-gray-300\"></i>\n");
@@ -142,31 +156,72 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                </div>\n");
       out.write("                            </div>\n");
       out.write("\n");
+      out.write("                            <div class=\"col-xl-12 col-lg-12\">\n");
+      out.write("                                <div class=\"card shadow mb-4\">\n");
+      out.write("                                    <!-- Card Header - Dropdown -->\n");
+      out.write("                                    <div\n");
+      out.write("                                        class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\n");
+      out.write("                                        <h6 class=\"m-0 font-weight-bold text-primary\">Hóa Đơn Trong Ngày</h6>\n");
+      out.write("                                        <div class=\"dropdown no-arrow\">\n");
+      out.write("                                        </div>\n");
+      out.write("                                    </div>\n");
+      out.write("                                    <!-- Card Body -->\n");
+      out.write("                                    <div class=\"card-body\">\n");
+      out.write("                                        <table class=\"table table-bordered as\" id=\"dataTable\" width=\"1000%\" cellspacing=\"0\">\n");
+      out.write("                                            <thead>\n");
+      out.write("                                                <tr>\n");
+      out.write("                                                    <th>Mã Hóa Đơn</th>\n");
+      out.write("                                                    <th>Tên Khách Hàng</th>\n");
+      out.write("                                                    <th>Tổng Hóa Đơn</th>\n");
+      out.write("                                                    <th>Ngày Mua</th>\n");
+      out.write("                                                    <th></th>\n");
+      out.write("                                                </tr>\n");
+      out.write("                                            </thead>\n");
+      out.write("                                            <tbody>\n");
+      out.write("                                                ");
+      if (_jspx_meth_c_forEach_0(_jspx_page_context))
+        return;
       out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("                            <!-- Pie Chart -->\n");
-      out.write("                            <div class=\"col-xl-4 col-lg-5\">\n");
+      out.write("                                            </tbody>\n");
+      out.write("                                        </table>\n");
+      out.write("                                    </div>\n");
+      out.write("                                </div>\n");
       out.write("                            </div>\n");
-      out.write("                        </div>\n");
+      out.write("                            <div class=\"col-xl-12 col-lg-12\">\n");
+      out.write("                                <div class=\"card shadow mb-4\">\n");
+      out.write("                                    <!-- Card Header - Dropdown -->\n");
+      out.write("                                    <div\n");
+      out.write("                                        class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\n");
+      out.write("                                        <h6 class=\"m-0 font-weight-bold text-primary\">Hóa Đơn Trong Tháng</h6>\n");
+      out.write("                                        <div class=\"dropdown no-arrow\">\n");
+      out.write("                                            <a class=\"dropdown-toggle\" href=\"#\" role=\"button\" id=\"dropdownMenuLink\"\n");
+      out.write("                                               data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n");
+      out.write("                                            </a>\n");
       out.write("\n");
-      out.write("                        <!-- Content Row -->\n");
-      out.write("                        <div class=\"row\">\n");
+      out.write("                                        </div>\n");
+      out.write("                                    </div>\n");
+      out.write("                                    <!-- Card Body -->\n");
+      out.write("                                    <div class=\"card-body\">\n");
+      out.write("                                            <table class=\"table table-bordered as\" id=\"dataTable\" width=\"1000%\" cellspacing=\"0\">\n");
+      out.write("                                                <thead>\n");
+      out.write("                                                    <tr>\n");
+      out.write("                                                        <th>Mã Hóa Đơn</th>\n");
+      out.write("                                                        <th>Tên Khách Hàng</th>\n");
+      out.write("                                                        <th>Tổng Hóa Đơn</th>\n");
+      out.write("                                                        <th>Ngày Mua</th>\n");
+      out.write("                                                        <th></th>\n");
+      out.write("                                                    </tr>\n");
+      out.write("                                                </thead>\n");
+      out.write("                                                <tbody>\n");
+      out.write("                                                    ");
+      if (_jspx_meth_c_forEach_1(_jspx_page_context))
+        return;
       out.write("\n");
-      out.write("                            <!-- Content Column -->\n");
-      out.write("                            <div class=\"col-lg-6 mb-4\">\n");
-      out.write("\n");
-      out.write("\n");
+      out.write("                                                </tbody>\n");
+      out.write("                                            </table>\n");
+      out.write("                                    </div>\n");
+      out.write("                                </div>\n");
       out.write("                            </div>\n");
-      out.write("\n");
-      out.write("                            <!-- Color System -->\n");
-      out.write("                            <div class=\"row\">\n");
-      out.write("                            </div>\n");
-      out.write("\n");
-      out.write("                        </div>\n");
-      out.write("\n");
-      out.write("                        <div class=\"col-lg-6 mb-4\">\n");
       out.write("                        </div>\n");
       out.write("                    </div>\n");
       out.write("\n");
@@ -216,6 +271,7 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        </div>\n");
       out.write("    </div>\n");
       out.write("\n");
+      out.write("\n");
       out.write("    <!-- Bootstrap core JavaScript-->\n");
       out.write("    <script src=\"static/vendor/jquery/jquery.min.js\"></script>\n");
       out.write("    <script src=\"static/vendor/bootstrap/js/bootstrap.bundle.min.js\"></script>\n");
@@ -246,5 +302,111 @@ public final class home_jsp extends org.apache.jasper.runtime.HttpJspBase
     } finally {
       _jspxFactory.releasePageContext(_jspx_page_context);
     }
+  }
+
+  private boolean _jspx_meth_c_forEach_0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:forEach
+    org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
+    _jspx_th_c_forEach_0.setPageContext(_jspx_page_context);
+    _jspx_th_c_forEach_0.setParent(null);
+    _jspx_th_c_forEach_0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${billOnDay}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_0.setVar("bd");
+    int[] _jspx_push_body_count_c_forEach_0 = new int[] { 0 };
+    try {
+      int _jspx_eval_c_forEach_0 = _jspx_th_c_forEach_0.doStartTag();
+      if (_jspx_eval_c_forEach_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+        do {
+          out.write("\n");
+          out.write("\n");
+          out.write("                                                    <tr>\n");
+          out.write("                                                        <td>");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${bd.bid}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</td>\n");
+          out.write("                                                        <td>");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${bd.cname}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</td>\n");
+          out.write("                                                        <td>");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${bd.total/1000000}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write(" tr</td>\n");
+          out.write("                                                        <td>");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${bd.date}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</td>\n");
+          out.write("                                                        <td><a href=\"\">Chi tiết hóa đơn</a> </td>\n");
+          out.write("                                                    </tr>\n");
+          out.write("\n");
+          out.write("                                                ");
+          int evalDoAfterBody = _jspx_th_c_forEach_0.doAfterBody();
+          if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+            break;
+        } while (true);
+      }
+      if (_jspx_th_c_forEach_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+        return true;
+      }
+    } catch (Throwable _jspx_exception) {
+      while (_jspx_push_body_count_c_forEach_0[0]-- > 0)
+        out = _jspx_page_context.popBody();
+      _jspx_th_c_forEach_0.doCatch(_jspx_exception);
+    } finally {
+      _jspx_th_c_forEach_0.doFinally();
+      _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_0);
+    }
+    return false;
+  }
+
+  private boolean _jspx_meth_c_forEach_1(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:forEach
+    org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_1 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
+    _jspx_th_c_forEach_1.setPageContext(_jspx_page_context);
+    _jspx_th_c_forEach_1.setParent(null);
+    _jspx_th_c_forEach_1.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${billOnMonth}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_1.setVar("bm");
+    int[] _jspx_push_body_count_c_forEach_1 = new int[] { 0 };
+    try {
+      int _jspx_eval_c_forEach_1 = _jspx_th_c_forEach_1.doStartTag();
+      if (_jspx_eval_c_forEach_1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+        do {
+          out.write("\n");
+          out.write("\n");
+          out.write("                                                        <tr>\n");
+          out.write("                                                            <td>");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${bm.bid}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</td>\n");
+          out.write("                                                            <td>");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${bm.cname}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</td>\n");
+          out.write("                                                            <td>");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${bm.total/1000000}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write(" tr</td>\n");
+          out.write("                                                            <td>");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${bm.date}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</td>\n");
+          out.write("                                                            <td><a href=\"\">Chi tiết hóa đơn</a> </td>\n");
+          out.write("                                                        </tr>\n");
+          out.write("\n");
+          out.write("                                                    ");
+          int evalDoAfterBody = _jspx_th_c_forEach_1.doAfterBody();
+          if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+            break;
+        } while (true);
+      }
+      if (_jspx_th_c_forEach_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+        return true;
+      }
+    } catch (Throwable _jspx_exception) {
+      while (_jspx_push_body_count_c_forEach_1[0]-- > 0)
+        out = _jspx_page_context.popBody();
+      _jspx_th_c_forEach_1.doCatch(_jspx_exception);
+    } finally {
+      _jspx_th_c_forEach_1.doFinally();
+      _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_1);
+    }
+    return false;
   }
 }

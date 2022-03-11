@@ -56,7 +56,7 @@
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Tổng Quan</h1>
+                            <h1 class="h3 mb-0 mt-4 text-gray-800">Tổng Quan</h1>
 
                         </div>
 
@@ -64,7 +64,7 @@
                         <div class="row">
 
                             <!-- Doanh Thu Trong Tháng -->
-                            <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="col-xl-6 col-md-6 mb-4">
                                 <div class="card border-left-primary shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -82,7 +82,7 @@
                             </div>
 
                             <!-- Earnings (Monthly) Card Example -->
-                            <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="col-xl-6 col-md-6 mb-4">
                                 <div class="card border-left-success shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
@@ -99,102 +99,150 @@
                                 </div>
                             </div>
 
-                            <div class="card-body">
-                                <div class="table-responsive">
+                            <div class="col-xl-12 col-lg-12">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Hóa Đơn Trong Ngày</h6>
+                                        <div class="dropdown no-arrow">
+                                        </div>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <table class="table table-bordered as" id="dataTable" width="1000%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mã Hóa Đơn</th>
+                                                    <th>Tên Khách Hàng</th>
+                                                    <th>Tổng Hóa Đơn</th>
+                                                    <th>Ngày Mua</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="${billOnDay}" var="bd">
 
-                                    <table class="table table-bordered as" id="dataTable" width="1000%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>MKH</th>
-                                                <th>Tên KH</th>
-                                                <th>Sdt</th>
-                                                <th>Địa Chỉ</th>
-                                                <th>Note</th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
+                                                    <tr>
+                                                        <td>${bd.bid}</td>
+                                                        <td>${bd.cname}</td>
+                                                        <td>${bd.total/1000000} tr</td>
+                                                        <td>${bd.date}</td>
+                                                        <td><a href="">Chi tiết hóa đơn</a> </td>
+                                                    </tr>
 
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-lg-12">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Hóa Đơn Trong Tháng</h6>
+                                        <div class="dropdown no-arrow">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            </a>
 
+                                        </div>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                            <table class="table table-bordered as" id="dataTable" width="1000%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Mã Hóa Đơn</th>
+                                                        <th>Tên Khách Hàng</th>
+                                                        <th>Tổng Hóa Đơn</th>
+                                                        <th>Ngày Mua</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:forEach items="${billOnMonth}" var="bm">
 
-                                        <%for (Customer c : customers) {%>
-                                        <tbody>
-                                            <tr>
-                                                <td><%=c.getId()%></td>
-                                                <td><%=c.getName()%></td>
-                                                <td><%=c.getPhone()%></td>
-                                                <td><%=c.getAddress()%></td>
-                                                <td><%=c.getNote()%></td>
-                                                <td><a href="editcustomer?id=<%=c.getId()%>">Chỉnh sửa</a> </td>
-                                                <td><a href="deletecustomer?id=<%=c.getId()%>" onclick="return confirm('Bạn có chắc là muốn xóa khách hàng này không?')">Xóa</a></td>
-                                            </tr>
-                                        </tbody>
-                                        <%}%>
-                                    </table>
+                                                        <tr>
+                                                            <td>${bm.bid}</td>
+                                                            <td>${bm.cname}</td>
+                                                            <td>${bm.total/1000000} tr</td>
+                                                            <td>${bm.date}</td>
+                                                            <td><a href="">Chi tiết hóa đơn</a> </td>
+                                                        </tr>
+
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                    </div>
-                    <!-- /.container-fluid -->
-                    <!-- Footer -->
-                    <div class = "footer">
-                        <jsp:include page="combonent/footer.jsp" />
-                    </div>
-                    <!-- End of Footer -->
                 </div>
-                <!-- End of Main Content -->
-
-
-
+                <!-- /.container-fluid -->
+                <!-- Footer -->
+                <div class = "footer">
+                    <jsp:include page="combonent/footer.jsp" />
+                </div>
+                <!-- End of Footer -->
             </div>
-            <!-- End of Content Wrapper -->
+            <!-- End of Main Content -->
+
+
 
         </div>
+        <!-- End of Content Wrapper -->
 
-        <!-- End of Page Wrapper -->
+    </div>
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+    <!-- End of Page Wrapper -->
 
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
-                    </div>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="static/vendor/jquery/jquery.min.js"></script>
-        <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="static/vendor/jquery/jquery.min.js"></script>
+    <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="static/js/sb-admin-2.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Page level plugins -->
-        <script src="static/vendor/chart.js/Chart.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="static/js/sb-admin-2.min.js"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="static/js/demo/chart-area-demo.js"></script>
-        <script src="static/js/demo/chart-pie-demo.js"></script>
+    <!-- Page level plugins -->
+    <script src="static/vendor/chart.js/Chart.min.js"></script>
 
-    </body>
+    <!-- Page level custom scripts -->
+    <script src="static/js/demo/chart-area-demo.js"></script>
+    <script src="static/js/demo/chart-pie-demo.js"></script>
+
+</body>
 </html>
