@@ -59,8 +59,8 @@
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4 mt-2">
                             <form
-                                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-4 my-md-0 mw-100 navbar-search">
-                                <div class="input-group">
+                                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-4 my-md-0 mw-100 navbar-search">
+                                <div class="input-group mt-2">
                                     <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm sản phẩm..."
                                            aria-label="Search" aria-describedby="basic-addon2">
  
