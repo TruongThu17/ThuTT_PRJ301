@@ -68,6 +68,22 @@
         <servlet-name>HomeController</servlet-name>
         <servlet-class>controller.home.HomeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BillController</servlet-name>
+        <servlet-class>controller.service.BillController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddBillController</servlet-name>
+        <servlet-class>controller.service.AddBillController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchProduct</servlet-name>
+        <servlet-class>controller.commodity.SearchProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SeachProductController</servlet-name>
+        <servlet-class>controller.commodity.SeachProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SupplierController</servlet-name>
         <url-pattern>/supplier</url-pattern>
@@ -131,6 +147,22 @@
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BillController</servlet-name>
+        <url-pattern>/bill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddBillController</servlet-name>
+        <url-pattern>/addbill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProduct</servlet-name>
+        <url-pattern>/search-product-inventory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SeachProductController</servlet-name>
+        <url-pattern>/product/search</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

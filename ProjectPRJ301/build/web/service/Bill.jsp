@@ -35,13 +35,46 @@
         <link href="static/css/css.css" rel="stylesheet">
         <link href="static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     </head>
+    <style>
+        .mymodal {
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: block;
+            background: rgba(0, 0, 0, 0.3);
+            height: 100%;
+            width: 100%;
+            transform: scale(0);
+            transition-duration: 0s;
+            z-index: 2;
+        }
+
+        .mymodal .content {
+            position: absolute;
+            padding: 15px 35px 15px 35px;
+            border-radius: 10px;
+            background: #FDFDFE;
+            transform: scale(0);
+            transition-duration: 0.5s;
+            z-index: 99;
+            top: 3vh;
+            left: 23vh;
+            width: 75vw;
+            height: 90vh;
+        }
+    </style>
     <body id="page-top">
         <div id="wrapper">
             <div class ="sidebar" >
                 <jsp:include page="../combonent/navbar.jsp" />  
             </div>
             <!-- End of Sidebar -->
-
+            <button onclick="openModal()">+</button>
+            <div id="mymodal" class="mymodal">
+                <div class="content" id="content">
+                    <p>Hello</p>
+                </div>
+            </div>
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
 
@@ -61,17 +94,24 @@
                             <form
                                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3  my-4 my-md-0 mw-100 navbar-search">
                                 <div class="input-group mt-2">
-                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Tìm sản phẩm..."
+                                    <input id="searchKey" type="text" class="form-control bg-light border-0 small" placeholder="Tìm sản phẩm..."
                                            aria-label="Search" aria-describedby="basic-addon2">
- 
+
                                     <div class="input-group-append">
-                                        <button class="btn btn-light" type="button">
+                                        <button onclick="searchProduct()" class="btn btn-light" type="button">
                                             <i class="fas fa-search fa-sm"></i>
                                         </button>
                                     </div>
                                     <input type="number" class="form-control bg-light border-0 small" placeholder="Số Lượng">
+                                    <div class="result" >
+                                        <table>
+                                            <thead>
+
+                                            </thead>
+                                        </table>
+                                    </div>
                                 </div>
-                                
+
                             </form>
                             <div class="row mt-2">
 
@@ -92,7 +132,7 @@
                                                         <th scope="col">Total Price</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody id="product-list">
 
                                                 </tbody>
                                             </table>
@@ -152,6 +192,33 @@
 
 
                 <!-- Bootstrap core JavaScript-->
+                <script>
+
+                    function openModal() {
+                        var mymodal = document.getElementById("mymodal");
+                        var content = document.getElementById("content");
+//                        alert(  mymodal.style.transform );
+                        mymodal.style.transform = "scale(1)";
+//                         alert(  mymodal.style.transform );
+                        content.style.transform = "scale(1)";
+                    }
+//
+                    function searchProduct() {
+                        var searchKey = document.getElementById("searchKey");
+                        var url = "product/search?searchKey=" + searchKey;
+
+                        fetch(url).then(function (response) {
+                            return response.text();
+                        }).then(function (result) {
+
+                        });
+                    }
+
+
+
+
+
+                </script>
                 <script src="static/vendor/jquery/jquery.min.js"></script>
                 <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

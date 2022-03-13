@@ -67,9 +67,34 @@ public class ProductDBContext extends DBContext {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return products;
+    }
+    public Product getProductById(String pid) {
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            String sql = "SELECT [pid]\n"
+                    + "      ,[pname]\n"
+                    + "      ,[nsx]\n"
+                    + "      ,[ptid]\n"
+                    + "  FROM [dbo].[Prod] where pid =?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, pid);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Product p = new Product();
+                p.setProid(rs.getString("pid"));
+                p.setPname(rs.getString("pname"));
+                p.setNsx(rs.getString("nsx"));
+                p.setPtid(rs.getString("ptid"));
+                return p;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public void insertProduct(Product p) {
@@ -92,20 +117,20 @@ public class ProductDBContext extends DBContext {
             stm.setString(4, p.getPtid());
             stm.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (stm != null) {
                 try {
                     stm.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }

@@ -58,7 +58,7 @@
                 </a>
                 <div id="collapseT" class="collapse" aria-labelledby="heading" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="">Hóa Đơn</a>
+                        <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/addbill">Lên Hóa Đơn</a>
                         <a class="collapse-item" href="">Trả Hàng</a>
                         <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/insertcustomer">Thêm Khách Hàng</a>
                         <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/importproduct">Nhập Hàng Hóa</a>

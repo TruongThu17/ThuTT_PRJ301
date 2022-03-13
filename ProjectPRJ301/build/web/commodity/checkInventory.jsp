@@ -57,7 +57,7 @@
                 <div id="content">
 
                     <!-- Topbar -->
-                   <div class ="topbar" >
+                    <div class ="topbar" >
                         <jsp:include page="../combonent/topbar.jsp" />  
                     </div>
                     <!-- End of Topbar -->
@@ -99,13 +99,13 @@
                                 <div class=" col-sm-12 col-md-6">
                                     <div id="dataTable_filter" class="right dataTables_filter">
                                         <label>Search:
-                                            <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
+                                            <input oninput="searchByName(this)" type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
+                                <div class="table-responsive" id ="content">
                                     <table class="table table-bordered as" id="dataTable" width="1000%" cellspacing="0">
                                         <thead>
                                             <tr>
@@ -186,6 +186,8 @@
                 <script src="static/js/demo/chart-pie-demo.js"></script>
 
                 </body>
-
+                <script>
+                        
+                </script>
                 </html>
 
