@@ -1,6 +1,6 @@
-﻿USE [master]
+USE [master]
 GO
-/****** Object:  Database [InventoryManage]    Script Date: 3/11/2022 11:42:40 PM ******/
+/****** Object:  Database [InventoryManage]    Script Date: 3/12/2022 10:16:03 PM ******/
 CREATE DATABASE [InventoryManage]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -82,7 +82,7 @@ ALTER DATABASE [InventoryManage] SET QUERY_STORE = OFF
 GO
 USE [InventoryManage]
 GO
-/****** Object:  Table [dbo].[Account]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[Account]    Script Date: 3/12/2022 10:16:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -96,7 +96,7 @@ CREATE TABLE [dbo].[Account](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Billed]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[Billed]    Script Date: 3/12/2022 10:16:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -116,7 +116,7 @@ CREATE TABLE [dbo].[Billed](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Customer]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[Customer]    Script Date: 3/12/2022 10:16:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -133,7 +133,7 @@ CREATE TABLE [dbo].[Customer](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InfBilled]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[InfBilled]    Script Date: 3/12/2022 10:16:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -145,7 +145,7 @@ CREATE TABLE [dbo].[InfBilled](
 	[unitprice] [float] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InforProduct]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[InforProduct]    Script Date: 3/12/2022 10:16:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -168,7 +168,7 @@ CREATE TABLE [dbo].[InforProduct](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InfRefund]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[InfRefund]    Script Date: 3/12/2022 10:16:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -180,7 +180,7 @@ CREATE TABLE [dbo].[InfRefund](
 	[unitprice] [float] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Prod]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[Prod]    Script Date: 3/12/2022 10:16:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -196,7 +196,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ProductType]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[ProductType]    Script Date: 3/12/2022 10:16:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -210,7 +210,7 @@ CREATE TABLE [dbo].[ProductType](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Refund]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[Refund]    Script Date: 3/12/2022 10:16:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -225,7 +225,7 @@ CREATE TABLE [dbo].[Refund](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Supplier]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[Supplier]    Script Date: 3/12/2022 10:16:03 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -269,6 +269,14 @@ INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice
 GO
 INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [note]) VALUES (N'b12', N'c10', 11300000, 11300000, 0, CAST(N'2022-03-11' AS Date), 1, NULL)
 GO
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [note]) VALUES (N'b13', N'c01', 39020000, 10000000, 29020000, CAST(N'2022-03-12' AS Date), 0, NULL)
+GO
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [note]) VALUES (N'b14', N'c08', 2700000, 1000000, 1700000, CAST(N'2022-03-12' AS Date), 0, NULL)
+GO
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [note]) VALUES (N'b15', N'c06', 2280000, 2000000, 280000, CAST(N'2022-03-12' AS Date), 0, NULL)
+GO
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [note]) VALUES (N'b16', N'c03', 3510000, 2000000, 1510000, CAST(N'2022-03-12' AS Date), 0, NULL)
+GO
 INSERT [dbo].[Customer] ([cid], [cname], [cphone], [caddress], [Note]) VALUES (N'c01', N'Nguyễn Ngọc', N'0972276577', N'Bình Yên, Thạch Thất', NULL)
 GO
 INSERT [dbo].[Customer] ([cid], [cname], [cphone], [caddress], [Note]) VALUES (N'c02', N'Lê Nam', N'0971346527', N'Bình Yên, Thạch Thất', NULL)
@@ -306,6 +314,18 @@ GO
 INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b02', N'1011', 1000, 18300)
 GO
 INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b03', N'1004', 8, 1170000)
+GO
+INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b13', N'1001', 2, 1460000)
+GO
+INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b13', N'1012', 100, 114000)
+GO
+INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b13', N'1016', 100, 247000)
+GO
+INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b14', N'1002', 2, 1350000)
+GO
+INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b15', N'1003', 2, 1140000)
+GO
+INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b16', N'1004', 3, 1170000)
 GO
 INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b03', N'1013', 100, 113000)
 GO
