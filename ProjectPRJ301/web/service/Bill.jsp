@@ -46,7 +46,7 @@
             width: 100%;
             transform: scale(0);
             transition-duration: 0s;
-            z-index: 2;
+            z-index: 3;
         }
 
         .mymodal .content {
@@ -56,7 +56,7 @@
             background: #FDFDFE;
             transform: scale(0);
             transition-duration: 0.5s;
-            z-index: 99;
+            z-index: 3;
             top: 3vh;
             left: 23vh;
             width: 75vw;
@@ -70,7 +70,7 @@
             </div>
             <!-- End of Sidebar -->
             <button onclick="openModal()">+</button>
-            <div id="mymodal" class="mymodal">
+            <div id="md" class="mymodal">
                 <div class="content" id="content">
                     <p>Hello</p>
                 </div>
@@ -102,7 +102,6 @@
                                             <i class="fas fa-search fa-sm"></i>
                                         </button>
                                     </div>
-                                    <input type="number" class="form-control bg-light border-0 small" placeholder="Số Lượng">
                                     <div class="result" >
                                         <table>
                                             <thead>
@@ -121,7 +120,7 @@
 
                                         <!-- Card Body -->
                                         <div class="card-body">
-                                            <table class="table">
+                                            <table class="table">    
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">#</th>
@@ -195,7 +194,7 @@
                 <script>
 
                     function openModal() {
-                        var mymodal = document.getElementById("mymodal");
+                        var mymodal = document.getElementById("md");
                         var content = document.getElementById("content");
 //                        alert(  mymodal.style.transform );
                         mymodal.style.transform = "scale(1)";

@@ -33,7 +33,20 @@ public class CustomerController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CustomerDBContext cdb = new CustomerDBContext();
-        ArrayList<Customer> customers = cdb.getCustomers();
+        String raw_txt = request.getParameter("searchc");
+        ArrayList<Customer> customers = new ArrayList<>();
+        String err = "";
+        if(raw_txt!= null){
+            customers= cdb.getCustomersByName(raw_txt);
+        }
+        else{
+            customers= cdb.getCustomers();
+        }
+         if(customers.isEmpty()){
+             err="Danh sách khách hàng rỗng";
+              request.setAttribute("err", err);
+         }
+        
         request.setAttribute("customers", customers);
         request.getRequestDispatcher("businesspartner/customer.jsp").forward(request, response);
     }

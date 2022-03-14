@@ -28,7 +28,6 @@ import model.Supplier;
  */
 public class importProducts extends HttpServlet {
 
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,8 +39,46 @@ public class importProducts extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        InforProductDBContext db = new InforProductDBContext();
+        ArrayList<InforProduct> products = new ArrayList<>();
+        String raw_did = request.getParameter("did");
+        String raw_txt = request.getParameter("searchP");
+        String err = null;
+        ProductDBContext pdb = new ProductDBContext();
+        ArrayList<Product> product = new ArrayList<>();
+        if (raw_did == null || raw_did.length() == 0 || "-1".equals(raw_did)) {
+            if (raw_txt == null) {
+                product = pdb.getProduct();
+                products =db.getInforProduct();
+            } else {
+                product = pdb.getProductByString(raw_txt);
+                products = db.getInforProductByPname(raw_txt);
+            }
+        } else {
+            if (raw_txt == null) {
+                product = pdb.getProductByPTid(raw_did);
+                products = db.getInforProductByPTid(raw_did);
+            } else {
+                product = pdb.getProductByPTidandName(raw_txt, raw_did);
+                products = db.getProductByPTidandName(raw_txt, raw_did);
+            }
+        }
+        if (product.isEmpty()) {
+            err = "Danh sách sản phẩm rỗng";
+            request.setAttribute("err", err);
+        }
+         request.setAttribute("did", raw_did);
+        request.setAttribute("products", products);
+        SupplierDBContext sdb = new SupplierDBContext();
+        request.setAttribute("product", product);
+        ArrayList<Supplier> suppliers = sdb.getSupplier();
+        request.setAttribute("suppliers", suppliers);
+        ProductTypeDBContext ptdb = new ProductTypeDBContext();
+        ArrayList<ProductType> producttypes = ptdb.getProductType();
+        request.setAttribute("producttypes", producttypes);
+        request.getRequestDispatcher("transaction/importProducts.jsp").forward(request, response);
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -54,19 +91,7 @@ public class importProducts extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        InforProductDBContext db = new InforProductDBContext();
-        ArrayList<InforProduct> products = db.getInforProduct();
-        request.setAttribute("products", products);
-        ProductDBContext pdb = new ProductDBContext();
-        ArrayList<Product> product = pdb.getProduct();
-        request.setAttribute("product", product);
-        SupplierDBContext sdb = new SupplierDBContext();
-        ArrayList<Supplier> suppliers = sdb.getSupplier();
-        request.setAttribute("suppliers", suppliers);
-        ProductTypeDBContext ptdb = new ProductTypeDBContext();
-        ArrayList<ProductType> producttypes = ptdb.getProductType();
-        request.setAttribute("producttypes", producttypes);
-        request.getRequestDispatcher("transaction/importProducts.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -80,7 +105,7 @@ public class importProducts extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**

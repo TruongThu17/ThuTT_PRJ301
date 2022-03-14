@@ -84,6 +84,14 @@
         <servlet-name>SeachProductController</servlet-name>
         <servlet-class>controller.commodity.SeachProductController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RefaudController</servlet-name>
+        <servlet-class>controller.transaction.RefaudController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OrderController</servlet-name>
+        <servlet-class>controller.transaction.OrderController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SupplierController</servlet-name>
         <url-pattern>/supplier</url-pattern>
@@ -163,6 +171,14 @@
     <servlet-mapping>
         <servlet-name>SeachProductController</servlet-name>
         <url-pattern>/product/search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RefaudController</servlet-name>
+        <url-pattern>/refaud</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderController</servlet-name>
+        <url-pattern>/order</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

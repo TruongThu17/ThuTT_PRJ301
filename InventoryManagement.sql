@@ -1,6 +1,6 @@
 ﻿USE [master]
 GO
-/****** Object:  Database [InventoryManage]    Script Date: 3/11/2022 11:42:40 PM ******/
+/****** Object:  Database [InventoryManage]    Script Date: 3/14/2022 11:24:08 PM ******/
 CREATE DATABASE [InventoryManage]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -82,7 +82,7 @@ ALTER DATABASE [InventoryManage] SET QUERY_STORE = OFF
 GO
 USE [InventoryManage]
 GO
-/****** Object:  Table [dbo].[Account]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[Account]    Script Date: 3/14/2022 11:24:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -96,7 +96,7 @@ CREATE TABLE [dbo].[Account](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Billed]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[Billed]    Script Date: 3/14/2022 11:24:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -109,14 +109,15 @@ CREATE TABLE [dbo].[Billed](
 	[debt] [float] NOT NULL,
 	[dateinvoice] [date] NOT NULL,
 	[unit] [bit] NULL,
-	[note] [varchar](150) NULL,
+	[date] [date] NULL,
+	[note] [nvarchar](350) NULL,
  CONSTRAINT [PK_Billed_1] PRIMARY KEY CLUSTERED 
 (
 	[bid] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Customer]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[Customer]    Script Date: 3/14/2022 11:24:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -133,7 +134,7 @@ CREATE TABLE [dbo].[Customer](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InfBilled]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[InfBilled]    Script Date: 3/14/2022 11:24:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -145,7 +146,7 @@ CREATE TABLE [dbo].[InfBilled](
 	[unitprice] [float] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InforProduct]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[InforProduct]    Script Date: 3/14/2022 11:24:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -168,7 +169,7 @@ CREATE TABLE [dbo].[InforProduct](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InfRefund]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[InfRefund]    Script Date: 3/14/2022 11:24:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -180,7 +181,7 @@ CREATE TABLE [dbo].[InfRefund](
 	[unitprice] [float] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Prod]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[Prod]    Script Date: 3/14/2022 11:24:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -196,7 +197,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ProductType]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[ProductType]    Script Date: 3/14/2022 11:24:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -210,7 +211,7 @@ CREATE TABLE [dbo].[ProductType](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Refund]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[Refund]    Script Date: 3/14/2022 11:24:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -225,7 +226,7 @@ CREATE TABLE [dbo].[Refund](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Supplier]    Script Date: 3/11/2022 11:42:41 PM ******/
+/****** Object:  Table [dbo].[Supplier]    Script Date: 3/14/2022 11:24:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -245,29 +246,37 @@ INSERT [dbo].[Account] ([username], [password]) VALUES (N'anhnn181', N'654321')
 GO
 INSERT [dbo].[Account] ([username], [password]) VALUES (N'hoaithu177', N'123456')
 GO
-INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [note]) VALUES (N'b01', N'c01', 83690000, 83690000, 0, CAST(N'2022-03-01' AS Date), 1, NULL)
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b01', N'c01', 78185000, 83690000, 0, CAST(N'2022-03-01' AS Date), 1, CAST(N'2022-03-01' AS Date), NULL)
 GO
-INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [note]) VALUES (N'b02', N'c02', 24990000, 24990000, 0, CAST(N'2022-03-02' AS Date), 1, NULL)
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b02', N'c02', 23640000, 24990000, 0, CAST(N'2022-03-02' AS Date), 1, CAST(N'2022-03-02' AS Date), NULL)
 GO
-INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [note]) VALUES (N'b03', N'c03', 22490000, 10000000, 12490000, CAST(N'2022-02-11' AS Date), 1, NULL)
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b03', N'c03', 18980000, 22490000, 0, CAST(N'2022-02-11' AS Date), 1, CAST(N'2022-02-11' AS Date), NULL)
 GO
-INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [note]) VALUES (N'b04', N'c04', 9450000, 2000000, 7450000, CAST(N'2022-01-29' AS Date), 1, NULL)
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b04', N'c04', 7110000, 9450000, 0, CAST(N'2022-01-29' AS Date), 1, CAST(N'2022-01-29' AS Date), NULL)
 GO
-INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [note]) VALUES (N'b05', N'c02', 4050000, 3000000, 1050000, CAST(N'2022-03-09' AS Date), 1, NULL)
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b05', N'c02', 2700000, 4050000, 0, CAST(N'2022-03-09' AS Date), 1, CAST(N'2022-03-09' AS Date), NULL)
 GO
-INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [note]) VALUES (N'b06', N'c05', 7300000, 6000000, 1300000, CAST(N'2022-03-01' AS Date), 1, NULL)
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b06', N'c05', 7300000, 7300000, 0, CAST(N'2022-03-01' AS Date), 1, CAST(N'2022-03-01' AS Date), NULL)
 GO
-INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [note]) VALUES (N'b07', N'c06', 10800000, 10800000, 0, CAST(N'2022-03-02' AS Date), 1, NULL)
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b07', N'c06', 8100000, 10800000, 0, CAST(N'2022-03-02' AS Date), 1, CAST(N'2022-03-02' AS Date), NULL)
 GO
-INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [note]) VALUES (N'b08', N'c07', 21920000, 20000000, 1920000, CAST(N'2022-02-01' AS Date), 1, NULL)
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b08', N'c07', 17540000, 21920000, 0, CAST(N'2022-02-01' AS Date), 1, CAST(N'2022-02-01' AS Date), NULL)
 GO
-INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [note]) VALUES (N'b09', N'c08', 34200000, 34200000, 0, CAST(N'2022-03-05' AS Date), 1, NULL)
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b09', N'c08', 34200000, 34200000, 0, CAST(N'2022-03-05' AS Date), 1, CAST(N'2022-03-05' AS Date), NULL)
 GO
-INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [note]) VALUES (N'b10', N'c08', 6580000, 6580000, 0, CAST(N'2022-03-11' AS Date), 1, NULL)
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b10', N'c08', 4750000, 6580000, 0, CAST(N'2022-03-11' AS Date), 1, CAST(N'2022-03-11' AS Date), NULL)
 GO
-INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [note]) VALUES (N'b11', N'c09', 4050000, 4050000, 0, CAST(N'2022-03-11' AS Date), 1, NULL)
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b11', N'c09', 2700000, 4050000, 0, CAST(N'2022-03-11' AS Date), 1, CAST(N'2022-03-11' AS Date), NULL)
 GO
-INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [note]) VALUES (N'b12', N'c10', 11300000, 11300000, 0, CAST(N'2022-03-11' AS Date), 1, NULL)
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b12', N'c10', 11300000, 11300000, 0, CAST(N'2022-03-11' AS Date), 1, CAST(N'2022-03-11' AS Date), NULL)
+GO
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b13', N'c01', 39020000, 10000000, 29020000, CAST(N'2022-03-14' AS Date), 0, CAST(N'2022-03-18' AS Date), NULL)
+GO
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b14', N'c08', 2700000, 1000000, 1700000, CAST(N'2022-03-14' AS Date), 0, CAST(N'2022-03-17' AS Date), NULL)
+GO
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b15', N'c06', 2280000, 2000000, 280000, CAST(N'2022-03-14' AS Date), 0, CAST(N'2022-03-15' AS Date), NULL)
+GO
+INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b16', N'c03', 3510000, 2000000, 1510000, CAST(N'2022-03-14' AS Date), 0, CAST(N'2022-03-19' AS Date), NULL)
 GO
 INSERT [dbo].[Customer] ([cid], [cname], [cphone], [caddress], [Note]) VALUES (N'c01', N'Nguyễn Ngọc', N'0972276577', N'Bình Yên, Thạch Thất', NULL)
 GO
@@ -306,6 +315,18 @@ GO
 INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b02', N'1011', 1000, 18300)
 GO
 INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b03', N'1004', 8, 1170000)
+GO
+INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b13', N'1001', 2, 1460000)
+GO
+INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b13', N'1012', 100, 114000)
+GO
+INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b13', N'1016', 100, 247000)
+GO
+INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b14', N'1002', 2, 1350000)
+GO
+INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b15', N'1003', 2, 1140000)
+GO
+INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b16', N'1004', 3, 1170000)
 GO
 INSERT [dbo].[InfBilled] ([bid], [pid], [quantity], [unitprice]) VALUES (N'b03', N'1013', 100, 113000)
 GO
@@ -395,6 +416,24 @@ INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexp
 GO
 INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1032', N'1015', 157000, 178000, NULL, 8000000, N'Cay', 1, N'S04', CAST(N'2022-03-01' AS Date), N'')
 GO
+INSERT [dbo].[InfRefund] ([rid], [pid], [quantity], [unitprice]) VALUES (N'r01', N'1009', 300, 18350)
+GO
+INSERT [dbo].[InfRefund] ([rid], [pid], [quantity], [unitprice]) VALUES (N'r02', N'1002', 1, 1350000)
+GO
+INSERT [dbo].[InfRefund] ([rid], [pid], [quantity], [unitprice]) VALUES (N'r03', N'1004', 3, 1170000)
+GO
+INSERT [dbo].[InfRefund] ([rid], [pid], [quantity], [unitprice]) VALUES (N'r04', N'1004', 2, 1170000)
+GO
+INSERT [dbo].[InfRefund] ([rid], [pid], [quantity], [unitprice]) VALUES (N'r05', N'1002', 1, 1350000)
+GO
+INSERT [dbo].[InfRefund] ([rid], [pid], [quantity], [unitprice]) VALUES (N'r06', N'1002', 2, 1350000)
+GO
+INSERT [dbo].[InfRefund] ([rid], [pid], [quantity], [unitprice]) VALUES (N'r07', N'1001', 3, 1460000)
+GO
+INSERT [dbo].[InfRefund] ([rid], [pid], [quantity], [unitprice]) VALUES (N'r08', N'1011', 100, 18300)
+GO
+INSERT [dbo].[InfRefund] ([rid], [pid], [quantity], [unitprice]) VALUES (N'r09', N'1002', 1, 1350000)
+GO
 INSERT [dbo].[Prod] ([pid], [pname], [nsx], [ptid]) VALUES (N'1001', N'Xi Mang Bim Son PC40', N'Xi Mang Bim Son', N'pt01')
 GO
 INSERT [dbo].[Prod] ([pid], [pname], [nsx], [ptid]) VALUES (N'1002', N'Xi Mang Bim Son PC30', N'Xi Mang Bim Son', N'pt01')
@@ -450,6 +489,24 @@ GO
 INSERT [dbo].[ProductType] ([ptId], [ptName]) VALUES (N'pt01', N'Xi mang')
 GO
 INSERT [dbo].[ProductType] ([ptId], [ptName]) VALUES (N'pt02', N'Sat, Thep')
+GO
+INSERT [dbo].[Refund] ([rid], [bid], [date]) VALUES (N'r01', N'b01', CAST(N'2022-03-02' AS Date))
+GO
+INSERT [dbo].[Refund] ([rid], [bid], [date]) VALUES (N'r02', N'b02', CAST(N'2022-03-10' AS Date))
+GO
+INSERT [dbo].[Refund] ([rid], [bid], [date]) VALUES (N'r03', N'b03', CAST(N'2022-03-12' AS Date))
+GO
+INSERT [dbo].[Refund] ([rid], [bid], [date]) VALUES (N'r04', N'b04', CAST(N'2022-03-11' AS Date))
+GO
+INSERT [dbo].[Refund] ([rid], [bid], [date]) VALUES (N'r05', N'b05', CAST(N'2022-03-10' AS Date))
+GO
+INSERT [dbo].[Refund] ([rid], [bid], [date]) VALUES (N'r06', N'b07', CAST(N'2022-03-07' AS Date))
+GO
+INSERT [dbo].[Refund] ([rid], [bid], [date]) VALUES (N'r07', N'b08', CAST(N'2022-02-27' AS Date))
+GO
+INSERT [dbo].[Refund] ([rid], [bid], [date]) VALUES (N'r08', N'b10', CAST(N'2022-03-14' AS Date))
+GO
+INSERT [dbo].[Refund] ([rid], [bid], [date]) VALUES (N'r09', N'b11', CAST(N'2022-03-14' AS Date))
 GO
 INSERT [dbo].[Supplier] ([Sid], [SName], [Email], [Phone]) VALUES (N'S01', N'CTy CP DTNL Xay dung Thuong mai Hoang Son', N'HoangSonCPTM@gmail.com', N'0971333555')
 GO

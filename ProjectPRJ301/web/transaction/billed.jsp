@@ -1,8 +1,3 @@
-<%-- 
-    Document   : Bill
-    Created on : Mar 10, 2022, 1:12:16 AM
-    Author     : win
---%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.ArrayList"%>
@@ -10,11 +5,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value = "vi_VN"/>
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
-        
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -35,7 +31,7 @@
         <link href="static/css/css.css" rel="stylesheet">
         <link href="static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     </head>
-     <body id="page-top">
+    <body id="page-top">
         <div id="wrapper">
             <div class ="sidebar" >
                 <jsp:include page="../combonent/navbar.jsp" />  
@@ -97,6 +93,7 @@
                                                 <th>Đã Trả</th>
                                                 <th>Còn Nợ</th>
                                                 <th>Ngày Nhập Đơn</th>
+                                                <th>Ngày Giao hàng</th>
                                                 <th></th>
                                                 <th></th>
                                             </tr>
@@ -105,22 +102,24 @@
 
 
                                         <c:forEach items="${requestScope.billed}" var="b">
-                                        <tbody>
-                                            <tr>
-                                                <td>${b.bid}</td>
-                                                <td>
-                                                    <c:forEach items="${requestScope.customers}" var="c">
-                                                        ${c.id == b.cid?c.name:""}
-                                                    </c:forEach>
-                                                </td>
-                                                <td>${b.total/1000000} tr</td>
-                                                <td>${b.prepayment/1000000} tr</td>
-                                                <td>${b.debt/1000000} tr</td>
-                                                <td>${b.date} </td>
-                                                <td><a href="#">Chi tiết hóa đơn</a> </td>
-                                                <td><a href="deletebilled?id=${s.bid}" onclick="return confirm('Bạn có chắc là muốn xóa hóa đơn này không?')">Xóa</a></td>
-                                            </tr>
-                                        </tbody>
+                                            <tbody>
+                                                <tr>
+                                                    <td>${b.bid}</td>
+                                                    <td>
+                                                        <c:forEach items="${requestScope.customers}" var="c">
+                                                            ${c.id == b.cid?c.name:""}
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                        <fmt:formatNumber value = "${b.total}" type = "currency"/></td>
+                                                    <td><fmt:formatNumber value = "${b.prepayment}" type = "currency"/></td>
+                                                    <td><fmt:formatNumber value = "${b.debt}" type = "currency"/></td>
+                                                    <td>${b.dateinvoice} </td>
+                                                    <td>${b.date} </td>
+                                                    <td><a href="#">Chi tiết hóa đơn</a> </td>
+                                                    <td><a href="deletebilled?id=${s.bid}" onclick="return confirm('Bạn có chắc là muốn xóa hóa đơn này không?')">Xóa</a></td>
+                                                </tr>
+                                            </tbody>
                                         </c:forEach>
 
 

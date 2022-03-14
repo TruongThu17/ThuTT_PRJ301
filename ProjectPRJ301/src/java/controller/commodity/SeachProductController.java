@@ -62,7 +62,7 @@ public class SeachProductController extends HttpServlet {
         ProductDBContext db = new ProductDBContext();
 
         String searchKey = request.getParameter("searchKey");
-
+        if(searchKey!=null){
         Product p = db.getProductById(searchKey);
 
         String result = "";
@@ -84,6 +84,8 @@ public class SeachProductController extends HttpServlet {
 
         PrintWriter writer = response.getWriter();
         writer.print(result);
+        }
+        
 
     }
 

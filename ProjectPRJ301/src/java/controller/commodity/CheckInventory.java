@@ -39,18 +39,33 @@ public class CheckInventory extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        InforProductDBContext db = new InforProductDBContext();
+        ArrayList<Inventory> inventoris = new ArrayList<>();
         String raw_did = request.getParameter("did");
-        if (raw_did == null || raw_did.length() == 0||"-1".equals(raw_did)) {
-            InforProductDBContext db = new InforProductDBContext();
-            ArrayList<Inventory> inventoris = db.checkInventory();
-            request.setAttribute("inventoris", inventoris);
+        String raw_txt = request.getParameter("searchP");
+        String err = null;
+
+        if (raw_did == null || raw_did.length() == 0 || "-1".equals(raw_did)) {
+            if (raw_txt != null) {
+                inventoris = db.checkInventoryByString(raw_txt);
+            } else {
+                inventoris = db.checkInventory();
+            }
         } else {
+            if (raw_txt != null) {
+                inventoris = db.checkInventoryByIDandName(raw_did, raw_txt);
+
+            } else {
+                inventoris = db.checkInventoryByID(raw_did);
+            }
             request.setAttribute("did", raw_did);
-            InforProductDBContext db = new InforProductDBContext();
-            ArrayList<Inventory> inventoris = db.checkInventoryByID(raw_did);
-            request.setAttribute("inventoris", inventoris);
         }
+        if (inventoris.size() == 0) {
+            err = "Không có sản phẩm bạn cần tìm ";
+            request.setAttribute("err", err);
+        }
+        request.setAttribute("did", raw_did);
+        request.setAttribute("inventoris", inventoris);
         ProductTypeDBContext ptdb = new ProductTypeDBContext();
         ArrayList<ProductType> producttypes = ptdb.getProductType();
         request.setAttribute("producttypes", producttypes);

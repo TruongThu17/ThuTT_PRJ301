@@ -57,7 +57,7 @@
                 <div id="content">
 
                     <!-- Topbar -->
-                   <div class ="topbar" >
+                    <div class ="topbar" >
                         <jsp:include page="../combonent/topbar.jsp" />  
                     </div>
                     <!-- End of Topbar -->
@@ -78,10 +78,12 @@
                                 </div>
 
                             </div>
-                            <div class="row ">
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="left dataTables_length" id="dataTable_length">
-                                        <form id="searchForm" method="POST" action="settingprice"> 
+                            <form id="searchForm" method="POST" action="settingprice"> 
+                                <div class="row ">
+
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="left dataTables_length" id="dataTable_length">
+
                                             <select name="did" aria-controls="dataTable" class="mx-3 my-3 custom-select custom-select-sm form-control form-control-sm" onchange="submitSearchForm();" >
                                                 <option value="-1">Tất Cả</option>
                                                 <c:forEach items="${requestScope.producttypes}" var="p">
@@ -92,17 +94,21 @@
                                                         value="${p.ptid}">${p.ptname}</option>
                                                 </c:forEach>
                                             </select>
-                                        </form>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class=" col-sm-12 col-md-6">
-                                    <div id="dataTable_filter" class="right dataTables_filter">
-                                        <label>Search:
-                                            <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
-                                        </label>
+
+                                    <div class=" col-sm-12 col-md-6">
+                                        <div id="dataTable_filter" class="right dataTables_filter">
+                                            <label>Search:
+
+                                                <input name ="searchP" onchange="searchProduct();" type="search" class="form-control form-control-sm " placeholder="" aria-controls="dataTable">
+
+                                            </label>
+                                        </div>
                                     </div>
+
                                 </div>
-                            </div>
+                            </form>
 
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -120,29 +126,31 @@
                                                     <th></th>
                                                 </tr>
                                             </thead>
-
-
-
-                                            <c:forEach items="${requestScope.inventoris}" var="i">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>${i.getId()}</td>
-                                                        <td>${i.getName()}</td>
-                                                        <td>${i.getPtname()}</td>
-                                                        <td><input class=" form-control-plaintext text-center" type="text" value="${i.getPrice()}" name ="${i.getId()}" />  </td>
-                                                        <td>${i.getNsx()}</td>
-                                                        <td>${i.getSl()}</td>
-                                                        <td>${i.getUnit()}</td>
-                                                        <td><a href="#">Chỉnh sửa</a> </td>
-                                                    </tr>
-                                                </tbody>
-                                            </c:forEach>
-
-
-
-
-                                        </table><input type="submit" value="Lưu thông tin" />  
+                                            <c:choose>
+                                                <c:when test ="${requestScope.inventoris.size()==0}">
+                                                    <div style="color: red;">${requestScope.err}</div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:forEach items="${requestScope.inventoris}" var="i">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>${i.getId()}</td>
+                                                            <td>${i.getName()}</td>
+                                                            <td>${i.getPtname()}</td>
+                                                            <td><input class=" form-control-plaintext text-center" type="text" value="${i.getPrice()}" name ="${i.getId()}" />  </td>
+                                                            <td>${i.getNsx()}</td>
+                                                            <td>${i.getSl()}</td>
+                                                            <td>${i.getUnit()}</td>
+                                                            <td><a href="#">Chỉnh sửa</a> </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    </c:forEach>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </table>
+                                            <input type="submit" value="Lưu thông tin" />  
                                     </form>
+
                                 </div>
                             </div>
 

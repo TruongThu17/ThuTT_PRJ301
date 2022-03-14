@@ -40,6 +40,7 @@
                 document.getElementById("searchForm").submit();
             }
 
+
         </script>
     </head>
 
@@ -67,7 +68,7 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-700">Kiểm kho</h1>
+                        <h1 class="h3 mb-4 text-gray-700 mt-4">Kiểm kho</h1>
 
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
@@ -78,11 +79,12 @@
                                 </div>
 
                             </div>
+                            <form id="searchForm" method="POST" action="checkinventory"> 
+                                <div class="row ">
 
-                            <div class="row ">
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="left dataTables_length" id="dataTable_length">
-                                        <form id="searchForm" method="POST" action="checkinventory"> 
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="left dataTables_length" id="dataTable_length">
+
                                             <select name="did" aria-controls="dataTable" class="mx-3 my-3 custom-select custom-select-sm form-control form-control-sm" onchange="submitSearchForm();" >
                                                 <option value="-1">Tất Cả</option>
                                                 <c:forEach items="${requestScope.producttypes}" var="p">
@@ -93,17 +95,21 @@
                                                         value="${p.ptid}">${p.ptname}</option>
                                                 </c:forEach>
                                             </select>
-                                        </form>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class=" col-sm-12 col-md-6">
-                                    <div id="dataTable_filter" class="right dataTables_filter">
-                                        <label>Search:
-                                            <input oninput="searchByName(this)" type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
-                                        </label>
+
+                                    <div class=" col-sm-12 col-md-6">
+                                        <div id="dataTable_filter" class="right dataTables_filter">
+                                            <label>Search:
+
+                                                <input name ="searchP" onchange="searchProduct();" type="search" class="form-control form-control-sm " placeholder="" aria-controls="dataTable">
+
+                                            </label>
+                                        </div>
                                     </div>
+
                                 </div>
-                            </div>
+                            </form>
                             <div class="card-body">
                                 <div class="table-responsive" id ="content">
                                     <table class="table table-bordered as" id="dataTable" width="1000%" cellspacing="0">
@@ -124,28 +130,36 @@
 
 
 
-                                        <c:forEach items="${requestScope.inventoris}" var="i">
-                                            <tbody>
-                                                <tr>
-                                                    <td>${i.getId()}</td>
-                                                    <td>${i.getName()}</td>
-                                                    <td>${i.getPtname()}</td>
-                                                    <td>${i.getPrice()}</td>
-                                                    <td>${i.getNsx()}</td>
-                                                    <td>${i.getSl()}</td>
-                                                    <td>${i.getUnit()}</td>
-                                                    <td>${i.isStatus()!="1"?"Đang kinh doanh":"Ngừng kinh doanh"}
-                                                    </td>
-                                                    <td><a href="#">Chỉnh sửa</a> </td>
-                                                    <td><a href="deleteproduct?id=${i.getId()}" onclick="return confirm('Bạn có chắc là muốn xóa sản phẩm này không?')">Xóa</a></td>
-                                                </tr>
-                                            </tbody>
-                                        </c:forEach>
+                                        <tbody>
+                                            <c:choose>
+                                                <c:when test ="${requestScope.inventoris.size()==0}">
+                                                <div style="color: red;">${requestScope.err}</div>
 
 
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:forEach items="${requestScope.inventoris}" var="i">
 
+                                                    <tr>
+                                                        <td>${i.getId()}</td>
+                                                        <td>${i.getName()}</td>
+                                                        <td>${i.getPtname()}</td>
+                                                        <td>${i.getPrice()}</td>
+                                                        <td>${i.getNsx()}</td>
+                                                        <td>${i.getSl()}</td>
+                                                        <td>${i.getUnit()}</td>
+                                                        <td>${i.isStatus()!="1"?"Đang kinh doanh":"Ngừng kinh doanh"}
+                                                        </td>
+                                                        <td><a href="#">Chỉnh sửa</a> </td>
+                                                        <td><a href="deleteproduct?id=${i.getId()}" onclick="return confirm('Bạn có chắc là muốn xóa sản phẩm này không?')">Xóa</a></td>
+                                                    </tr>
 
+                                                </c:forEach>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        </tbody>
                                     </table>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -187,7 +201,7 @@
 
                 </body>
                 <script>
-                        
+
                 </script>
                 </html>
 

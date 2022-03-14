@@ -44,7 +44,7 @@ public class InforProductDBContext extends DBContext {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InforProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return products;
     }
@@ -72,20 +72,24 @@ public class InforProductDBContext extends DBContext {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InforProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return inventorys;
     }
 
-    public ArrayList<Inventory> checkInventoryByID(String id) {
+    public ArrayList<Inventory> checkInventoryByID(String id, int page, int page_sz) {
         ArrayList<Inventory> inventorys = new ArrayList<>();
         try {
             String sql = "select a.pid, a.pname,a.nsx, b.saleprice, sum(b.quantityinstock) as qt, b.status, b.unit, c.ptName  from Prod a inner join InforProduct b on a.pid = b.pid\n"
                     + "inner join ProductType c on a.ptid = c.ptId where b.status = 1 and c.ptid=?\n"
                     + "group by a.pid, a.pname, b.saleprice,a.nsx, b.status, b.unit, a.ptid, c.ptName\n"
-                    + "order by a.pid";
+                    + "order by a.pid"
+                    + "offset (?-1)*? row fetch next ? rows only";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, id);
+            stm.setInt(2, page);
+            stm.setInt(3, page_sz);
+            stm.setInt(4, page_sz);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Inventory i = new Inventory();
@@ -101,7 +105,7 @@ public class InforProductDBContext extends DBContext {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InforProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return inventorys;
     }
@@ -144,20 +148,20 @@ public class InforProductDBContext extends DBContext {
             stm.setString(10, infp.getNote());
             stm.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InforProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (stm != null) {
                 try {
                     stm.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(InforProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(InforProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -177,27 +181,60 @@ public class InforProductDBContext extends DBContext {
                 stm.executeUpdate();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InforProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (stm != null) {
                 try {
                     stm.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(InforProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(InforProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
 
     }
 
-    public ArrayList<Inventory> checkInventoryByName(String txt) {
+    public ArrayList<Inventory> checkInventoryByName(String txt, int page, int page_sz) {
+        ArrayList<Inventory> inventorys = new ArrayList<>();
+        try {
+            String sql = "select a.pid, a.pname,a.nsx, b.saleprice, sum(b.quantityinstock) as qt, b.status, b.unit, c.ptName  from Prod a inner join InforProduct b on a.pid = b.pid\n"
+                    + "inner join ProductType c on a.ptid = c.ptId where b.status = 1 and a.pname like ?\n"
+                    + "group by a.pid, a.pname, b.saleprice,a.nsx, b.status, b.unit, a.ptid, c.ptName\n"
+                    + "order by a.pid"
+                    + "offset (?-1)*? row fetch next ? rows only";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, txt);
+            stm.setInt(2, page);
+            stm.setInt(3, page_sz);
+            stm.setInt(4, page_sz);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Inventory i = new Inventory();
+                i.setId(rs.getString("pid"));
+                i.setName(rs.getString("pname"));
+                i.setNsx(rs.getString("nsx"));
+                i.setPrice(rs.getFloat("saleprice"));
+                i.setSl(rs.getInt("qt"));
+                i.setStatus(rs.getBoolean("status"));
+                i.setUnit(rs.getString("unit"));
+                i.setPtname(rs.getString("ptName"));
+                inventorys.add(i);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InforProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return inventorys;
+    }
+
+    public ArrayList<Inventory> checkInventoryByString(String raw_txt) {
         ArrayList<Inventory> inventorys = new ArrayList<>();
         try {
             String sql = "select a.pid, a.pname,a.nsx, b.saleprice, sum(b.quantityinstock) as qt, b.status, b.unit, c.ptName  from Prod a inner join InforProduct b on a.pid = b.pid\n"
@@ -205,7 +242,7 @@ public class InforProductDBContext extends DBContext {
                     + "group by a.pid, a.pname, b.saleprice,a.nsx, b.status, b.unit, a.ptid, c.ptName\n"
                     + "order by a.pid";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, txt);
+            stm.setString(1, "%" + raw_txt + "%");
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Inventory i = new Inventory();
@@ -221,21 +258,22 @@ public class InforProductDBContext extends DBContext {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InforProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return inventorys;
     }
 
-    public ArrayList<Inventory> checkInventoryByIDandName(String raw_did, String txt) {
-ArrayList<Inventory> inventorys = new ArrayList<>();
+    public ArrayList<Inventory> checkInventoryByIDandName(String raw_did, String raw_txt) {
+        ArrayList<Inventory> inventorys = new ArrayList<>();
         try {
             String sql = "select a.pid, a.pname,a.nsx, b.saleprice, sum(b.quantityinstock) as qt, b.status, b.unit, c.ptName  from Prod a inner join InforProduct b on a.pid = b.pid\n"
                     + "inner join ProductType c on a.ptid = c.ptId where b.status = 1 and a.pname like ? and c.ptid=?\n"
                     + "group by a.pid, a.pname, b.saleprice,a.nsx, b.status, b.unit, a.ptid, c.ptName\n"
                     + "order by a.pid";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, txt);
+            stm.setString(1, "%" + raw_txt + "%");
             stm.setString(2, raw_did);
+
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Inventory i = new Inventory();
@@ -251,8 +289,127 @@ ArrayList<Inventory> inventorys = new ArrayList<>();
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InforProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return inventorys;    }
+        return inventorys;
+    }
+
+    public ArrayList<Inventory> checkInventoryByID(String raw_did) {
+        ArrayList<Inventory> inventorys = new ArrayList<>();
+        try {
+            String sql = "select a.pid, a.pname,a.nsx, b.saleprice, sum(b.quantityinstock) as qt, b.status, b.unit, c.ptName  from Prod a inner join InforProduct b on a.pid = b.pid\n"
+                    + "inner join ProductType c on a.ptid = c.ptId where b.status = 1 and c.ptid=?\n"
+                    + "group by a.pid, a.pname, b.saleprice,a.nsx, b.status, b.unit, a.ptid, c.ptName\n"
+                    + "order by a.pid";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, raw_did);
+
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Inventory i = new Inventory();
+                i.setId(rs.getString("pid"));
+                i.setName(rs.getString("pname"));
+                i.setNsx(rs.getString("nsx"));
+                i.setPrice(rs.getFloat("saleprice"));
+                i.setSl(rs.getInt("qt"));
+                i.setStatus(rs.getBoolean("status"));
+                i.setUnit(rs.getString("unit"));
+                i.setPtname(rs.getString("ptName"));
+                inventorys.add(i);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InforProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return inventorys;
+    }
+
+    public ArrayList<InforProduct> getInforProductByPname(String raw_txt) {
+        ArrayList<InforProduct> products = new ArrayList<>();
+        try {
+            String sql = "select * from InforProduct a inner join Prod b on a.pid = b.pid where b.pname like ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, "%" + raw_txt + "%");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                InforProduct p = new InforProduct();
+                p.setId(rs.getString("code"));
+                p.setPid(rs.getString("pid"));
+                p.setImportprice(rs.getFloat("importprice"));
+                p.setSaleprice(rs.getFloat("saleprice"));
+                p.setDateexp(rs.getDate("dateexpiry"));
+                p.setDateimport(rs.getDate("dateimport"));
+                p.setQuantity(rs.getInt("quantityinstock"));
+                p.setUnit(rs.getString("unit"));
+                p.setStatus(rs.getBoolean("status"));
+                p.setSid(rs.getString("sid"));
+                p.setNote(rs.getString("Note"));
+                products.add(p);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InforProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return products;
+    }
+
+    public ArrayList<InforProduct> getInforProductByPTid(String raw_did) {
+        ArrayList<InforProduct> products = new ArrayList<>();
+        try {
+            String sql = "select a.* from InforProduct a inner join Prod b on a.pid = b.pid where b.ptid = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, raw_did);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                InforProduct p = new InforProduct();
+                p.setId(rs.getString("code"));
+                p.setPid(rs.getString("pid"));
+                p.setImportprice(rs.getFloat("importprice"));
+                p.setSaleprice(rs.getFloat("saleprice"));
+                p.setDateexp(rs.getDate("dateexpiry"));
+                p.setDateimport(rs.getDate("dateimport"));
+                p.setQuantity(rs.getInt("quantityinstock"));
+                p.setUnit(rs.getString("unit"));
+                p.setStatus(rs.getBoolean("status"));
+                p.setSid(rs.getString("sid"));
+                p.setNote(rs.getString("Note"));
+                products.add(p);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InforProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return products;
+    }
+
+    public ArrayList<InforProduct> getProductByPTidandName(String raw_txt, String raw_did) {
+        ArrayList<InforProduct> products = new ArrayList<>();
+        try {
+            String sql = "select a.* from InforProduct a inner join Prod b on a.pid = b.pid where b.ptid = ? and b.pname like ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, raw_did);
+            stm.setString(2, "%" + raw_txt + "%");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                InforProduct p = new InforProduct();
+                p.setId(rs.getString("code"));
+                p.setPid(rs.getString("pid"));
+                p.setImportprice(rs.getFloat("importprice"));
+                p.setSaleprice(rs.getFloat("saleprice"));
+                p.setDateexp(rs.getDate("dateexpiry"));
+                p.setDateimport(rs.getDate("dateimport"));
+                p.setQuantity(rs.getInt("quantityinstock"));
+                p.setUnit(rs.getString("unit"));
+                p.setStatus(rs.getBoolean("status"));
+                p.setSid(rs.getString("sid"));
+                p.setNote(rs.getString("Note"));
+                products.add(p);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InforProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return products;
+    }
 
 }

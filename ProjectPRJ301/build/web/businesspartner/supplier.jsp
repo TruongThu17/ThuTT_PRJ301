@@ -61,7 +61,7 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">Nhà phân phối</h1>
+                        <h1 class="h3 mb-4 text-gray-800 mt-4">Nhà phân phối</h1>
 
 
                         <!-- DataTales Example -->
@@ -83,85 +83,90 @@
                                 </div>
                                 <div class=" col-sm-12 col-md-6">
                                     <div id="dataTable_filter" class="right dataTables_filter">
-                                        <label>Search:
-                                            <input type="search" class="form-control form-control" placeholder="" aria-controls="dataTable">
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered as" id="dataTable" width="1000%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>MNPP</th>
-                                                <th>Tên nhà phân phối</th>
-                                                <th>Email</th>
-                                                <th>Phone</th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
+                                        <form id="searchForm" method="POST" action="supplier"> 
+                                            <label>Search:
+                                                <input name ="searchs" type="search" class="form-control form-control" placeholder="" aria-controls="dataTable">
+                                            </label>
+                                            <form>
+                                                </div>
+                                                </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered as" id="dataTable" width="1000%" cellspacing="0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>MNPP</th>
+                                                                    <th>Tên nhà phân phối</th>
+                                                                    <th>Email</th>
+                                                                    <th>Phone</th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+
+
+                                                            <c:choose>
+                                                                <c:when test ="${requestScope.suppliers.size()==0}">
+                                                                    <div style="color: red;">${requestScope.err}</div>
+
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <c:forEach items="${requestScope.suppliers}" var="s">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>${s.id}</td>
+                                                                                <td>${s.name}</td>
+                                                                                <td>${s.email}</td>
+                                                                                <td>${s.phone}</td>
+                                                                                <td><a href="editsupplier?id=${s.id}">Chỉnh sửa</a> </td>
+                                                                                <td><a href="deletesupplier?id=${s.id}" onclick="return confirm('Bạn có chắc là muốn xóa Nhà Cung cấp này không?')">Xóa</a></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </c:forEach>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                </div>
+
+                                                </div>
+                                                <!-- /.container-fluid -->
+
+                                                </div>
+                                                <!-- End of Main Content -->
+
+                                                <!-- Footer -->
+                                                <div class ="footer" >
+                                                    <jsp:include page="../combonent/footer.jsp" />  
+                                                </div>
+                                                <!-- End of Footer -->
+
+                                                <!-- Scroll to Top Button-->
+                                                <a class="scroll-to-top rounded" href="#page-top">
+                                                    <i class="fas fa-angle-up"></i>
+                                                </a>
 
 
 
-                                        <%for (Supplier s : suppliers) {%>
-                                        <tbody>
-                                            <tr>
-                                                <td><%=s.getId()%></td>
-                                                <td><%=s.getName()%></td>
-                                                <td><%=s.getEmail()%></td>
-                                                <td><%=s.getPhone()%></td>
-                                                <td><a href="editsupplier?id=<%=s.getId()%>">Chỉnh sửa</a> </td>
-                                                <td><a href="deletesupplier?id=<%=s.getId()%>" onclick="return confirm('Bạn có chắc là muốn xóa Nhà Cung cấp này không?')">Xóa</a></td>
-                                            </tr>
-                                        </tbody>
-                                        <%}%>
+                                                <!-- Bootstrap core JavaScript-->
+                                                <script src="static/vendor/jquery/jquery.min.js"></script>
+                                                <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+                                                <!-- Core plugin JavaScript-->
+                                                <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
+                                                <!-- Custom scripts for all pages-->
+                                                <script src="static/js/sb-admin-2.min.js"></script>
 
+                                                <!-- Page level plugins -->
+                                                <script src="static/vendor/chart.js/Chart.min.js"></script>
 
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                                                <!-- Page level custom scripts -->
+                                                <script src="static/js/demo/chart-area-demo.js"></script>
+                                                <script src="static/js/demo/chart-pie-demo.js"></script>
 
-                    </div>
-                    <!-- /.container-fluid -->
+                                                </body>
 
-                </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <div class ="footer" >
-                    <jsp:include page="../combonent/footer.jsp" />  
-                </div>
-                <!-- End of Footer -->
-
-                <!-- Scroll to Top Button-->
-                <a class="scroll-to-top rounded" href="#page-top">
-                    <i class="fas fa-angle-up"></i>
-                </a>
-
-
-
-                <!-- Bootstrap core JavaScript-->
-                <script src="static/vendor/jquery/jquery.min.js"></script>
-                <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-                <!-- Core plugin JavaScript-->
-                <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-                <!-- Custom scripts for all pages-->
-                <script src="static/js/sb-admin-2.min.js"></script>
-
-                <!-- Page level plugins -->
-                <script src="static/vendor/chart.js/Chart.min.js"></script>
-
-                <!-- Page level custom scripts -->
-                <script src="static/js/demo/chart-area-demo.js"></script>
-                <script src="static/js/demo/chart-pie-demo.js"></script>
-
-                </body>
-
-                </html>
+                                                </html>

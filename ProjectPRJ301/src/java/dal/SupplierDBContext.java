@@ -37,7 +37,7 @@ public class SupplierDBContext extends DBContext {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger( SupplierDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return suppliers;
     }
@@ -53,20 +53,20 @@ public class SupplierDBContext extends DBContext {
             stm.setString(1, id);
             stm.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger( SupplierDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (stm != null) {
                 try {
                     stm.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger( SupplierDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger( SupplierDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -90,20 +90,20 @@ public class SupplierDBContext extends DBContext {
 
             stm.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger( SupplierDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (stm != null) {
                 try {
                     stm.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger( SupplierDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger( SupplierDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -128,7 +128,7 @@ public class SupplierDBContext extends DBContext {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger( SupplierDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -154,22 +154,44 @@ public class SupplierDBContext extends DBContext {
             stm.setString(4, s.getPhone());
             stm.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger( SupplierDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (stm != null) {
                 try {
                     stm.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger( SupplierDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger( SupplierDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
+    }
+
+    public ArrayList<Supplier> getSupplierByName(String raw_txt) {
+       ArrayList<Supplier> suppliers = new ArrayList<>();
+        try {
+            String sql = "select Sid, SName, Phone, Email from Supplier where SName like ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, "%"+raw_txt+"%");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Supplier s = new Supplier();
+                s.setId(rs.getString("Sid"));
+                s.setName(rs.getString("SName"));
+                s.setPhone(rs.getString("Phone"));
+                s.setEmail(rs.getString("Email"));
+                suppliers.add(s);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger( SupplierDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return suppliers;
     }
 }

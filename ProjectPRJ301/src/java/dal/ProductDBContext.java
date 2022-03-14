@@ -46,6 +46,57 @@ public class ProductDBContext extends DBContext {
         }
         return products;
     }
+    public ArrayList<Product> getProductByPTidandName(String txt, String ptid) {
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            String sql = "SELECT [pid]\n"
+                    + "      ,[pname]\n"
+                    + "      ,[nsx]\n"
+                    + "      ,[ptid]\n"
+                    + "  FROM [dbo].[Prod] where ptid =? and pname like ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, ptid);
+            stm.setString(2, "%"+txt+"%");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setProid(rs.getString("pid"));
+                p.setPname(rs.getString("pname"));
+                p.setNsx(rs.getString("nsx"));
+                p.setPtid(rs.getString("ptid"));
+                products.add(p);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return products;
+    }
+    public ArrayList<Product> getProductByString(String txt) {
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            String sql = "SELECT [pid]\n"
+                    + "      ,[pname]\n"
+                    + "      ,[nsx]\n"
+                    + "      ,[ptid]\n"
+                    + "  FROM [dbo].[Prod] where pname like ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, "%"+txt+"%");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setProid(rs.getString("pid"));
+                p.setPname(rs.getString("pname"));
+                p.setNsx(rs.getString("nsx"));
+                p.setPtid(rs.getString("ptid"));
+                products.add(p);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return products;
+    }
     public ArrayList<Product> getProductByPTid(String ptid) {
         ArrayList<Product> products = new ArrayList<>();
         try {

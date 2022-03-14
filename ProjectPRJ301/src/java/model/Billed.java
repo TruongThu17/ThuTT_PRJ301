@@ -17,7 +17,27 @@ public class Billed {
     private float total;
     private float prepayment;
     private float debt;
+    private Date dateinvoice;
     private Date date;
+    private String Note;
+
+    public String getNote() {
+        return Note;
+    }
+
+    public void setNote(String Note) {
+        this.Note = Note;
+    }
+    
+
+    public Date getDateinvoice() {
+        return dateinvoice;
+    }
+
+    public void setDateinvoice(Date dateinvoice) {
+        this.dateinvoice = dateinvoice;
+    }
+    
 
     public Date getDate() {
         return date;

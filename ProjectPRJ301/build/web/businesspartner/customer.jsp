@@ -38,8 +38,14 @@
         <%
             ArrayList<Customer> customers = (ArrayList<Customer>) request.getAttribute("customers");
         %>
-    </head>
 
+    </head>
+    <script>
+        function submitSearchForm()
+        {
+            document.getElementById("searchForm").submit();
+        }
+    </script>
     <body id="page-top">
         <div id="wrapper">
             <div class ="sidebar" >
@@ -63,7 +69,7 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-3 mt-3 text-gray-800">Khách Hàng</h1>
+                        <h1 class="h3 mb-4 mt-4 text-gray-800">Khách Hàng</h1>
 
 
                         <!-- DataTales Example -->
@@ -86,9 +92,11 @@
                                 </div>
                                 <div class=" col-sm-12 col-md-6">
                                     <div id="dataTable_filter" class="right dataTables_filter">
-                                        <label>Search:
-                                            <input type="search" class="form-control" placeholder="" aria-controls="dataTable">
-                                        </label>
+                                        <form id="searchForm" method="POST" action="customer"> 
+                                            <label>Search:
+                                                <input name="searchc" type="search" class="form-control" placeholder="" aria-controls="dataTable">
+                                            </label>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -108,21 +116,26 @@
                                             </tr>
                                         </thead>
 
-
-
-                                        <%for (Customer c : customers) {%>
-                                        <tbody>
-                                            <tr>
-                                                <td><%=c.getId()%></td>
-                                                <td><%=c.getName()%></td>
-                                                <td><%=c.getPhone()%></td>
-                                                <td><%=c.getAddress()%></td>
-                                                <td><%=c.getNote()%></td>
-                                                <td><a href="editcustomer?id=<%=c.getId()%>">Chỉnh sửa</a> </td>
-                                                <td><a href="deletecustomer?id=<%=c.getId()%>" onclick="return confirm('Bạn có chắc là muốn xóa khách hàng này không?')">Xóa</a></td>
-                                            </tr>
-                                        </tbody>
-                                        <%}%>
+                                        <c:choose>
+                                            <c:when test ="${requestScope.customers.size()==0}">
+                                                <div style="color: red;">${requestScope.err}</div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:forEach items="${requestScope.customers}" var="c">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>${c.id}</td>
+                                                            <td>${c.name}</td>
+                                                            <td>${c.phone}</td>
+                                                            <td>${c.address}</td>
+                                                            <td>${c.note}</td>
+                                                            <td><a href="editcustomer?id=${c.id}">Chỉnh sửa</a> </td>
+                                                            <td><a href="deletecustomer?id=${c.id}" onclick="return confirm('Bạn có chắc là muốn xóa khách hàng này không?')">Xóa</a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </c:forEach>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </table>
                                 </div>
                             </div>

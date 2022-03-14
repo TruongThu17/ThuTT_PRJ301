@@ -178,4 +178,27 @@ public class CustomerDBContext extends DBContext {
         }
     }
 
+    public ArrayList<Customer> getCustomersByName(String raw_txt) {
+        ArrayList<Customer> customers = new ArrayList<>();
+        try {
+            String sql = "select cid, cname, cphone, caddress, Note from Customer where cname like ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, "%"+raw_txt+"%");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Customer c = new Customer();
+                c.setId(rs.getString("cid"));
+                c.setName(rs.getString("cname"));
+                c.setPhone(rs.getString("cphone"));
+                c.setAddress(rs.getString("caddress"));
+                c.setNote(rs.getString("Note"));
+                customers.add(c);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return customers;
+    }
+
 }

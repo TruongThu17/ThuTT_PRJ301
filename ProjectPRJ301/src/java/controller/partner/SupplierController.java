@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Customer;
 import model.Supplier;
 
 /**
@@ -33,7 +34,19 @@ public class SupplierController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         SupplierDBContext sdb = new SupplierDBContext();
-        ArrayList<Supplier> suppliers = sdb.getSupplier();
+        ArrayList<Supplier> suppliers = new ArrayList<>();
+        String raw_txt = request.getParameter("searchs");
+        String err = "";
+        if(raw_txt== null|| raw_txt.length()==0){ suppliers= sdb.getSupplier();
+             
+        }
+        else{
+          suppliers= sdb.getSupplierByName(raw_txt);
+        }
+         if(suppliers.isEmpty()){
+             err="Danh sách khách hàng rỗng";
+             request.setAttribute("err", err);
+         }
         request.setAttribute("suppliers", suppliers);
         request.getRequestDispatcher("businesspartner/supplier.jsp").forward(request, response);
     }

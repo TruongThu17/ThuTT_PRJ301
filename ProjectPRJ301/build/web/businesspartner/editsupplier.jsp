@@ -60,7 +60,7 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-700">Chỉnh Sửa Thông Tin Khách Hàng</h1>
+                        <h1 class="h3 mb-4 mt-4 text-gray-700">Chỉnh Sửa Thông Tin Nhà Cung Cấp</h1>
                         <div class="card shadow">
                             <div class="card-body ">
                                 <div class="container">

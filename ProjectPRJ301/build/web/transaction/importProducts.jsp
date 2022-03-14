@@ -35,7 +35,12 @@
         <link href="static/css/css.css" rel="stylesheet">
         <link href="static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     </head>
-
+    <script>
+        function submitSearchForm()
+        {
+            document.getElementById("searchForm").submit();
+        }
+    </script>
     <body id="page-top">
         <div id="wrapper">
             <div class ="sidebar" >
@@ -60,7 +65,7 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-700">Nhập Hàng</h1>
+                        <h1 class="h3 mb-4 mt-4 text-gray-700">Nhập Hàng</h1>
 
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
@@ -71,26 +76,36 @@
                                 </div>
 
                             </div>
-                            <div class="row ">
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="left dataTables_length" id="dataTable_length">
-                                        <label>Show 
-                                            <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
-                                                <option value="10">10</option>
-                                                <option value="25">25</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
+                            <form id="searchForm" method="POST" action="importproducts"> 
+                                <div class="row ">
+
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="left dataTables_length" id="dataTable_length">
+
+                                            <select name="did" aria-controls="dataTable" class="mx-3 my-3 custom-select custom-select-sm form-control form-control-sm" onchange="submitSearchForm();" >
+                                                <option value="-1">Tất Cả</option>
+                                                <c:forEach items="${requestScope.producttypes}" var="p">
+                                                    <option 
+                                                        ${p.ptid eq requestScope.did?"selected=\"selected\"":""}
+                                                            
+                                                        value="${p.ptid}">${p.ptname}</option>
+                                                </c:forEach>
                                             </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class=" col-sm-12 col-md-6">
-                                    <div id="dataTable_filter" class="right dataTables_filter">
-                                        <label>Search:
-                                            <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
-                                        </label>
+
+                                    <div class=" col-sm-12 col-md-6">
+                                        <div id="dataTable_filter" class="right dataTables_filter">
+                                            <label>Search:
+
+                                                <input name ="searchP" onchange="submitSearchForm();" type="search" class="form-control form-control-sm " placeholder="" aria-controls="dataTable">
+
+                                            </label>
+                                        </div>
                                     </div>
+
                                 </div>
-                            </div>
+                            </form>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered as" id="dataTable" width="1000%" cellspacing="0">
