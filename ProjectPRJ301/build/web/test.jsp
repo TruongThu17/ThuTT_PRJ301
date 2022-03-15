@@ -43,10 +43,10 @@
         <button onclick="openModal()">+</button>
         <div id="modal" class="modal">
             <div class="content" id="content">
-                <button  onclick="closeModal()">X</button>
+                
                 <input type="search" id="searchKey"  />
                 <button onclick="searchProduct()"  >Search</button>
-                <div id="result"></div>
+                <div id="result"></div><button  onclick="closeModal()">X</button>
             </div>
         </div>
     </body>
@@ -63,6 +63,8 @@
             var content = document.getElementById("content");
             modal.style.transform = "scale(0)";
             content.style.transform = "scale(0)";
+            var searchKey = document.getElementById("searchKey");
+            searchKey.value="";
         }
 
 
@@ -70,7 +72,6 @@
         function searchProduct() {
             var searchKey = document.getElementById("searchKey").value;
             var url = "product/search?searchKey=" + searchKey;
-
             fetch(url).then(function (response) {
                 return response.text();
             }).then(function (result) {

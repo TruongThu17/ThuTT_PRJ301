@@ -96,7 +96,7 @@
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Các Loại Giao Dịch:</h6>
-                        <a class="collapse-item" href="#">Đặt Hàng</a>
+                        <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/order">Đặt Hàng</a>
                         <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/billed">Hóa Đơn</a>
                         <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/refaud">Trả Hàng</a>
                         <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/importproducts">Nhập Hàng</a>
@@ -123,7 +123,7 @@
             <!-- Nav Item - quản lý -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseB"
-                   aria-expanded="true" aria-controls="collapseUtilities">
+                   aria-expanded="true" aria-controls="collapse">
                    <i class="fas fa-fw fa-folder"></i>
                     <span>Báo Cáo</span>
                 </a>
@@ -131,7 +131,7 @@
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Các Loại Báo Cáo:</h6>
-                        <a class="collapse-item" href="#">Báo Cáo Cuối Ngày</a>
+                        <a class="collapse-item" href="">Báo Cáo Cuối Ngày</a>
                         <a class="collapse-item" href="">Báo Cáo Tháng</a>
                         <a class="collapse-item" href="">Báo Cáo Năm</a>
                     </div>

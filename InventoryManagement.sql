@@ -1,6 +1,6 @@
 ﻿USE [master]
 GO
-/****** Object:  Database [InventoryManage]    Script Date: 3/14/2022 11:24:08 PM ******/
+/****** Object:  Database [InventoryManage]    Script Date: 3/15/2022 11:13:36 PM ******/
 CREATE DATABASE [InventoryManage]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -82,7 +82,7 @@ ALTER DATABASE [InventoryManage] SET QUERY_STORE = OFF
 GO
 USE [InventoryManage]
 GO
-/****** Object:  Table [dbo].[Account]    Script Date: 3/14/2022 11:24:09 PM ******/
+/****** Object:  Table [dbo].[Account]    Script Date: 3/15/2022 11:13:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -96,7 +96,7 @@ CREATE TABLE [dbo].[Account](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Billed]    Script Date: 3/14/2022 11:24:09 PM ******/
+/****** Object:  Table [dbo].[Billed]    Script Date: 3/15/2022 11:13:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -117,7 +117,7 @@ CREATE TABLE [dbo].[Billed](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Customer]    Script Date: 3/14/2022 11:24:09 PM ******/
+/****** Object:  Table [dbo].[Customer]    Script Date: 3/15/2022 11:13:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -134,7 +134,7 @@ CREATE TABLE [dbo].[Customer](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InfBilled]    Script Date: 3/14/2022 11:24:09 PM ******/
+/****** Object:  Table [dbo].[InfBilled]    Script Date: 3/15/2022 11:13:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -146,7 +146,7 @@ CREATE TABLE [dbo].[InfBilled](
 	[unitprice] [float] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InforProduct]    Script Date: 3/14/2022 11:24:09 PM ******/
+/****** Object:  Table [dbo].[InforProduct]    Script Date: 3/15/2022 11:13:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -169,7 +169,19 @@ CREATE TABLE [dbo].[InforProduct](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InfRefund]    Script Date: 3/14/2022 11:24:09 PM ******/
+/****** Object:  Table [dbo].[InfRefaudProduct]    Script Date: 3/15/2022 11:13:36 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[InfRefaudProduct](
+	[rpid] [varchar](50) NOT NULL,
+	[code] [varchar](50) NOT NULL,
+	[quantity] [int] NOT NULL,
+	[importprice] [float] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[InfRefund]    Script Date: 3/15/2022 11:13:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -181,7 +193,7 @@ CREATE TABLE [dbo].[InfRefund](
 	[unitprice] [float] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Prod]    Script Date: 3/14/2022 11:24:09 PM ******/
+/****** Object:  Table [dbo].[Prod]    Script Date: 3/15/2022 11:13:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -197,7 +209,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ProductType]    Script Date: 3/14/2022 11:24:09 PM ******/
+/****** Object:  Table [dbo].[ProductType]    Script Date: 3/15/2022 11:13:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -211,7 +223,22 @@ CREATE TABLE [dbo].[ProductType](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Refund]    Script Date: 3/14/2022 11:24:09 PM ******/
+/****** Object:  Table [dbo].[RefaudProduct]    Script Date: 3/15/2022 11:13:36 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[RefaudProduct](
+	[rpid] [varchar](50) NOT NULL,
+	[daterefaud] [date] NOT NULL,
+	[total] [float] NOT NULL,
+ CONSTRAINT [PK_RefaudProduct] PRIMARY KEY CLUSTERED 
+(
+	[rpid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Refund]    Script Date: 3/15/2022 11:13:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -226,7 +253,7 @@ CREATE TABLE [dbo].[Refund](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Supplier]    Script Date: 3/14/2022 11:24:09 PM ******/
+/****** Object:  Table [dbo].[Supplier]    Script Date: 3/15/2022 11:13:36 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -416,6 +443,10 @@ INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexp
 GO
 INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1032', N'1015', 157000, 178000, NULL, 8000000, N'Cay', 1, N'S04', CAST(N'2022-03-01' AS Date), N'')
 GO
+INSERT [dbo].[InfRefaudProduct] ([rpid], [code], [quantity], [importprice]) VALUES (N'rp01', N'p1001', 20, 1270000)
+GO
+INSERT [dbo].[InfRefaudProduct] ([rpid], [code], [quantity], [importprice]) VALUES (N'rp01', N'p1013', 2000, 18350)
+GO
 INSERT [dbo].[InfRefund] ([rid], [pid], [quantity], [unitprice]) VALUES (N'r01', N'1009', 300, 18350)
 GO
 INSERT [dbo].[InfRefund] ([rid], [pid], [quantity], [unitprice]) VALUES (N'r02', N'1002', 1, 1350000)
@@ -490,6 +521,16 @@ INSERT [dbo].[ProductType] ([ptId], [ptName]) VALUES (N'pt01', N'Xi mang')
 GO
 INSERT [dbo].[ProductType] ([ptId], [ptName]) VALUES (N'pt02', N'Sat, Thep')
 GO
+INSERT [dbo].[RefaudProduct] ([rpid], [daterefaud], [total]) VALUES (N'rp01', CAST(N'2022-03-15' AS Date), 0)
+GO
+INSERT [dbo].[RefaudProduct] ([rpid], [daterefaud], [total]) VALUES (N'rp02', CAST(N'2022-03-15' AS Date), 0)
+GO
+INSERT [dbo].[RefaudProduct] ([rpid], [daterefaud], [total]) VALUES (N'rp03', CAST(N'2022-03-14' AS Date), 0)
+GO
+INSERT [dbo].[RefaudProduct] ([rpid], [daterefaud], [total]) VALUES (N'rp04', CAST(N'2022-03-14' AS Date), 0)
+GO
+INSERT [dbo].[RefaudProduct] ([rpid], [daterefaud], [total]) VALUES (N'rp05', CAST(N'2022-03-15' AS Date), 0)
+GO
 INSERT [dbo].[Refund] ([rid], [bid], [date]) VALUES (N'r01', N'b01', CAST(N'2022-03-02' AS Date))
 GO
 INSERT [dbo].[Refund] ([rid], [bid], [date]) VALUES (N'r02', N'b02', CAST(N'2022-03-10' AS Date))
@@ -546,6 +587,16 @@ ALTER TABLE [dbo].[InforProduct]  WITH CHECK ADD  CONSTRAINT [FK_InforProduct_Su
 REFERENCES [dbo].[Supplier] ([Sid])
 GO
 ALTER TABLE [dbo].[InforProduct] CHECK CONSTRAINT [FK_InforProduct_Supplier]
+GO
+ALTER TABLE [dbo].[InfRefaudProduct]  WITH CHECK ADD  CONSTRAINT [FK_InfRefaudProduct_InforProduct] FOREIGN KEY([code])
+REFERENCES [dbo].[InforProduct] ([code])
+GO
+ALTER TABLE [dbo].[InfRefaudProduct] CHECK CONSTRAINT [FK_InfRefaudProduct_InforProduct]
+GO
+ALTER TABLE [dbo].[InfRefaudProduct]  WITH CHECK ADD  CONSTRAINT [FK_InfRefaudProduct_RefaudProduct] FOREIGN KEY([rpid])
+REFERENCES [dbo].[RefaudProduct] ([rpid])
+GO
+ALTER TABLE [dbo].[InfRefaudProduct] CHECK CONSTRAINT [FK_InfRefaudProduct_RefaudProduct]
 GO
 ALTER TABLE [dbo].[InfRefund]  WITH CHECK ADD  CONSTRAINT [FK_InfRefund_Refund] FOREIGN KEY([rid])
 REFERENCES [dbo].[Refund] ([rid])

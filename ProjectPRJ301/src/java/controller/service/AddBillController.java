@@ -5,12 +5,15 @@
  */
 package controller.service;
 
+import dal.CustomerDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Customer;
 
 /**
  *
@@ -31,6 +34,9 @@ public class AddBillController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        CustomerDBContext cdb = new CustomerDBContext();
+        ArrayList<Customer> customers = cdb.getCustomers();
+        request.setAttribute("customers", customers);
         request.getRequestDispatcher("service/Bill.jsp").forward(request, response);
     }
 

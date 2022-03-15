@@ -92,6 +92,10 @@
         <servlet-name>OrderController</servlet-name>
         <servlet-class>controller.transaction.OrderController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addCustomer</servlet-name>
+        <servlet-class>controller.service.addCustomer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SupplierController</servlet-name>
         <url-pattern>/supplier</url-pattern>
@@ -179,6 +183,10 @@
     <servlet-mapping>
         <servlet-name>OrderController</servlet-name>
         <url-pattern>/order</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addCustomer</servlet-name>
+        <url-pattern>/addcustomer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
