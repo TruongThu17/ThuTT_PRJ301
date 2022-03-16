@@ -45,30 +45,7 @@ public class BilledDBContext extends DBContext {
         return billed;
     }
 
-    public ArrayList<Billed> getOrder() {
-        ArrayList<Billed> billed = new ArrayList<>();
-        try {
-            String sql = "select bid, cid, total, prepayment, debt, dateinvoice, date, note from Billed  where unit =0";
-            PreparedStatement stm = connection.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                Billed b = new Billed();
-                b.setBid(rs.getString("bid"));
-                b.setCid(rs.getString("cid"));
-                b.setTotal(rs.getFloat("total"));
-                b.setPrepayment(rs.getFloat("prepayment"));
-                b.setDebt(rs.getFloat("debt"));
-                b.setDate(rs.getDate("date"));
-                b.setDateinvoice(rs.getDate("dateinvoice"));
-                b.setNote(rs.getString("note"));
-                billed.add(b);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return billed;
-    }
+    
     public float getTotalDay() {
 
         try {

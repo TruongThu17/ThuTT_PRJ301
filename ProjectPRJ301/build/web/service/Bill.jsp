@@ -71,6 +71,68 @@
             height: 80vh;
 
         }
+
+        .input-group {
+            position: relative;
+        }
+        .input-group  .result {
+            position: absolute;
+            top: 50px;
+            background: #fff;
+            height: 100px;
+            width: 300px;
+            overflow: auto;
+            z-index: 20;
+            box-shadow: 0px 0px 2px 2px #ccc;
+            padding: 10px;
+            text-align: center;
+            border: 1px sold blue;
+            display: none;
+            cursor: pointer;
+        }
+        .input-group  .result:hover {
+            background: #ccc;
+            color: #fff;
+        }
+        .card-body .table {
+            table-layout: fixed;
+            font-size: 15px;
+        }
+
+        .card-body .table thead td {
+            font-weight: bold;
+            word-wrap: break-word;
+        }
+
+        .card-body .table td {
+            border: 1px solid #000;
+        }
+
+        .card-body .table td:nth-child(1) {
+           width: 60px;
+        }
+        .card-body .table td:nth-child(3) {
+           width: 80px;
+        }
+        .card-body .table td:nth-child(4) {
+           width: 100px;
+        }
+        .card-body .table td:nth-child(5) {
+           width: 80px;
+        }
+        .card-body .table td:nth-child(6) {
+           width: 80px;
+        }
+        .card-body .table td:nth-child(7) input {
+           width: 100%;
+        }
+/*        .card-body .table td:nth-child(1) {
+           width: 60px;
+        }*/
+        .card-body .table td:nth-child(2) {
+            width: 65px;
+        }
+
     </style>
     <body id="page-top">
         <div id="wrapper">
@@ -141,12 +203,8 @@
                                             <i class="fas fa-search fa-sm"></i>
                                         </button>
                                     </div>
-                                    <div class="result" >
-                                        <table>
-                                            <thead>
+                                    <div  class="result row" id="result" >
 
-                                            </thead>
-                                        </table>
                                     </div>
                                 </div>
 
@@ -162,12 +220,14 @@
                                             <table class="table">    
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">Image</th>
-                                                        <th scope="col">Name</th>
-                                                        <th scope="col">Price</th>
-                                                        <th scope="col">Quantity</th>
-                                                        <th scope="col">Total Price</th>
+                                                        <td scope="col"></td>
+                                                        <td scope="col">Stt</td>
+                                                        <td scope="col">Mã sản Phẩm</td>
+                                                        <td scope="col">Tên Sản Phẩm</td>
+                                                        <td scope="col">Đơn vị</td>
+                                                        <td scope="col">Giá</td>
+                                                        <td scope="col">Số Lượng</td>
+                                                        <td scope="col">Thành Tiền</td>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="product-list">
@@ -190,7 +250,7 @@
                                                     <div class ="row mb-4">
                                                         <div class ="col-md-8 row">
                                                             <div class ="col-sm-10 mt-2">
-                                                                <select name="did" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" >
+                                                                <select id ="customer-box" name="did" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" >
                                                                     <option>Khách Hàng</option>
                                                                     <c:forEach items="${requestScope.customers}" var="c">
                                                                         <option value="${c.id}">${c.name}</option>
@@ -212,7 +272,7 @@
                                                             <label for="name" class="form-label">Tổng Tiền Hàng:  
                                                         </div>
                                                         <div class ="col-md-7">
-                                                            <input style="width: 200px;" type="text" class="form-control-plaintext" value ="?" id="name" name="name" aria-describedby="emailHelp">
+                                                            <input style="width: 200px;" type="text" class="form-control-plaintext" id="total-amount" name="total" aria-describedby="emailHelp">
                                                         </div>
                                                     </div>
 
@@ -225,7 +285,7 @@
                                                             <label for="phone" class="form-label">Giảm Giá: </label>
                                                         </div>
                                                         <div class ="col-md-7">
-                                                            <input type="text" class="form-control-plaintext" id="phone" name="phone" aria-describedby="emailHelp">
+                                                            <input type="text" class="form-control-plaintext" id="discount" name="discount" aria-describedby="emailHelp">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -278,13 +338,96 @@
                 </a>
 
                 <script>
-
+                    var ordinalNumber = 1;
                     function openModal() {
                         var mymodal = document.getElementById("md");
                         var content = document.getElementById("content");
                         mymodal.style.transform = "scale(1)";
                         content.style.transform = "scale(1)";
 
+                    }
+
+                    function generateRow(listAttribute) {
+                        var productId = listAttribute[0].innerHTML;
+                        var productName = listAttribute[1].innerHTML;
+                        var unit = listAttribute[2].innerHTML;
+                        var unitPrice = listAttribute[3].innerHTML;
+
+
+                        var row = "";
+                        row += "<tr id=\"" + ordinalNumber + "\" >";
+                        row += "<td><button  onclick=\"deleteRow('" + ordinalNumber + "')\"  ><i class=\"fa fa-trash\" ></i></button></td>";
+                        row += "<td>" + ordinalNumber + "</td>"
+                        row += "<td>" + productId + " <input type=\"hidden\" name=\"id\" value =\"" + productId + "\" /> </td>"
+                        row += "<td>" + productName + "</td>"
+                        row += "<td>" + unit + "</td>"
+                        row += "<td>" + unitPrice + "</td>"
+                        row += "<td><input name =\"quantity\" value=\"1\" type=\"text\" onkeyup=\"setAmount('" + ordinalNumber + "')\" /></td>"
+                        row += "<td></td>"
+                        row += "<tr>";
+
+                        return row;
+                    }
+
+                    function deleteRow(rowId) {
+                        var productList = document.getElementById("product-list");
+                        var rows = productList.children;
+                        var removeRow = document.getElementById(rowId);
+                        productList.removeChild(removeRow);
+                        for (var i = 0, max = rows.length; i < max; i++) {
+                            var currentRowId = rows[i].id;
+                            var rid = parseInt(currentRowId);
+                            if (rid > parseInt(rowId)) {
+                                rid -= 1;
+                                rows[i].id = rid;
+                                var tds = rows[i].children;
+                                tds[1].innerHTML = rid;
+                                tds[0].innerHTML = "<button onclick=\"deleteRow('" + rid + "')\"  ><i class=\"fa fa-trash\" ></i></button>";
+                                var inputQuantity = (tds[6].children)[0].value;
+                                tds[6].innerHTML = "<input value=\"" + inputQuantity + "\" type=\"text\" onkeyup=\"setAmount('" + ordinalNumber + "')\" />";
+                            }
+                        }
+                        ordinalNumber -= 1;
+                    }
+
+                    function setAmount(rowId) {
+                        var atRow = document.getElementById(rowId);
+                        var tds = atRow.children;
+                        var inputQuantity = (tds[6].children)[0];
+
+                        var price = parseFloat(tds[5].innerHTML);
+                        var quantity = parseInt(inputQuantity.value);
+
+                        var total = price * quantity;
+                        tds[7].innerHTML = total;
+                        setTotalAmount();
+                    }
+
+                    function setTotalAmount() {
+                        var total = 0;
+                        var productList = document.getElementById("product-list");
+                        var rows = productList.children;
+                        for (var i = 0, max = rows.length - 1; i < max; i++) {
+                            var tds = rows[i].childNodes;
+//                             alert(tds.length);
+                            var amount = parseFloat(tds[7].innerHTML);
+                            total += amount;
+                        }
+                       
+                        var totalAmount = document.getElementById('total-amount');
+                        totalAmount.value = total;
+                    }
+
+                    function addToCart(id) {
+                        var productList = document.getElementById("product-list");
+                        var faResultBox = document.getElementById('result');
+                        var resultBox = document.getElementById(id);
+                        var listAttribute = resultBox.childNodes;
+//                        alert(listAttribute.length);
+                        var newRow = generateRow(listAttribute);
+                        productList.innerHTML += newRow;
+                        faResultBox.style.display = "none";
+                        ordinalNumber += 1;
                     }
 
                     function closeModal() {
@@ -307,6 +450,7 @@
 
 
                     function insertCustomer() {
+                        var customerBox = document.getElementById('customer-box');
                         var id = document.getElementById("id").value;
                         var name = document.getElementById("name").value;
                         var phone = document.getElementById("phone").value;
@@ -316,7 +460,26 @@
                         fetch(url).then(function (response) {
                             return response.text();
                         }).then(function (result) {
-                            document.getElementById("rs").innerHTML = result;
+                            var data = result.split("|");
+                            document.getElementById("rs").innerHTML = data[0];
+                            var newCustomer = "<option value=\"" + data[1] + "\">" + data[2] + "</option>";
+                            customerBox.innerHTML += newCustomer;
+
+                        });
+                    }
+
+                    function searchProduct() {
+                        var searchKey = document.getElementById('searchKey').value;
+                        var resultBox = document.getElementById('result');
+                        var url = "product/search?searchKey=" + searchKey;
+                        fetch(url, {method: 'POST'}).then(function (response) {
+                            return response.text();
+                        }).then(function (result) {
+//                            var data = result.split("|");
+                            resultBox.style.display = "block";
+                            var re = document.getElementById("result");
+                            re.innerHTML = result;
+//                            alert(re.innerHTML);
                         });
                     }
                 </script>

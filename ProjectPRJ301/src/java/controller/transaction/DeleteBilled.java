@@ -3,23 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.service;
+package controller.transaction;
 
-import dal.CustomerDBContext;
+import dal.OrderDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Customer;
 
 /**
  *
  * @author win
  */
-public class addCustomer extends HttpServlet {
+public class DeleteBilled extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String id = request.getParameter("id");
+        OrderDBContext db = new OrderDBContext();
+        db.deleteOrder(id);
+        db.deleteInfOrder(id);
+        request.getRequestDispatcher("billed").forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -33,25 +49,7 @@ public class addCustomer extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        String name = request.getParameter("name");
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
-        String note = request.getParameter("note");
-        String rs = "";
-        if ((!"".equals(id) && !"".equals(name) && !"".equals(phone) && !"".equals(address))) {
-            Customer c = new Customer(id, name, phone, address, note);
-            CustomerDBContext db = new CustomerDBContext(); 
-            db.insertCustomer(c);
-            rs += "<div style =\"color: green;\">Them khach hang thanh cong!</div>";
-            rs += "|" + id + "|" + name;
-        } else {
-            rs += "<div style =\"color: red;\">Them khach hang khong thanh cong!</div>";
-        }
-        
-        
-            PrintWriter writer = response.getWriter();
-            writer.print(rs);
+        processRequest(request, response);
     }
 
     /**
@@ -65,7 +63,7 @@ public class addCustomer extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        processRequest(request, response);
     }
 
     /**

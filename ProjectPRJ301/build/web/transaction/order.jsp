@@ -31,6 +31,12 @@
         <link href="static/css/css.css" rel="stylesheet">
         <link href="static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     </head>
+    <script>
+        function submitSearchForm()
+        {
+            document.getElementById("searchForm").submit();
+        }
+    </script>
     <body id="page-top">
         <div id="wrapper">
             <div class ="sidebar" >
@@ -62,11 +68,7 @@
                             <div class="card-header py-3">
                                 <div class ="row">
                                     <h6 class="m-0 font-weight-bold text-primary col-md-3 col-md-9">Danh sánh</h6>
-                                    <div class="col-md-3 col-sm-2 text-center">
-                                        <form action="insertbilled">
-                                            <input class=" form-control" type="submit" value="+ Thêm mới" />
-                                        </form>
-                                    </div>
+
                                 </div>
 
                             </div>
@@ -77,7 +79,9 @@
                                 <div class=" col-sm-12 col-md-6">
                                     <div id="dataTable_filter" class="right dataTables_filter">
                                         <label>Search:
-                                            <input type="search" class="form-control form-control" placeholder="" aria-controls="dataTable">
+                                            <form action = "order" method="post">
+                                            <input name ="search" onchange="submitSearchForm();" type="searchs" class="form-control form-control-sm " placeholder="" aria-controls="dataTable">
+                                            </form>
                                         </label>
                                     </div>
                                 </div>
@@ -100,27 +104,64 @@
                                         </thead>
 
 
+                                        <c:choose>
+                                            <c:when test="${requestScope.customers.size()==0||requestScope.billed.size()==0}"> ${err}</c:when>
+                                            <c:otherwise>
+                                                <c:forEach items="${requestScope.customers}"  var="c">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <c:forEach items="${requestScope.billed}" var="b">
+                                                                    ${c.id == b.cid?b.bid:""}
+                                                                </c:forEach>
+                                                            </td>
+                                                            <td>
+                                                                ${c.name}
+                                                            </td>
+                                                            <td>
+                                                                <c:forEach items="${requestScope.billed}" var="b">
+                                                                    <c:if test="${c.id == b.cid}">
+                                                                        <fmt:formatNumber value = "${b.total}" type = "currency"/>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </td>
+                                                            <td> <c:forEach items="${requestScope.billed}" var="b">
+                                                                    <c:if test="${c.id == b.cid}">
+                                                                        <fmt:formatNumber value = "${b.prepayment}" type = "currency"/>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </td>
+                                                            <td>
+                                                                <c:forEach items="${requestScope.billed}" var="b">
+                                                                    <c:if test="${c.id == b.cid}">
+                                                                        <fmt:formatNumber value = "${b.debt}" type = "currency"/>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </td>
+                                                            <td>
+                                                                <c:forEach items="${requestScope.billed}" var="b">
+                                                                    ${c.id == b.cid?b.dateinvoice:""}
+                                                                </c:forEach>
+                                                            </td>
+                                                            <td>
+                                                                <c:forEach items="${requestScope.billed}" var="b">
+                                                                    ${c.id == b.cid?b.date:""}
+                                                                </c:forEach>
+                                                            </td>
+                                                            <td><a href="#">Chi tiết hóa đơn</a> </td>
+                                                            <td>
+                                                                <c:forEach items="${requestScope.billed}" var="b">
+                                                                    <c:if test="${c.id == b.cid}">
+                                                                        <a href="deletebilled?id=${b.bid}" onclick="return confirm('Bạn có chắc là muốn xóa hóa đơn này không?')">Xóa</a>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </c:forEach>
+                                            </c:otherwise>
+                                        </c:choose>
 
-                                        <c:forEach items="${requestScope.billed}" var="b">
-                                            <tbody>
-                                                <tr>
-                                                    <td>${b.bid}</td>
-                                                    <td>
-                                                        <c:forEach items="${requestScope.customers}" var="c">
-                                                            ${c.id == b.cid?c.name:""}
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>
-                                                        <fmt:formatNumber value = "${b.total}" type = "currency"/></td>
-                                                    <td><fmt:formatNumber value = "${b.prepayment}" type = "currency"/></td>
-                                                    <td><fmt:formatNumber value = "${b.debt}" type = "currency"/></td>
-                                                    <td>${b.dateinvoice} </td>
-                                                    <td>${b.date} </td>
-                                                    <td><a href="#">Chi tiết hóa đơn</a> </td>
-                                                    <td><a href="deletebilled?id=${s.bid}" onclick="return confirm('Bạn có chắc là muốn xóa hóa đơn này không?')">Xóa</a></td>
-                                                </tr>
-                                            </tbody>
-                                        </c:forEach>
 
 
 

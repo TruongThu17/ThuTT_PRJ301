@@ -41,6 +41,29 @@ public class CustomerDBContext extends DBContext {
         return customers;
     }
 
+    public ArrayList<Customer> getCustomerInOrder() {
+        ArrayList<Customer> customers = new ArrayList<>();
+        try {
+            String sql = "select a.cid, cname, cphone, caddress, a.Note from Customer a inner join Billed b\n"
+                    + "on a.cid = b.cid where b.unit=0";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Customer c = new Customer();
+                c.setId(rs.getString("cid"));
+                c.setName(rs.getString("cname"));
+                c.setPhone(rs.getString("cphone"));
+                c.setAddress(rs.getString("caddress"));
+                c.setNote(rs.getString("Note"));
+                customers.add(c);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return customers;
+    }
+
     public Customer getCustomerbyId(String id) {
 
         try {
@@ -63,6 +86,29 @@ public class CustomerDBContext extends DBContext {
             Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    public ArrayList<Customer> getCustomerbyNameInOrder(String raw_txt) {
+        ArrayList<Customer> customers = new ArrayList<>();
+        try {
+            String sql = "select a.cid, cname, cphone, caddress, a.Note from Customer a inner join Billed b\n"
+                    + "on a.cid = b.cid where b.unit=0 and cname like ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, "%" + raw_txt + "%");
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Customer c = new Customer();
+                c.setId(rs.getString("cid"));
+                c.setName(rs.getString("cname"));
+                c.setPhone(rs.getString("cphone"));
+                c.setAddress(rs.getString("caddress"));
+                c.setNote(rs.getString("Note"));
+                customers.add(c);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return customers;
     }
 
     public void insertCustomer(Customer c) {
@@ -183,7 +229,7 @@ public class CustomerDBContext extends DBContext {
         try {
             String sql = "select cid, cname, cphone, caddress, Note from Customer where cname like ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, "%"+raw_txt+"%");
+            stm.setString(1, "%" + raw_txt + "%");
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Customer c = new Customer();

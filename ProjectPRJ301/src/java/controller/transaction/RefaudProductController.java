@@ -5,22 +5,23 @@
  */
 package controller.transaction;
 
-import dal.CustomerDBContext;
-import dal.OrderDBContext;
+import dal.RefaudProductDBContext;
+import dal.SupplierDBContext;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Billed;
-import model.Customer;
+import model.RefaudProduct;
+import model.Supplier;
 
 /**
  *
  * @author win
  */
-public class OrderController extends HttpServlet {
+public class RefaudProductController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,25 +34,19 @@ public class OrderController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String err ="";
-        OrderDBContext db = new OrderDBContext();
-        ArrayList<Billed> billed = db.getOrder();
-        request.setAttribute("billed", billed);
-        CustomerDBContext cdb = new CustomerDBContext();
-        String search = request.getParameter("search");
-         ArrayList<Customer> customers = new ArrayList<>();
-        if("".equals(search)||search == null){
-        customers = cdb.getCustomerInOrder();
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet RefaudProductController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet RefaudProductController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        else{
-            customers = cdb.getCustomerbyNameInOrder(search);
-        }
-        if(customers.isEmpty()){
-            err ="Danh sánh rỗng!";
-            request.setAttribute("err", err);
-        }
-        request.setAttribute("customers", customers);
-        request.getRequestDispatcher("transaction/order.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -66,7 +61,18 @@ public class OrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        RefaudProductDBContext db = new RefaudProductDBContext();
+        ArrayList<RefaudProduct> refaudproducts = db.getRefaud();
+        SupplierDBContext sdb = new SupplierDBContext();
+        ArrayList<Supplier> suppliers = sdb.getSupplier();
+        request.setAttribute("suppliers", suppliers);
+        String err = "";
+        if(suppliers.isEmpty()){
+             err="Danh sách khách hàng rỗng";
+             request.setAttribute("err", err);
+         }
+        request.setAttribute("refaudproducts", refaudproducts);
+        request.getRequestDispatcher("transaction/refaudproduct.jsp").forward(request, response);
     }
 
     /**

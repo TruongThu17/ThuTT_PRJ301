@@ -17,7 +17,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>IM ADMIN - Hóa Đơn</title>
+        <title>IM ADMIN - Trả Hàng</title>
 
         <!-- Custom fonts for this template-->
         <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -31,6 +31,12 @@
         <link href="static/css/css.css" rel="stylesheet">
         <link href="static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     </head>
+    <script>
+        function submitSearchForm()
+        {
+            document.getElementById("searchForm").submit();
+        }
+    </script>
     <body id="page-top">
         <div id="wrapper">
             <div class ="sidebar" >
@@ -54,7 +60,7 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-4 mt-4 text-gray-800">Hóa Đơn</h1>
+                        <h1 class="h3 mb-4 mt-4 text-gray-800">Trả Hàng Nhập</h1>
 
 
                         <!-- DataTales Example -->
@@ -62,11 +68,7 @@
                             <div class="card-header py-3">
                                 <div class ="row">
                                     <h6 class="m-0 font-weight-bold text-primary col-md-3 col-md-9">Danh sánh</h6>
-                                    <div class="col-md-3 col-sm-2 text-center">
-                                        <form action="insertbilled">
-                                            <input class=" form-control" type="submit" value="+ Thêm mới" />
-                                        </form>
-                                    </div>
+
                                 </div>
 
                             </div>
@@ -76,9 +78,11 @@
                                 </div>
                                 <div class=" col-sm-12 col-md-6">
                                     <div id="dataTable_filter" class="right dataTables_filter">
-                                        <label>Search:
-                                            <input type="search" class="form-control form-control" placeholder="" aria-controls="dataTable">
-                                        </label>
+                                        <form id="searchForm" method="POST" action="refaud"> 
+                                            <label>Search:
+                                                <input name ="searchR" onchange="submitSearchForm();" type="search" class="form-control form-control" placeholder="" aria-controls="dataTable">
+                                            </label>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -87,44 +91,40 @@
                                     <table class="table table-bordered as" id="dataTable" width="1000%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>Mã Hóa Đơn</th>
-                                                <th>Tên Khách Hàng</th>
-                                                <th>Tổng Hóa Đơn</th>
-                                                <th>Đã Trả</th>
-                                                <th>Còn Nợ</th>
-                                                <th>Ngày Nhập Đơn</th>
-                                                <th>Ngày Giao hàng</th>
+                                                <th>Mã Trả Hàng</th>
+                                                <th>Nhà Cung Cấp</th>
+                                                <th>Tổng Đơn Hàng</th>
+                                                <th>Ngày Trả Hàng</th>
                                                 <th></th>
                                                 <th></th>
                                             </tr>
                                         </thead>
 
+                                        <tbody>
+                                            <c:choose>
+                                                <c:when test="${requestScope.refauds.size()==0}">
+                                                <div style="color: red;">${err}</div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:forEach items="${requestScope.refaudproducts}" var="r">
 
+                                                    <tr>
+                                                        <td>${r.rpid}</td>
+                                                        <td>
+                                                            <c:forEach items="${requestScope.suppliers}" var="s">
+                                                                ${s.id == r.sid?s.name:""}
+                                                            </c:forEach>
+                                                        </td>
+                                                        <td><fmt:formatNumber value = "${r.total}" type = "currency"/></td>
+                                                        <td>${r.daterefaud}</td>
+                                                        <td><a href="#">Chi tiết hóa đơn</a> </td>
+                                                        <td><a href="deleterefaudproduct?id=${r.rpid}" onclick="return confirm('Bạn có chắc là muốn xóa hóa đơn này không?')">Xóa</a></td>
+                                                    </tr>
 
-                                        <c:forEach items="${requestScope.billed}" var="b">
-                                            <tbody>
-                                                <tr>
-                                                    <td>${b.bid}</td>
-                                                    <td>
-                                                        <c:forEach items="${requestScope.customers}" var="c">
-                                                            ${c.id == b.cid?c.name:""}
-                                                        </c:forEach>
-                                                    </td>
-                                                    <td>
-                                                        <fmt:formatNumber value = "${b.total}" type = "currency"/></td>
-                                                    <td><fmt:formatNumber value = "${b.prepayment}" type = "currency"/></td>
-                                                    <td><fmt:formatNumber value = "${b.debt}" type = "currency"/></td>
-                                                    <td>${b.dateinvoice} </td>
-                                                    <td>${b.date} </td>
-                                                    <td><a href="#">Chi tiết hóa đơn</a> </td>
-                                                    <td><a href="deletebilled?id=${s.bid}" onclick="return confirm('Bạn có chắc là muốn xóa hóa đơn này không?')">Xóa</a></td>
-                                                </tr>
-                                            </tbody>
-                                        </c:forEach>
-
-
-
-
+                                                </c:forEach>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>

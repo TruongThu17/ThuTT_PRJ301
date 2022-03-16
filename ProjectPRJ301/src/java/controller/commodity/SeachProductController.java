@@ -5,6 +5,7 @@
  */
 package controller.commodity;
 
+import dal.InforProductDBContext;
 import dal.ProductDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.InforProduct;
 import model.Product;
 
 /**
@@ -59,33 +61,28 @@ public class SeachProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         ProductDBContext db = new ProductDBContext();
-
+        InforProductDBContext idb = new InforProductDBContext();
         String searchKey = request.getParameter("searchKey");
-        if(searchKey!=null){
-        Product p = db.getProductById(searchKey);
-
-        String result = "";
-
-        result += "<table>";
-        result += "<tr>";
-        result += "<td>Product ID</td>";
-        result += "<td>Product Name</td>";
-        result += "<td>Product NSX</td>";
-        result += "<td>Product Pt</td>";
-        result += "/<tr>";
-        result += "<tr>";
-        result += "<td>" + p.getProid() + "</td>";
-        result += "<td>" + p.getPname() + "</td>";
-        result += "<td>" + p.getNsx() + "</td>";
-        result += "<td>" + p.getPtid() + "</td>";
-        result += "/<tr>";
-        result += "</table>";
-
         PrintWriter writer = response.getWriter();
-        writer.print(result);
+        String result = "";
+        if (searchKey != null) {
+            Product p = db.getProductById(searchKey);
+            InforProduct in = null;
+            ArrayList<InforProduct> inforProduct = idb.getInforProduct();
+            for (InforProduct info : inforProduct) {
+                if (info.getPid().equals(p.getProid())) {
+                    in = info;
+                    break;
+                }
+            }
+            result += p.getProid() + "|";
+            result += p.getPname() + "|";
+            result += in.getUnit() + "|";
+            result += in.getSaleprice() + "|";
         }
-        
+        writer.print(result);
 
     }
 
@@ -100,7 +97,34 @@ public class SeachProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        ProductDBContext db = new ProductDBContext();
+        InforProductDBContext idb = new InforProductDBContext();
+        String searchKey = request.getParameter("searchKey");
+        PrintWriter writer = response.getWriter();
+        String result = "";
+        if (searchKey != null) {
+            Product p = db.getProductById(searchKey);
+            if (p != null) {
+                InforProduct in = null;
+                ArrayList<InforProduct> inforProduct = idb.getInforProduct();
+                for (InforProduct info : inforProduct) {
+                    if (info.getPid().equals(p.getProid())) {
+                        in = info;
+                        break;
+                    }
+                }
+                result += "<div onclick=\"addToCart('" + p.getProid() + "')\" class=\"row\" id =\"" + p.getProid() + "\">";
+                result += "<span>" + p.getProid() + "</span>";
+                result += "<span>" + p.getPname() + "</span>";
+                result += "<span>" + in.getUnit() + "</span>";
+                result += "<span>" + in.getSaleprice() + "</span>";
+                result += "</div>";
+            } else {
+                result = "Không tìm thấy sản phẩm";
+            }
+        }
+        writer.print(result);
     }
 
     /**

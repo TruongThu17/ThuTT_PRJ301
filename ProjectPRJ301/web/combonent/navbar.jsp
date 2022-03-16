@@ -89,7 +89,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-sync-alt"></i>
+                    <i class="fas fa-sync-alt"></i>  
                     <span>Giao Dịch</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -100,7 +100,7 @@
                         <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/billed">Hóa Đơn</a>
                         <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/refaud">Trả Hàng</a>
                         <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/importproducts">Nhập Hàng</a>
-                        <a class="collapse-item" href="#">Trả Hàng Nhập</a>
+                        <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/refaudproduct">Trả Hàng Nhập</a>
                     </div>
                 </div>
             </li>

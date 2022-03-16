@@ -121,7 +121,7 @@
                                                         <td><fmt:formatNumber value = "${r.total}" type = "currency"/></td>
                                                         <td>${r.daterefaud} </td>
                                                         <td><a href="#">Chi tiết hóa đơn</a> </td>
-                                                        <td><a href="deleterefaud?id=${s.bid}" onclick="return confirm('Bạn có chắc là muốn xóa hóa đơn này không?')">Xóa</a></td>
+                                                        <td><a href="deleterefaud?id=${r.rid}" onclick="return confirm('Bạn có chắc là muốn xóa hóa đơn này không?')">Xóa</a></td>
                                                     </tr>
 
                                                 </c:forEach>

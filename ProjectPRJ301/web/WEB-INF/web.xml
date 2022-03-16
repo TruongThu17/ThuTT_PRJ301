@@ -96,6 +96,26 @@
         <servlet-name>addCustomer</servlet-name>
         <servlet-class>controller.service.addCustomer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RefaudProductController</servlet-name>
+        <servlet-class>controller.transaction.RefaudProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteOrder</servlet-name>
+        <servlet-class>controller.transaction.DeleteOrder</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteBilled</servlet-name>
+        <servlet-class>controller.transaction.DeleteBilled</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteRefaud</servlet-name>
+        <servlet-class>controller.transaction.DeleteRefaud</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleterefaudProduct</servlet-name>
+        <servlet-class>controller.transaction.DeleterefaudProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SupplierController</servlet-name>
         <url-pattern>/supplier</url-pattern>
@@ -187,6 +207,26 @@
     <servlet-mapping>
         <servlet-name>addCustomer</servlet-name>
         <url-pattern>/addcustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RefaudProductController</servlet-name>
+        <url-pattern>/refaudproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteOrder</servlet-name>
+        <url-pattern>/deleteorder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteBilled</servlet-name>
+        <url-pattern>/deletebilled</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRefaud</servlet-name>
+        <url-pattern>/deleterefaud</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleterefaudProduct</servlet-name>
+        <url-pattern>/deleterefaudproduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -38,12 +38,12 @@ public class SupplierController extends HttpServlet {
         String raw_txt = request.getParameter("searchs");
         String err = "";
         if(raw_txt== null|| raw_txt.length()==0){ suppliers= sdb.getSupplier();
-             
+             suppliers = sdb.getSupplier();
         }
         else{
           suppliers= sdb.getSupplierByName(raw_txt);
         }
-         if(suppliers.isEmpty()){
+        if(suppliers.isEmpty()){
              err="Danh sách khách hàng rỗng";
              request.setAttribute("err", err);
          }
