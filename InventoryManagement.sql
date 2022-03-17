@@ -1,6 +1,6 @@
 ﻿USE [master]
 GO
-/****** Object:  Database [InventoryManage]    Script Date: 3/15/2022 11:13:36 PM ******/
+/****** Object:  Database [InventoryManage]    Script Date: 3/17/2022 11:55:25 PM ******/
 CREATE DATABASE [InventoryManage]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -82,7 +82,7 @@ ALTER DATABASE [InventoryManage] SET QUERY_STORE = OFF
 GO
 USE [InventoryManage]
 GO
-/****** Object:  Table [dbo].[Account]    Script Date: 3/15/2022 11:13:36 PM ******/
+/****** Object:  Table [dbo].[Account]    Script Date: 3/17/2022 11:55:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -96,7 +96,7 @@ CREATE TABLE [dbo].[Account](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Billed]    Script Date: 3/15/2022 11:13:36 PM ******/
+/****** Object:  Table [dbo].[Billed]    Script Date: 3/17/2022 11:55:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -117,7 +117,7 @@ CREATE TABLE [dbo].[Billed](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Customer]    Script Date: 3/15/2022 11:13:36 PM ******/
+/****** Object:  Table [dbo].[Customer]    Script Date: 3/17/2022 11:55:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -134,7 +134,7 @@ CREATE TABLE [dbo].[Customer](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InfBilled]    Script Date: 3/15/2022 11:13:36 PM ******/
+/****** Object:  Table [dbo].[InfBilled]    Script Date: 3/17/2022 11:55:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -146,7 +146,7 @@ CREATE TABLE [dbo].[InfBilled](
 	[unitprice] [float] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InforProduct]    Script Date: 3/15/2022 11:13:36 PM ******/
+/****** Object:  Table [dbo].[InforProduct]    Script Date: 3/17/2022 11:55:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -169,7 +169,7 @@ CREATE TABLE [dbo].[InforProduct](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InfRefaudProduct]    Script Date: 3/15/2022 11:13:36 PM ******/
+/****** Object:  Table [dbo].[InfRefaudProduct]    Script Date: 3/17/2022 11:55:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -181,7 +181,7 @@ CREATE TABLE [dbo].[InfRefaudProduct](
 	[importprice] [float] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[InfRefund]    Script Date: 3/15/2022 11:13:36 PM ******/
+/****** Object:  Table [dbo].[InfRefund]    Script Date: 3/17/2022 11:55:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -193,7 +193,7 @@ CREATE TABLE [dbo].[InfRefund](
 	[unitprice] [float] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Prod]    Script Date: 3/15/2022 11:13:36 PM ******/
+/****** Object:  Table [dbo].[Prod]    Script Date: 3/17/2022 11:55:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -209,7 +209,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ProductType]    Script Date: 3/15/2022 11:13:36 PM ******/
+/****** Object:  Table [dbo].[ProductType]    Script Date: 3/17/2022 11:55:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -223,7 +223,7 @@ CREATE TABLE [dbo].[ProductType](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[RefaudProduct]    Script Date: 3/15/2022 11:13:36 PM ******/
+/****** Object:  Table [dbo].[RefaudProduct]    Script Date: 3/17/2022 11:55:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -232,13 +232,14 @@ CREATE TABLE [dbo].[RefaudProduct](
 	[rpid] [varchar](50) NOT NULL,
 	[daterefaud] [date] NOT NULL,
 	[total] [float] NOT NULL,
+	[sid] [varchar](50) NULL,
  CONSTRAINT [PK_RefaudProduct] PRIMARY KEY CLUSTERED 
 (
 	[rpid] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Refund]    Script Date: 3/15/2022 11:13:36 PM ******/
+/****** Object:  Table [dbo].[Refund]    Script Date: 3/17/2022 11:55:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -253,7 +254,7 @@ CREATE TABLE [dbo].[Refund](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Supplier]    Script Date: 3/15/2022 11:13:36 PM ******/
+/****** Object:  Table [dbo].[Supplier]    Script Date: 3/17/2022 11:55:26 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -304,6 +305,16 @@ GO
 INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b15', N'c06', 2280000, 2000000, 280000, CAST(N'2022-03-14' AS Date), 0, CAST(N'2022-03-15' AS Date), NULL)
 GO
 INSERT [dbo].[Billed] ([bid], [cid], [total], [prepayment], [debt], [dateinvoice], [unit], [date], [note]) VALUES (N'b16', N'c03', 3510000, 2000000, 1510000, CAST(N'2022-03-14' AS Date), 0, CAST(N'2022-03-19' AS Date), NULL)
+GO
+INSERT [dbo].[Customer] ([cid], [cname], [cphone], [caddress], [Note]) VALUES (N'111111', N'aaaaa', N'123123123123', N'Quang Xuong - Thanh Hoa', N'')
+GO
+INSERT [dbo].[Customer] ([cid], [cname], [cphone], [caddress], [Note]) VALUES (N'123321', N'thu', N'09722765', N'Quang Xuong - Thanh Hoa', N'')
+GO
+INSERT [dbo].[Customer] ([cid], [cname], [cphone], [caddress], [Note]) VALUES (N'2222', N'c', N'09722765', N'Quang Xuong - Thanh Hoa', N'')
+GO
+INSERT [dbo].[Customer] ([cid], [cname], [cphone], [caddress], [Note]) VALUES (N'222222222', N'b', N'2123123', N'Quang Xuong - Thanh Hoa', N'')
+GO
+INSERT [dbo].[Customer] ([cid], [cname], [cphone], [caddress], [Note]) VALUES (N'3333333', N'd', N'2313123', N'Quang Xuong - Thanh Hoa', N'')
 GO
 INSERT [dbo].[Customer] ([cid], [cname], [cphone], [caddress], [Note]) VALUES (N'c01', N'Nguyễn Ngọc', N'0972276577', N'Bình Yên, Thạch Thất', NULL)
 GO
@@ -405,19 +416,19 @@ INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexp
 GO
 INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1012', N'1008', 1270000, 1350000, CAST(N'2021-02-02' AS Date), 0, N'Tan', 0, N'S06', CAST(N'2020-12-21' AS Date), N'')
 GO
-INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1013', N'1009', 17250, 18350, NULL, 1000000, N'Met', 1, N'S01', CAST(N'2022-01-21' AS Date), N'')
+INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1013', N'1009', 17250, 18350, NULL, 10000000, N'Kg', 1, N'S01', CAST(N'2022-01-21' AS Date), N'')
 GO
-INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1014', N'1009', 17000, 18350, NULL, 5000000, N'Met', 1, N'S02', CAST(N'2021-02-20' AS Date), N'')
+INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1014', N'1009', 17000, 18350, NULL, 50000000, N'Kg', 1, N'S02', CAST(N'2021-02-20' AS Date), N'')
 GO
-INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1015', N'1010', 17250, 18300, NULL, 8000000, N'Met', 1, N'S01', CAST(N'2022-03-01' AS Date), N'')
+INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1015', N'1010', 17250, 18300, NULL, 80000000, N'Kg', 1, N'S01', CAST(N'2022-03-01' AS Date), N'')
 GO
-INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1016', N'1011', 17200, 18300, NULL, 8000000, N'Met', 1, N'S01', CAST(N'2022-02-01' AS Date), N'')
+INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1016', N'1011', 17200, 18300, NULL, 80000000, N'Kg', 1, N'S01', CAST(N'2022-02-01' AS Date), N'')
 GO
-INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1017', N'1026', 17200, 18300, NULL, 8000000, N'Met', 1, N'S01', CAST(N'2022-02-01' AS Date), N'')
+INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1017', N'1026', 17200, 18300, NULL, 80000000, N'Kg', 1, N'S01', CAST(N'2022-02-01' AS Date), N'')
 GO
-INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1018', N'1012', 97000, 114000, NULL, 1000000, N'Cay', 1, N'S04', CAST(N'2022-01-11' AS Date), N'')
+INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1018', N'1012', 97000, 114000, NULL, 10000000, N'Cay', 1, N'S04', CAST(N'2022-01-11' AS Date), N'')
 GO
-INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1019', N'1013', 96000, 113000, NULL, 8000000, N'Cay', 1, N'S04', CAST(N'2022-03-01' AS Date), N'')
+INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1019', N'1013', 96000, 113000, NULL, 80000000, N'Cay', 1, N'S04', CAST(N'2022-03-01' AS Date), N'')
 GO
 INSERT [dbo].[InforProduct] ([code], [pid], [importprice], [saleprice], [dateexpiry], [quantityinstock], [unit], [status], [sid], [dateimport], [Note]) VALUES (N'p1020', N'1014', 160000, 180000, NULL, 1000000, N'Cay', 1, N'S04', CAST(N'2022-01-01' AS Date), N'')
 GO
@@ -446,6 +457,18 @@ GO
 INSERT [dbo].[InfRefaudProduct] ([rpid], [code], [quantity], [importprice]) VALUES (N'rp01', N'p1001', 20, 1270000)
 GO
 INSERT [dbo].[InfRefaudProduct] ([rpid], [code], [quantity], [importprice]) VALUES (N'rp01', N'p1013', 2000, 18350)
+GO
+INSERT [dbo].[InfRefaudProduct] ([rpid], [code], [quantity], [importprice]) VALUES (N'rp02', N'p1003', 20, 1270000)
+GO
+INSERT [dbo].[InfRefaudProduct] ([rpid], [code], [quantity], [importprice]) VALUES (N'rp03', N'p1004', 20, 1310000)
+GO
+INSERT [dbo].[InfRefaudProduct] ([rpid], [code], [quantity], [importprice]) VALUES (N'rp04', N'p1019', 2000, 96000)
+GO
+INSERT [dbo].[InfRefaudProduct] ([rpid], [code], [quantity], [importprice]) VALUES (N'rp04', N'p1020', 3000, 160000)
+GO
+INSERT [dbo].[InfRefaudProduct] ([rpid], [code], [quantity], [importprice]) VALUES (N'rp05', N'p1025', 3000, 381500)
+GO
+INSERT [dbo].[InfRefaudProduct] ([rpid], [code], [quantity], [importprice]) VALUES (N'rp05', N'p1029', 3000, 590000)
 GO
 INSERT [dbo].[InfRefund] ([rid], [pid], [quantity], [unitprice]) VALUES (N'r01', N'1009', 300, 18350)
 GO
@@ -521,15 +544,15 @@ INSERT [dbo].[ProductType] ([ptId], [ptName]) VALUES (N'pt01', N'Xi mang')
 GO
 INSERT [dbo].[ProductType] ([ptId], [ptName]) VALUES (N'pt02', N'Sat, Thep')
 GO
-INSERT [dbo].[RefaudProduct] ([rpid], [daterefaud], [total]) VALUES (N'rp01', CAST(N'2022-03-15' AS Date), 0)
+INSERT [dbo].[RefaudProduct] ([rpid], [daterefaud], [total], [sid]) VALUES (N'rp01', CAST(N'2022-03-15' AS Date), 62100000, N'S01')
 GO
-INSERT [dbo].[RefaudProduct] ([rpid], [daterefaud], [total]) VALUES (N'rp02', CAST(N'2022-03-15' AS Date), 0)
+INSERT [dbo].[RefaudProduct] ([rpid], [daterefaud], [total], [sid]) VALUES (N'rp02', CAST(N'2022-03-15' AS Date), 25400000, N'S02')
 GO
-INSERT [dbo].[RefaudProduct] ([rpid], [daterefaud], [total]) VALUES (N'rp03', CAST(N'2022-03-14' AS Date), 0)
+INSERT [dbo].[RefaudProduct] ([rpid], [daterefaud], [total], [sid]) VALUES (N'rp03', CAST(N'2022-03-14' AS Date), 26200000, N'S02')
 GO
-INSERT [dbo].[RefaudProduct] ([rpid], [daterefaud], [total]) VALUES (N'rp04', CAST(N'2022-03-14' AS Date), 0)
+INSERT [dbo].[RefaudProduct] ([rpid], [daterefaud], [total], [sid]) VALUES (N'rp04', CAST(N'2022-03-14' AS Date), 672000000, N'S04')
 GO
-INSERT [dbo].[RefaudProduct] ([rpid], [daterefaud], [total]) VALUES (N'rp05', CAST(N'2022-03-15' AS Date), 0)
+INSERT [dbo].[RefaudProduct] ([rpid], [daterefaud], [total], [sid]) VALUES (N'rp05', CAST(N'2022-03-15' AS Date), 2914500000, N'S04')
 GO
 INSERT [dbo].[Refund] ([rid], [bid], [date]) VALUES (N'r01', N'b01', CAST(N'2022-03-02' AS Date))
 GO

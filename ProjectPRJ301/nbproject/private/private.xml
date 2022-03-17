@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/home.jsp</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/service/Bill.jsp</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/businesspartner/customer.jsp</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/web/transaction/billed.jsp</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/service/AddBillController.java</file>
+            <file>file:/D:/ProjectPrj301/ProjectPRJ301/src/java/controller/commodity/SeachProductController.java</file>
         </group>
     </open-files>
 </project-private>

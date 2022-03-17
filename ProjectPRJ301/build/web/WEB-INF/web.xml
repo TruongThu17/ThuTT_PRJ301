@@ -116,6 +116,14 @@
         <servlet-name>DeleterefaudProduct</servlet-name>
         <servlet-class>controller.transaction.DeleterefaudProduct</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Bill</servlet-name>
+        <servlet-class>controller.service.Bill</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Searchproduct</servlet-name>
+        <servlet-class>controller.service.Searchproduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SupplierController</servlet-name>
         <url-pattern>/supplier</url-pattern>
@@ -227,6 +235,14 @@
     <servlet-mapping>
         <servlet-name>DeleterefaudProduct</servlet-name>
         <url-pattern>/deleterefaudproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Bill</servlet-name>
+        <url-pattern>/add-bill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Searchproduct</servlet-name>
+        <url-pattern>/search-product</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

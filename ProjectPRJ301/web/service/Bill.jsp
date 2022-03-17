@@ -80,7 +80,7 @@
             top: 50px;
             background: #fff;
             height: 100px;
-            width: 300px;
+            width: 400px;
             overflow: auto;
             z-index: 20;
             box-shadow: 0px 0px 2px 2px #ccc;
@@ -109,26 +109,26 @@
         }
 
         .card-body .table td:nth-child(1) {
-           width: 60px;
+            width: 50px;
         }
         .card-body .table td:nth-child(3) {
-           width: 80px;
+            width: 80px;
         }
         .card-body .table td:nth-child(4) {
-           width: 100px;
+            width: 100px;
         }
         .card-body .table td:nth-child(5) {
-           width: 80px;
+            width: 80px;
         }
         .card-body .table td:nth-child(6) {
-           width: 80px;
+            width: 80px;
         }
         .card-body .table td:nth-child(7) input {
-           width: 100%;
+            width: 100%;
         }
-/*        .card-body .table td:nth-child(1) {
-           width: 60px;
-        }*/
+        /*        .card-body .table td:nth-child(1) {
+                   width: 60px;
+                }*/
         .card-body .table td:nth-child(2) {
             width: 65px;
         }
@@ -295,7 +295,7 @@
                                                             <label for="address" class="form-label">Thanh Toán Trước: </label>
                                                         </div>
                                                         <div class ="col-md-7">
-                                                            <input type="text" class="form-control-plaintext" id="address" name="address" aria-describedby="emailHelp">
+                                                            <input type="text" class="form-control-plaintext" id="payment" name="address" aria-describedby="emailHelp">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -305,7 +305,7 @@
                                                             <label for="note" class="form-label">Khách cần trả: </label>
                                                         </div>
                                                         <div class ="col-md-7">
-                                                            <input class="form-control-plaintext" id="note" name="note" rows="1"></input>
+                                                            <input class="form-control-plaintext" id="total" name="note"></input>
                                                         </div>
                                                     </div>
 
@@ -344,16 +344,12 @@
                         var content = document.getElementById("content");
                         mymodal.style.transform = "scale(1)";
                         content.style.transform = "scale(1)";
-
                     }
-
                     function generateRow(listAttribute) {
                         var productId = listAttribute[0].innerHTML;
                         var productName = listAttribute[1].innerHTML;
                         var unit = listAttribute[2].innerHTML;
                         var unitPrice = listAttribute[3].innerHTML;
-
-
                         var row = "";
                         row += "<tr id=\"" + ordinalNumber + "\" >";
                         row += "<td><button  onclick=\"deleteRow('" + ordinalNumber + "')\"  ><i class=\"fa fa-trash\" ></i></button></td>";
@@ -362,13 +358,11 @@
                         row += "<td>" + productName + "</td>"
                         row += "<td>" + unit + "</td>"
                         row += "<td>" + unitPrice + "</td>"
-                        row += "<td><input name =\"quantity\" value=\"1\" type=\"text\" onkeyup=\"setAmount('" + ordinalNumber + "')\" /></td>"
+                        row += "<td><input name =\"quantity\" min=" + 0 + " type=\"number\" onkeyup=\"setAmount('" + ordinalNumber + "')\"onclick =\"setAmount('" + ordinalNumber + "')\" /></td>"
                         row += "<td></td>"
                         row += "<tr>";
-
                         return row;
                     }
-
                     function deleteRow(rowId) {
                         var productList = document.getElementById("product-list");
                         var rows = productList.children;
@@ -384,52 +378,47 @@
                                 tds[1].innerHTML = rid;
                                 tds[0].innerHTML = "<button onclick=\"deleteRow('" + rid + "')\"  ><i class=\"fa fa-trash\" ></i></button>";
                                 var inputQuantity = (tds[6].children)[0].value;
-                                tds[6].innerHTML = "<input value=\"" + inputQuantity + "\" type=\"text\" onkeyup=\"setAmount('" + ordinalNumber + "')\" />";
+                                tds[6].innerHTML = "<input min=" + 0 + "  type=\"number\" onkeyup=\"setAmount('" + ordinalNumber + "')\" onclick =\"setAmount('" + ordinalNumber + "')\"/>";
                             }
                         }
                         ordinalNumber -= 1;
                     }
-
                     function setAmount(rowId) {
                         var atRow = document.getElementById(rowId);
                         var tds = atRow.children;
                         var inputQuantity = (tds[6].children)[0];
-
                         var price = parseFloat(tds[5].innerHTML);
                         var quantity = parseInt(inputQuantity.value);
-
                         var total = price * quantity;
                         tds[7].innerHTML = total;
                         setTotalAmount();
-                    }
 
+                    }
                     function setTotalAmount() {
                         var total = 0;
                         var productList = document.getElementById("product-list");
+                        var totalAmount = document.getElementById("total-amount");
                         var rows = productList.children;
                         for (var i = 0, max = rows.length - 1; i < max; i++) {
                             var tds = rows[i].childNodes;
-//                             alert(tds.length);
                             var amount = parseFloat(tds[7].innerHTML);
                             total += amount;
                         }
-                       
-                        var totalAmount = document.getElementById('total-amount');
                         totalAmount.value = total;
+                        document.getElementById("total").value = total;
                     }
 
                     function addToCart(id) {
                         var productList = document.getElementById("product-list");
-                        var faResultBox = document.getElementById('result');
+                        var faResultBox = document.getElementById("result");
                         var resultBox = document.getElementById(id);
                         var listAttribute = resultBox.childNodes;
-//                        alert(listAttribute.length);
+
                         var newRow = generateRow(listAttribute);
                         productList.innerHTML += newRow;
                         faResultBox.style.display = "none";
                         ordinalNumber += 1;
                     }
-
                     function closeModal() {
                         var modal = document.getElementById("md");
                         var content = document.getElementById("content");
@@ -447,10 +436,8 @@
                         address.value = "";
                         note.value = "";
                     }
-
-
                     function insertCustomer() {
-                        var customerBox = document.getElementById('customer-box');
+                        var customerBox = document.getElementById("customer-box");
                         var id = document.getElementById("id").value;
                         var name = document.getElementById("name").value;
                         var phone = document.getElementById("phone").value;
@@ -464,10 +451,8 @@
                             document.getElementById("rs").innerHTML = data[0];
                             var newCustomer = "<option value=\"" + data[1] + "\">" + data[2] + "</option>";
                             customerBox.innerHTML += newCustomer;
-
                         });
                     }
-
                     function searchProduct() {
                         var searchKey = document.getElementById('searchKey').value;
                         var resultBox = document.getElementById('result');
