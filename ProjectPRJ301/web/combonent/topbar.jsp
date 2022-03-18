@@ -81,41 +81,35 @@
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                         Thông tin
                     </a>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="">
                         <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Cài đặt
-                    </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Hoạt động đăng nhập
+                        Cài Đặt Tài Khoản
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <a class="dropdown-item" href="http://localhost:8080/ProjectPRJ301/logout" >
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Đăng Xuất
                     </a>
                 </div>
-                </li>
-            </div>
 
-        </ul>
+                </ul>
 
-    </nav>
-    <script src="../static/vendor/jquery/jquery.min.js"></script>
-    <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        </nav>
+        <script src="../static/vendor/jquery/jquery.min.js"></script>
+        <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="../static/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="../static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="../static/js/sb-admin-2.min.js"></script>
-    <script src="../static/js/main/businesspartner.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="../static/js/sb-admin-2.min.js"></script>
+        <script src="../static/js/main/businesspartner.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="../static/vendor/chart.js/Chart.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="../static/vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="../static/js/demo/chart-area-demo.js"></script>
-    <script src="../static/js/demo/chart-pie-demo.js"></script>
-</body>
+        <!-- Page level custom scripts -->
+        <script src="../static/js/demo/chart-area-demo.js"></script>
+        <script src="../static/js/demo/chart-pie-demo.js"></script>
+    </body>
 </html>

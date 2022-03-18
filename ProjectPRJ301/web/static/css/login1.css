@@ -1,0 +1,66 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 15, 2022, 12:37:08 AM
+    Author     : win
+*/
+
+body{
+    text-align: center;
+    padding: 100px;
+    background-color: #f3f3f3;
+}
+.title{
+    font-family:inherit;
+    font-size: 60px;
+    margin-bottom: 20px;
+    color: #d77215;
+}
+.log{
+    font-family:inherit;
+    font-size: 35px;
+    color: #747373;
+}
+.form{
+    margin: 10px;
+    font-size: 20px;
+    border-radius: 8px;
+    height: 40px;
+}
+.login-more{
+  padding-left: 16px;
+  padding-top: 160px;
+}
+.login-more li{
+    display: block;
+  position: relative;
+  padding-left: 16px;
+ color: #747373;
+}
+.txt1 {
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.txt2 {
+  font-family: Poppins-Regular;
+  font-size: 15px;
+ color: #d77215;
+  line-height: 1.5;
+}
+.dn{
+    background-color: #edc7a4;
+}
+.login-page{
+    width: 400px;
+    height: 300px;
+    padding: 4% 0 4% ;
+    margin: auto;
+    background-color: white;
+    border-radius: 8px;
+    
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
