@@ -94,9 +94,22 @@
             background: #ccc;
             color: #fff;
         }
-        .card-body .table {
-            table-layout: fixed;
-            font-size: 15px;
+
+        .card-body {
+
+        }
+
+        .card-body .card-middle {
+            margin: 10px;
+            height: 400px;
+            overflow: auto;
+            padding: 0px;
+        }
+        .card-body .table thead {
+            position: sticky;
+            top: 0;
+            left: 0;
+            background: #ccc;
         }
 
         .card-body .table thead td {
@@ -131,6 +144,24 @@
                 }*/
         .card-body .table td:nth-child(2) {
             width: 65px;
+        }
+
+        /* width */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 10px;
         }
 
     </style>
@@ -217,23 +248,23 @@
 
                                         <!-- Card Body -->
                                         <div class="card-body">
-                                            <table class="table">    
-                                                <thead>
-                                                    <tr>
-                                                        <td scope="col"></td>
-                                                        <td scope="col">Stt</td>
-                                                        <td scope="col">Mã sản Phẩm</td>
-                                                        <td scope="col">Tên Sản Phẩm</td>
-                                                        <td scope="col">Đơn vị</td>
-                                                        <td scope="col">Giá</td>
-                                                        <td scope="col">Số Lượng</td>
-                                                        <td scope="col">Thành Tiền</td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="product-list">
-
-                                                </tbody>
-                                            </table>
+                                            <div class="card-middle">
+                                                <table class="table">    
+                                                    <thead>
+                                                        <tr>
+                                                            <td scope="col"></td>
+                                                            <td scope="col">Stt</td>
+                                                            <td scope="col">Mã sản Phẩm</td>
+                                                            <td scope="col">Tên Sản Phẩm</td>
+                                                            <td scope="col">Đơn vị</td>
+                                                            <td scope="col">Giá</td>
+                                                            <td scope="col">Số Lượng</td>
+                                                            <td scope="col">Thành Tiền</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="product-list"></tbody>
+                                                </table>
+                                            </div>
 
                                         </div>
                                     </div>
@@ -351,18 +382,22 @@
                         var unit = listAttribute[2].innerHTML;
                         var unitPrice = listAttribute[3].innerHTML;
                         var row = "";
-                        row += "<tr id=\"" + ordinalNumber + "\" >";
+//                        row += "<tr id=\"" + ordinalNumber + "\" >";
                         row += "<td><button  onclick=\"deleteRow('" + ordinalNumber + "')\"  ><i class=\"fa fa-trash\" ></i></button></td>";
                         row += "<td>" + ordinalNumber + "</td>"
-                        row += "<td>" + productId + " <input type=\"hidden\" name=\"id\" value =\"" + productId + "\" /> </td>"
-                        row += "<td>" + productName + "</td>"
+                        row += "<td>" + productId + "</td>"
+                        row += "<td>" + productName + " <input type=\"hidden\" name=\"id\" value =\"" + productId + "\" /></td>"
                         row += "<td>" + unit + "</td>"
                         row += "<td>" + unitPrice + "</td>"
-                        row += "<td><input name =\"quantity\" min=" + 0 + " type=\"number\" onkeyup=\"setAmount('" + ordinalNumber + "')\"onclick =\"setAmount('" + ordinalNumber + "')\" /></td>"
+                        row += "<td><input value =\"1\" name =\"quantity\" min=" + 1 + " type=\"number\" onkeyup=\"setAmount('" + ordinalNumber + "', this.value)\"onclick =\"setAmount('" + ordinalNumber + "', this.value)\" /></td>"
                         row += "<td></td>"
-                        row += "<tr>";
+//                        row += "<tr>";
                         return row;
                     }
+
+
+
+
                     function deleteRow(rowId) {
                         var productList = document.getElementById("product-list");
                         var rows = productList.children;
@@ -378,29 +413,54 @@
                                 tds[1].innerHTML = rid;
                                 tds[0].innerHTML = "<button onclick=\"deleteRow('" + rid + "')\"  ><i class=\"fa fa-trash\" ></i></button>";
                                 var inputQuantity = (tds[6].children)[0].value;
-                                tds[6].innerHTML = "<input min=" + 0 + "  type=\"number\" onkeyup=\"setAmount('" + ordinalNumber + "')\" onclick =\"setAmount('" + ordinalNumber + "')\"/>";
+                                tds[6].innerHTML = "<input value =\"1\" min=" + 1 + "  type=\"number\" onkeyup=\"setAmount('" + ordinalNumber + "', this.value)\" onclick =\"setAmount('" + ordinalNumber + "', this.value)\"/>";
                             }
                         }
                         ordinalNumber -= 1;
                     }
-                    function setAmount(rowId) {
-                        var atRow = document.getElementById(rowId);
-                        var tds = atRow.children;
-                        var inputQuantity = (tds[6].children)[0];
-                        var price = parseFloat(tds[5].innerHTML);
-                        var quantity = parseInt(inputQuantity.value);
-                        var total = price * quantity;
-                        tds[7].innerHTML = total;
-                        setTotalAmount();
+                    function setAmount(rowId, quantity) {
+                        var status = checkInputQuantity(quantity);
+                        if (status) {
+                            var atRow = document.getElementById(rowId);
+                            var tds = atRow.children;
+                            var inputQuantity = (tds[6].children)[0];
+                            var price = parseFloat(tds[5].innerHTML);
+                            var quantity = parseInt(inputQuantity.value);
+                            var total = price * quantity;
+                            tds[7].innerHTML = total;
+                            setTotalAmount();
+                        } else {
+                            var row = document.getElementById(rowId);
+                            var tds = row.children;
+                            var input = (tds[6].children)[0];
+                            input.value = "1";
+                        }
 
                     }
+                    function checkInputQuantity(value) {
+
+
+                        if (value === "") {
+                            return false;
+                        }
+
+                        for (var i = 0, max = value.length; i < max; i++) {
+                            var ch = value[i];
+                            if (ch < '0' || ch > '9')
+                                return false;
+                        }
+
+                        return true;
+                    }
+
                     function setTotalAmount() {
                         var total = 0;
                         var productList = document.getElementById("product-list");
                         var totalAmount = document.getElementById("total-amount");
                         var rows = productList.children;
-                        for (var i = 0, max = rows.length - 1; i < max; i++) {
-                            var tds = rows[i].childNodes;
+//                        alert(rows.length);
+                        for (var i = 0, max = rows.length; i < max; i++) {
+                            var tds = rows[i].children;
                             var amount = parseFloat(tds[7].innerHTML);
                             total += amount;
                         }
@@ -408,16 +468,45 @@
                         document.getElementById("total").value = total;
                     }
 
-                    function addToCart(id) {
+                    function checkExitProduct(id) {
                         var productList = document.getElementById("product-list");
-                        var faResultBox = document.getElementById("result");
-                        var resultBox = document.getElementById(id);
-                        var listAttribute = resultBox.childNodes;
+                        var rows = productList.children;
+                        for (var i = 0, max = rows.length; i < max; i++) {
+                            var tds = rows[i].children;
+                            var currentId = tds[2].innerHTML;
+                            if (id === currentId) {
+                                var input = (tds[6].children)[0];
+                                var currentQuantiy = parseInt(input.value);
+                                currentQuantiy += 1;
+                                input.value = currentQuantiy;
+                                setAmount(i + 1, currentQuantiy);
+                                return true;
+                            }
 
-                        var newRow = generateRow(listAttribute);
-                        productList.innerHTML += newRow;
+                        }
+                        return false;
+                    }
+
+                    function addToCart(id) {
+                        var status = checkExitProduct(id);
+                        var faResultBox = document.getElementById("result");
+                        if (!status) {
+                            var productList = document.getElementById("product-list");
+                            var resultBox = document.getElementById(id);
+                            var listAttribute = resultBox.childNodes;
+
+
+                            var newR = document.createElement('tr');
+                            newR.id = ordinalNumber;
+                            newR.innerHTML = generateRow(listAttribute);
+
+                            productList.insertAdjacentElement("beforeend", newR);
+                            setAmount(ordinalNumber, '1');
+                            ordinalNumber += 1;
+
+                        }
                         faResultBox.style.display = "none";
-                        ordinalNumber += 1;
+
                     }
                     function closeModal() {
                         var modal = document.getElementById("md");

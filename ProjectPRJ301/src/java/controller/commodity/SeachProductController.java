@@ -80,7 +80,7 @@ public class SeachProductController extends HttpServlet {
             result += p.getProid() + "|";
             result += p.getPname() + "|";
             result += in.getUnit() + "|";
-            result += in.getSaleprice() + "|";
+            result += in.getSaleprice();
         }
         writer.print(result);
 
@@ -124,6 +124,8 @@ public class SeachProductController extends HttpServlet {
                 result = "Không tìm thấy sản phẩm";
             }
         }
+        
+        result.trim();
         writer.print(result);
     }
 
