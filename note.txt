@@ -1,0 +1,14 @@
+Người dùng quan tâm tới 
+- đầu ra, đầu vào của sản phẩm kinh doanh
+- Kiểm tra được số lượng sản phẩm còn tồn trong kho
+- Giá Nhập, Ngày Nhập và hạn sử dụng của sản phẩm
+- Kiểm Kho để có thể check được số lượng còn tồn để nhập hàng về kịp để cung cấp cho 
+người tiêu dùng
+- Kiểm Tra được đơn hàng đã được giao hay chưa
+- Có những khách hàng họ sẽ đặt hàng trước và cọc thì khi giao nếu giá bán ra ở thời
+điểm giao tăng thì giá bán cho đơn hàng đấy sẽ không thay đổi
+- Sản phẩm chính của kho cần quản lý : Xi Măng, Sắt, Thép
+	+ Xi Măng được bán theo tấn
+	+ Sắt và thép được bán theo mét, cây và kg: đối với sắt 6,8 tính theo kg, các loại sắt
+	thép còn lại được tính mét và theo cây
+

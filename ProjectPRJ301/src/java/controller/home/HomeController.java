@@ -5,6 +5,7 @@
  */
 package controller.home;
 
+import Login.BaseAuthenticationController;
 import dal.BilledDBContext;
 import dal.HomeDBContext;
 import java.io.IOException;
@@ -20,7 +21,7 @@ import model.Bill_Month_Day;
  *
  * @author win
  */
-public class HomeController extends HttpServlet {
+public class HomeController extends BaseAuthenticationController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,14 +40,51 @@ public class HomeController extends HttpServlet {
             float totalday = db.getTotalDay();
             float totalmonth = db.getTotalMonth();
             HomeDBContext hdb = new HomeDBContext();
-            ArrayList<Bill_Month_Day> billOnMonth = hdb.getBillOnMonth();
-            ArrayList<Bill_Month_Day> billOnDay = hdb.getBillOnDay();
+            
+            String err1 = "";
+            String err2 = "";
+            final int page_sz = 10;
+            int page1 = 1,page2 = 1;
+            String pageStr1 = request.getParameter("page1");
+            String pageStr2 = request.getParameter("page2");
+            if (pageStr1 != null) {
+                page1 = Integer.parseInt(pageStr1);
+            }
+            if (pageStr2 != null) {
+                page2 = Integer.parseInt(pageStr2);
+            }
+            int totalProducts1 = db.getTotalBillMonth();
+            int totalPage1 = totalProducts1 / page_sz;
+            if (totalProducts1 % page_sz != 0) {
+                totalPage1 += 1;
+            }
+            ArrayList<Bill_Month_Day> billOnMonth = hdb.getBillOnMonth(page1, page_sz);
+            if (billOnMonth.isEmpty()) {
+                err1 = "Danh sách khách hàng rỗng";
+                request.setAttribute("err1", err1);
+            }
+            
+            
+            int totalProducts2 = db.getTotalBillDay();
+            int totalPage2 = totalProducts2 / page_sz;
+            if (totalProducts2 % page_sz != 0) {
+                totalPage2 += 1;
+            }
+            ArrayList<Bill_Month_Day> billOnDay = hdb.getBillOnDay(page1, page_sz);
+            if (billOnMonth.isEmpty()) {
+                err2 = "Danh sách khách hàng rỗng";
+                request.setAttribute("err2", err2);
+            }
+            request.setAttribute("page1", page1);
+            request.setAttribute("page2", page2);
+            request.setAttribute("totalPage1", totalPage1);
+            request.setAttribute("totalPage2", totalPage2);
             request.setAttribute("billOnDay", billOnDay);
             request.setAttribute("billOnMonth", billOnMonth);
             request.setAttribute("totalday", totalday);
             request.setAttribute("totalmonth", totalmonth);
             request.getRequestDispatcher("home.jsp").forward(request, response);
-            
+
         }
     }
 
@@ -60,7 +98,7 @@ public class HomeController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -74,7 +112,7 @@ public class HomeController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }

@@ -87,7 +87,7 @@
                                                 <c:forEach items="${requestScope.producttypes}" var="p">
                                                     <option 
                                                         ${p.ptid eq requestScope.did?"selected=\"selected\"":""}
-                                                            
+
                                                         value="${p.ptid}">${p.ptname}</option>
                                                 </c:forEach>
                                             </select>
@@ -98,7 +98,7 @@
                                         <div id="dataTable_filter" class="right dataTables_filter">
                                             <label>Search:
 
-                                                <input name ="searchP" onchange="submitSearchForm();" type="search" class="form-control form-control-sm " placeholder="" aria-controls="dataTable">
+                                                <input name ="searchP"  value = "${searchP}" onchange="submitSearchForm();" type="search" class="form-control form-control-sm " placeholder="" aria-controls="dataTable">
 
                                             </label>
                                         </div>
@@ -169,6 +169,28 @@
 
 
                                     </table>
+                                    <nav aria-label="Page navigation example" class ="">
+                                        <ul class="pagination justify-content-end">
+
+                                            <li class="page-item">
+                                                <a class="page-link" href="importproducts?page=${page-1<=0?1:page-1}&searchc=${searchP}&did=${did}" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                            </li>
+
+                                            <c:forEach begin="1" end="${requestScope.totalPage}" var="i">
+                                                <li class="page-item"><a class="page-link" onchange="submitSearchForm();" href="importproducts?page=${i}&searchc=${searchP}&did=${did}">${i}</a></li>
+                                                </c:forEach>
+                                            <li class="page-item">
+                                                <a class="page-link" href=importproducts?page=${page+1>totalPage?totalPage:page+1}&searchc=${searchP}&did=${did}" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </nav>
                                 </div>
                             </div>
                         </div>

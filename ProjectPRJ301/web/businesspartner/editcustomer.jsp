@@ -1,8 +1,4 @@
-<%-- 
-    Document   : editcustomer
-    Created on : Mar 3, 2022, 10:31:24 PM
-    Author     : win
---%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.ArrayList"%>
@@ -89,7 +85,7 @@
                                                     <label for="note">Ghi chú :</label>
                                                     <input type="note" class="form-control" name="note" placeholder="Ghi chú" value="${customer.getNote()}">
                                                 </div>
-                                                <input type="Submit" value="Lưu thông tin" />
+                                                <input type="submit" value="Lưu thông tin" />
                                             </form>
 
                                         </div>

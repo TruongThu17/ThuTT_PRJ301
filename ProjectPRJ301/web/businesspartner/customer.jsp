@@ -94,7 +94,7 @@
                                     <div id="dataTable_filter" class="right dataTables_filter">
                                         <form id="searchForm" method="POST" action="customer"> 
                                             <label>Search:
-                                                <input name="searchc" type="search" class="form-control" placeholder="" aria-controls="dataTable">
+                                                <input name="searchc" type="search" value="${searchc}" class="form-control" placeholder="" aria-controls="dataTable">
                                             </label>
                                         </form>
                                     </div>
@@ -137,6 +137,34 @@
                                             </c:otherwise>
                                         </c:choose>
                                     </table>
+                                </div>
+                                <div class ="row">
+                                    <div class ="col-lg-6">  </div>
+                                    <div class ="col-lg-6"> 
+
+                                        <nav aria-label="Page navigation example" class ="">
+                                            <ul class="pagination justify-content-end">
+
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                        <span class="sr-only">Previous</span>
+                                                    </a>
+                                                </li>
+
+                                                <c:forEach begin="1" end="${requestScope.totalPage}" var="i">
+                                                    <li class="page-item"><a class="page-link" onchange="submitSearchForm();" href="customer?page=${i}&searchc=${searchP}">${i}</a></li>
+                                                    </c:forEach>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </nav>
+                                    </div>
                                 </div>
                             </div>
                         </div>

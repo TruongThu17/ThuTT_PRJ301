@@ -5,6 +5,7 @@
  */
 package controller.partner;
 
+import Login.BaseAuthenticationController;
 import dal.CustomerDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +20,7 @@ import model.Customer;
  *
  * @author win
  */
-public class EditCustommer extends HttpServlet {
+public class EditCustommer extends BaseAuthenticationController {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -31,7 +32,7 @@ public class EditCustommer extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("id");
         CustomerDBContext cdb = new CustomerDBContext();
@@ -49,13 +50,13 @@ public class EditCustommer extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("id");
         String name = request.getParameter("name");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
-        String Note = request.getParameter("Note");
+        String Note = request.getParameter("note");
         
         Customer c = new Customer(id, name, phone, address, Note);
         CustomerDBContext cdb = new CustomerDBContext();

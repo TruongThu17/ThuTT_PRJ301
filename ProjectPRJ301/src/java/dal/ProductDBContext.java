@@ -5,6 +5,7 @@
  */
 package dal;
 
+import controller.commodity.Info_Product;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,6 +47,7 @@ public class ProductDBContext extends DBContext {
         }
         return products;
     }
+
     public ArrayList<Product> getProductByPTidandName(String txt, String ptid) {
         ArrayList<Product> products = new ArrayList<>();
         try {
@@ -56,7 +58,7 @@ public class ProductDBContext extends DBContext {
                     + "  FROM [dbo].[Prod] where ptid =? and pname like ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, ptid);
-            stm.setString(2, "%"+txt+"%");
+            stm.setString(2, "%" + txt + "%");
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Product p = new Product();
@@ -72,6 +74,7 @@ public class ProductDBContext extends DBContext {
         }
         return products;
     }
+
     public ArrayList<Product> getProductByString(String txt) {
         ArrayList<Product> products = new ArrayList<>();
         try {
@@ -81,7 +84,7 @@ public class ProductDBContext extends DBContext {
                     + "      ,[ptid]\n"
                     + "  FROM [dbo].[Prod] where pname like ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, "%"+txt+"%");
+            stm.setString(1, "%" + txt + "%");
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Product p = new Product();
@@ -97,6 +100,7 @@ public class ProductDBContext extends DBContext {
         }
         return products;
     }
+
     public ArrayList<Product> getProductByPTid(String ptid) {
         ArrayList<Product> products = new ArrayList<>();
         try {
@@ -122,6 +126,7 @@ public class ProductDBContext extends DBContext {
         }
         return products;
     }
+
     public Product getProductById(String pid) {
         ArrayList<Product> products = new ArrayList<>();
         try {
@@ -241,5 +246,32 @@ public class ProductDBContext extends DBContext {
                 }
             }
         }
+    }
+
+    public Info_Product getInforProduct(String id) {
+        try {
+
+            String sql = "select a.pid, a.pname, a.ptid, a.nsx, b.saleprice, sum( b.quantityinstock) as qt, b.unit, b.status\n"
+                    + "  from Prod a inner join InforProduct b on a.pid = b.pid where a.pid =?\n"
+                    + "  group by  a.pid, a.pname, a.ptid, a.nsx, b.saleprice, b.unit, b.status ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Info_Product i = new Info_Product();
+                i.setPid(rs.getString("pid"));
+                i.setPname(rs.getString("pname"));
+                i.setNsx(rs.getString("nsx"));
+                i.setPtid(rs.getString("ptid"));
+                i.setQuantity(rs.getInt("qt"));
+                i.setSaleprice(rs.getFloat("saleprice"));
+                i.setUnit(rs.getString("unit"));
+                i.setStatus(rs.getBoolean("status"));
+                return i;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

@@ -5,6 +5,7 @@
  */
 package controller.transaction;
 
+import Login.BaseAuthenticationController;
 import dal.OrderDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author win
  */
-public class DeleteOrder extends HttpServlet {
+public class DeleteOrder extends BaseAuthenticationController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,9 +33,10 @@ public class DeleteOrder extends HttpServlet {
             throws ServletException, IOException {
         String id = request.getParameter("id");
         OrderDBContext db = new OrderDBContext();
-        db.deleteOrder(id);
+        
         db.deleteInfOrder(id);
-        request.getRequestDispatcher("order").forward(request, response);
+        db.deleteOrder(id);
+        response.sendRedirect("order");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,7 +49,7 @@ public class DeleteOrder extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -61,7 +63,7 @@ public class DeleteOrder extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }

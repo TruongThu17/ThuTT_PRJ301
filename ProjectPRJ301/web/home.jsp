@@ -129,12 +129,42 @@
                                                         <td>${bd.cname}</td>
                                                         <td><fmt:formatNumber value = "${bd.total}" type = "currency"/></td>
                                                         <td>${bd.date}</td>
-                                                        <td><a href="">Chi tiết hóa đơn</a> </td>
+                                                        <td><a href="detailorder?id=${bd.bid}">Chi tiết hóa đơn</a> </td>
                                                     </tr>
 
                                                 </c:forEach>
                                             </tbody>
                                         </table>
+                                        <div class ="row">
+                                            <div class ="col-lg-6">  </div>
+                                            <div class ="col-lg-6"> 
+
+                                                <nav aria-label="Page navigation example" class ="">
+                                                    <ul class="pagination justify-content-end">
+
+
+
+                                                        <c:forEach begin="1" end="${requestScope.totalPage2}" var="i">
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="home?page2=${i-1}" aria-label="Previous">
+                                                                    <span aria-hidden="true">&laquo;</span>
+                                                                    <span class="sr-only">Previous</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="page-item"><a class="page-link" onchange="submitSearchForm();" href="home?page2=${i}">${i}</a></li>
+                                                            <li class="page-item">
+                                                                <a class="page-link" href="home?page2=${i+1}" aria-label="Next">
+                                                                    <span aria-hidden="true">&raquo;</span>
+                                                                    <span class="sr-only">Next</span>
+                                                                </a>
+                                                            </li>
+                                                        </c:forEach>
+
+
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -153,30 +183,59 @@
                                     </div>
                                     <!-- Card Body -->
                                     <div class="card-body">
-                                            <table class="table table-bordered as" id="dataTable" width="1000%" cellspacing="0">
-                                                <thead>
+                                        <table class="table table-bordered as" id="dataTable" width="1000%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mã Hóa Đơn</th>
+                                                    <th>Tên Khách Hàng</th>
+                                                    <th>Tổng Hóa Đơn</th>
+                                                    <th>Ngày Mua</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach items="${billOnMonth}" var="bm">
+
                                                     <tr>
-                                                        <th>Mã Hóa Đơn</th>
-                                                        <th>Tên Khách Hàng</th>
-                                                        <th>Tổng Hóa Đơn</th>
-                                                        <th>Ngày Mua</th>
-                                                        <th></th>
+                                                        <td>${bm.bid}</td>
+                                                        <td>${bm.cname}</td>
+                                                        <td><fmt:formatNumber value = "${bm.total}" type = "currency"/></td>
+                                                        <td>${bm.date}</td>
+                                                        <td><a href="detailorder?id=${bm.bid}">Chi tiết hóa đơn</a> </td>
                                                     </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <c:forEach items="${billOnMonth}" var="bm">
 
-                                                        <tr>
-                                                            <td>${bm.bid}</td>
-                                                            <td>${bm.cname}</td>
-                                                            <td><fmt:formatNumber value = "${bm.total}" type = "currency"/></td>
-                                                            <td>${bm.date}</td>
-                                                            <td><a href="">Chi tiết hóa đơn</a> </td>
-                                                        </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                        <div class ="row">
+                                            <div class ="col-lg-6">  </div>
+                                            <div class ="col-lg-6"> 
 
-                                                    </c:forEach>
-                                                </tbody>
-                                            </table>
+                                                <nav aria-label="Page navigation example" class ="">
+                                                    <ul class="pagination justify-content-end">
+
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="home?page1=${page1-1<=0?1:page1-1}" aria-label="Previous">
+                                                                <span aria-hidden="true">&laquo;</span>
+                                                                <span class="sr-only">Previous</span>
+                                                            </a>
+                                                        </li>
+
+                                                        <c:forEach begin="1" end="${requestScope.totalPage1}" var="i">
+
+                                                            <li class="page-item"><a class="page-link" onchange="submitSearchForm();" href="home?page1=${i}">${i}</a></li>
+                                                        </c:forEach>
+
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="home?page1=${page1+1>totalPage1?totalPage1:page1+1}" aria-label="Next">
+                                                                <span aria-hidden="true">&raquo;</span>
+                                                                <span class="sr-only">Next</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

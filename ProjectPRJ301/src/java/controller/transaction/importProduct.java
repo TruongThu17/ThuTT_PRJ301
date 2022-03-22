@@ -5,6 +5,7 @@
  */
 package controller.transaction;
 
+import Login.BaseAuthenticationController;
 import dal.InforProductDBContext;
 import dal.ProductDBContext;
 import dal.ProductTypeDBContext;
@@ -27,7 +28,7 @@ import model.Supplier;
  *
  * @author win
  */
-public class importProduct extends HttpServlet {
+public class importProduct extends BaseAuthenticationController {
 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -40,7 +41,7 @@ public class importProduct extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         InforProductDBContext db = new InforProductDBContext();
         ArrayList<InforProduct> products = db.getInforProduct();
@@ -66,7 +67,7 @@ public class importProduct extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("id");
         String barcode = request.getParameter("code");
@@ -75,7 +76,9 @@ public class importProduct extends HttpServlet {
         float pricep = Float.parseFloat(price);
         String nsx = request.getParameter("nsx");
         String hsd = request.getParameter("hsd");
-        Date hsdp = Date.valueOf(hsd);
+        Date hsdp = null;
+        if(hsd!=null){
+         hsdp= Date.valueOf(hsd);}
         String sl = request.getParameter("sl");
         int slp = Integer.parseInt(sl);
         String unit = request.getParameter("unit");

@@ -80,7 +80,7 @@
                                     <div id="dataTable_filter" class="right dataTables_filter">
                                         <label>Search:
                                             <form action = "order" method="post">
-                                            <input name ="search" onchange="submitSearchForm();" type="searchs" class="form-control form-control-sm " placeholder="" aria-controls="dataTable">
+                                                <input name ="search" value="${search}" onchange="submitSearchForm();" type="search" class="form-control form-control-sm " placeholder="" aria-controls="dataTable">
                                             </form>
                                         </label>
                                     </div>
@@ -107,54 +107,46 @@
                                         <c:choose>
                                             <c:when test="${requestScope.customers.size()==0||requestScope.billed.size()==0}"> ${err}</c:when>
                                             <c:otherwise>
-                                                <c:forEach items="${requestScope.customers}"  var="c">
+                                                <c:forEach items="${requestScope.billed}"  var="b">
                                                     <tbody>
                                                         <tr>
                                                             <td>
-                                                                <c:forEach items="${requestScope.billed}" var="b">
-                                                                    ${c.id == b.cid?b.bid:""}
-                                                                </c:forEach>
+
+                                                                ${b.bid}
+
                                                             </td>
                                                             <td>
-                                                                ${c.name}
+
+                                                                ${b.cid}
+
+
                                                             </td>
                                                             <td>
-                                                                <c:forEach items="${requestScope.billed}" var="b">
-                                                                    <c:if test="${c.id == b.cid}">
-                                                                        <fmt:formatNumber value = "${b.total}" type = "currency"/>
-                                                                    </c:if>
-                                                                </c:forEach>
+
+                                                                <fmt:formatNumber value = "${b.total}" type = "currency"/>
+
                                                             </td>
-                                                            <td> <c:forEach items="${requestScope.billed}" var="b">
-                                                                    <c:if test="${c.id == b.cid}">
-                                                                        <fmt:formatNumber value = "${b.prepayment}" type = "currency"/>
-                                                                    </c:if>
-                                                                </c:forEach>
+                                                            <td> 
+                                                                <fmt:formatNumber value = "${b.prepayment}" type = "currency"/>
+
                                                             </td>
                                                             <td>
-                                                                <c:forEach items="${requestScope.billed}" var="b">
-                                                                    <c:if test="${c.id == b.cid}">
-                                                                        <fmt:formatNumber value = "${b.debt}" type = "currency"/>
-                                                                    </c:if>
-                                                                </c:forEach>
+
+                                                                <fmt:formatNumber value = "${b.debt}" type = "currency"/>
+
                                                             </td>
                                                             <td>
-                                                                <c:forEach items="${requestScope.billed}" var="b">
-                                                                    ${c.id == b.cid?b.dateinvoice:""}
-                                                                </c:forEach>
+                                                                ${b.dateinvoice}    
                                                             </td>
                                                             <td>
-                                                                <c:forEach items="${requestScope.billed}" var="b">
-                                                                    ${c.id == b.cid?b.date:""}
-                                                                </c:forEach>
+                                                                ${b.date}
+
                                                             </td>
-                                                            <td><a href="#">Chi tiết hóa đơn</a> </td>
+                                                            <td><a href="detailorder?id=${b.bid}">Chi tiết hóa đơn</a> </td>
                                                             <td>
-                                                                <c:forEach items="${requestScope.billed}" var="b">
-                                                                    <c:if test="${c.id == b.cid}">
-                                                                        <a href="deletebilled?id=${b.bid}" onclick="return confirm('Bạn có chắc là muốn xóa hóa đơn này không?')">Xóa</a>
-                                                                    </c:if>
-                                                                </c:forEach>
+
+                                                                <a href="deleteorder?id=${b.bid}" onclick="return confirm('Bạn có chắc là muốn xóa hóa đơn này không?')">Xóa</a>
+
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -167,6 +159,34 @@
 
 
                                     </table>
+                                </div>
+                                <div class ="row">
+                                    <div class ="col-lg-6">  </div>
+                                    <div class ="col-lg-6"> 
+
+                                        <nav aria-label="Page navigation example" class ="">
+                                            <ul class="pagination justify-content-end">
+
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                        <span class="sr-only">Previous</span>
+                                                    </a>
+                                                </li>
+
+                                                <c:forEach begin="1" end="${requestScope.totalPage}" var="i">
+                                                    <li class="page-item"><a class="page-link" onchange="submitSearchForm();" href="order?page=${i}&search=${searchP}">${i}</a></li>
+                                                    </c:forEach>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </nav>
+                                    </div>
                                 </div>
                             </div>
                         </div>

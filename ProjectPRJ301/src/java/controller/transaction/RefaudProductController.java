@@ -5,6 +5,7 @@
  */
 package controller.transaction;
 
+import Login.BaseAuthenticationController;
 import dal.RefaudProductDBContext;
 import dal.SupplierDBContext;
 import java.io.IOException;
@@ -21,7 +22,7 @@ import model.Supplier;
  *
  * @author win
  */
-public class RefaudProductController extends HttpServlet {
+public class RefaudProductController extends BaseAuthenticationController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,7 +60,7 @@ public class RefaudProductController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RefaudProductDBContext db = new RefaudProductDBContext();
         ArrayList<RefaudProduct> refaudproducts = db.getRefaud();
@@ -84,7 +85,7 @@ public class RefaudProductController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }

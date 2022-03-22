@@ -58,13 +58,13 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-700">Nhập hàng vào kho</h1>
+                        <h1 class="h3 mb-4 mt-4 text-gray-700">Nhập hàng vào kho</h1>
                         <div class="card shadow">
                             <div class="card-body ">
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-md-8 ">
-                                            <form action="importproduct" method="POST">
+                                        <div class="col-md-8">
+                                            <form action="importproduct" method="POST" class ="justify-content-center">
                                                 <div class="form-group" >
                                                     <label for="ptid">Loại sản phẩm :</label>
                                                     <select  class ="form-control card" name ="ptid">
@@ -122,14 +122,15 @@
                                                     <input type="text" class="form-control card" name="note" id="exampleInputEmail1" aria-describedby="prodnote" placeholder="Ghi chú">
                                                 </div>
                                                 <div class ="text-center mgbt">
-                                                    <input class ="bg-primary border-primary flex-column"type="submit" value ="Thêm vào kho" />
+                                                    <input class ="justify-content-center" style="height: 40px; width: 150px;"type="submit" value ="Thêm vào kho" />
 
                                                 </div>
                                                 <div class="col-md-3"></div>
+                                                </form>
                                         </div>
                                     </div>
 
-                                    </form>
+                                    
                                 </div>
                             </div>
                         </div>

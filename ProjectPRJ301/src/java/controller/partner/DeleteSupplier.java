@@ -5,6 +5,7 @@
  */
 package controller.partner;
 
+import Login.BaseAuthenticationController;
 import dal.CustomerDBContext;
 import dal.SupplierDBContext;
 import java.io.IOException;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author win
  */
-public class DeleteSupplier extends HttpServlet {
+public class DeleteSupplier extends BaseAuthenticationController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,7 +48,7 @@ public class DeleteSupplier extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -61,7 +62,7 @@ public class DeleteSupplier extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }

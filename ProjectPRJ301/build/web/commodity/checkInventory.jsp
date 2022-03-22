@@ -84,17 +84,6 @@
 
                                     <div class="col-sm-12 col-md-6">
                                         <div class="left dataTables_length" id="dataTable_length">
-
-                                            <select name="did" aria-controls="dataTable" class="mx-3 my-3 custom-select custom-select-sm form-control form-control-sm" onchange="submitSearchForm();" >
-                                                <option value="-1">Tất Cả</option>
-                                                <c:forEach items="${requestScope.producttypes}" var="p">
-                                                    <option 
-                                                        <c:if test="${p.ptid eq requestScope.did}">
-                                                            selected="selected"
-                                                        </c:if>
-                                                        value="${p.ptid}">${p.ptname}</option>
-                                                </c:forEach>
-                                            </select>
                                         </div>
                                     </div>
 
@@ -102,7 +91,7 @@
                                         <div id="dataTable_filter" class="right dataTables_filter">
                                             <label>Search:
 
-                                                <input name ="searchP" onchange="searchProduct();" type="search" class="form-control form-control-sm " placeholder="" aria-controls="dataTable">
+                                                <input name ="searchP" value ="${searchP}" onchange="searchProduct();" type="search" class="form-control form-control-sm " placeholder="" aria-controls="dataTable">
 
                                             </label>
                                         </div>
@@ -150,7 +139,7 @@
                                                         <td>${i.getUnit()}</td>
                                                         <td>${i.isStatus()!="1"?"Đang kinh doanh":"Ngừng kinh doanh"}
                                                         </td>
-                                                        <td><a href="#">Chỉnh sửa</a> </td>
+                                                        <td><a href="editproduct?id=${i.getId()}">Chỉnh sửa</a> </td>
                                                         <td><a href="deleteproduct?id=${i.getId()}" onclick="return confirm('Bạn có chắc là muốn xóa sản phẩm này không?')">Xóa</a></td>
                                                     </tr>
 
@@ -159,7 +148,36 @@
                                         </c:choose>
                                         </tbody>
                                     </table>
-                                   
+
+                                </div>
+
+                                <div class ="row">
+                                    <div class ="col-lg-6">  </div>
+                                    <div class ="col-lg-6"> 
+
+                                        <nav aria-label="Page navigation example" class ="">
+                                            <ul class="pagination justify-content-end">
+
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                        <span class="sr-only">Previous</span>
+                                                    </a>
+                                                </li>
+
+                                                <c:forEach begin="1" end="${requestScope.totalPage}" var="i">
+                                                    <li class="page-item"><a class="page-link" onchange="submitSearchForm();" href="checkinventory?page=${i}&searchP=${searchP}">${i}</a></li>
+                                                    </c:forEach>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </nav>
+                                    </div>
                                 </div>
                             </div>
                         </div>

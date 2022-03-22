@@ -5,6 +5,7 @@
  */
 package controller.partner;
 
+import Login.BaseAuthenticationController;
 import dal.CustomerDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +19,7 @@ import model.Customer;
  *
  * @author win
  */
-public class InsertCustomer extends HttpServlet {
+public class InsertCustomer extends BaseAuthenticationController{
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -30,7 +31,7 @@ public class InsertCustomer extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("businesspartner/insertcustomer.jsp").forward(request, response);
     }
@@ -44,7 +45,7 @@ public class InsertCustomer extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("id");
         String name  = request.getParameter("name");

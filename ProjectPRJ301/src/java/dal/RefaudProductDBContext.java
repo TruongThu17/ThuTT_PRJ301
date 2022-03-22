@@ -120,4 +120,18 @@ public class RefaudProductDBContext extends DBContext {
             }
         }
     }
+
+    public int Count() {
+        try {
+            String sql = "  select count(*) from RefaudProduct";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) +1;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RefaudDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
 }

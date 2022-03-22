@@ -20,15 +20,19 @@ import model.Billed;
  */
 public class HomeDBContext extends DBContext {
 
-    public ArrayList<Bill_Month_Day> getBillOnMonth() {
+    public ArrayList<Bill_Month_Day> getBillOnMonth(int page, int page_sz) {
         ArrayList<Bill_Month_Day> billed = new ArrayList<>();
         try {
             String sql = "select a.bid, b.cname, total, dateinvoice from Billed a\n"
                     + "inner join Customer b on a.cid = b.cid\n"
                     + "where MONTH(dateinvoice)=  MONTH(GETDATE())\n"
                     + "and YEAR(dateinvoice) = Year(GETDATE())\n"
-                    + "group by a.bid, b.cname, total, dateinvoice ";
+                    + "group by a.bid, b.cname, total, dateinvoice order by a.bid "
+                    + "offset (?-1)*? row fetch next ? rows only";
             PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, page);
+            stm.setInt(2, page_sz);
+            stm.setInt(3, page_sz);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Bill_Month_Day b = new Bill_Month_Day();
@@ -45,14 +49,17 @@ public class HomeDBContext extends DBContext {
         return billed;
     }
 
-    public ArrayList<Bill_Month_Day> getBillOnDay() {
+    public ArrayList<Bill_Month_Day> getBillOnDay(int page, int page_sz) {
         ArrayList<Bill_Month_Day> billed = new ArrayList<>();
         try {
             String sql = "select a.bid, b.cname, total, dateinvoice from Billed a\n"
                     + "inner join Customer b on a.cid = b.cid\n"
                     + "where dateinvoice = CONVERT(date, GETDATE())\n"
-                    + "	group by a.bid, b.cname, total, dateinvoice";
+                    + "	group by a.bid, b.cname, total, dateinvoice order by a.bid offset (?-1)*? row fetch next ? rows only";
             PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, page);
+            stm.setInt(2, page_sz);
+            stm.setInt(3, page_sz);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Bill_Month_Day b = new Bill_Month_Day();

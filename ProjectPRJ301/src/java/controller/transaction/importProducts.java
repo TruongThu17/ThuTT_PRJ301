@@ -5,6 +5,7 @@
  */
 package controller.transaction;
 
+import Login.BaseAuthenticationController;
 import dal.InforProductDBContext;
 import dal.ProductDBContext;
 import dal.ProductTypeDBContext;
@@ -26,7 +27,7 @@ import model.Supplier;
  *
  * @author win
  */
-public class importProducts extends HttpServlet {
+public class importProducts extends BaseAuthenticationController{
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,30 +45,45 @@ public class importProducts extends HttpServlet {
         String raw_did = request.getParameter("did");
         String raw_txt = request.getParameter("searchP");
         String err = null;
+        final int page_sz = 10;
+        int page = 1;
+        String pageStr = request.getParameter("page");
+        if (pageStr != null) {
+            page = Integer.parseInt(pageStr);
+        }
+
         ProductDBContext pdb = new ProductDBContext();
         ArrayList<Product> product = new ArrayList<>();
         if (raw_did == null || raw_did.length() == 0 || "-1".equals(raw_did)) {
             if (raw_txt == null) {
                 product = pdb.getProduct();
-                products =db.getInforProduct();
+                products =db.getInforProduct(page, page_sz);
             } else {
                 product = pdb.getProductByString(raw_txt);
-                products = db.getInforProductByPname(raw_txt);
+                products = db.getInforProductByPname(raw_txt, page, page_sz);
             }
         } else {
             if (raw_txt == null) {
                 product = pdb.getProductByPTid(raw_did);
-                products = db.getInforProductByPTid(raw_did);
+                products = db.getInforProductByPTid(raw_did, page, page_sz);
             } else {
                 product = pdb.getProductByPTidandName(raw_txt, raw_did);
-                products = db.getProductByPTidandName(raw_txt, raw_did);
+                products = db.getProductByPTidandName(raw_txt, raw_did, page, page_sz);
             }
         }
+        int totalProducts = product.size();
+        int totalPage = totalProducts / page_sz;
+        if (totalProducts % page_sz != 0) {
+            totalPage += 1;
+        }
+        request.setAttribute("totalPage", totalPage);
         if (product.isEmpty()) {
             err = "Danh sách sản phẩm rỗng";
             request.setAttribute("err", err);
         }
-         request.setAttribute("did", raw_did);
+        request.setAttribute("page", page);
+        request.setAttribute("did", raw_did);
+        request.setAttribute("searchP", raw_txt);
         request.setAttribute("products", products);
         SupplierDBContext sdb = new SupplierDBContext();
         request.setAttribute("product", product);
@@ -89,7 +105,7 @@ public class importProducts extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -103,7 +119,7 @@ public class importProducts extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }

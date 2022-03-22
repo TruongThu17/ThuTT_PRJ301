@@ -62,11 +62,7 @@
                             <div class="card-header py-3">
                                 <div class ="row">
                                     <h6 class="m-0 font-weight-bold text-primary col-md-3 col-md-9">Danh sánh</h6>
-                                    <div class="col-md-3 col-sm-2 text-center">
-                                        <form action="insertbilled">
-                                            <input class=" form-control" type="submit" value="+ Thêm mới" />
-                                        </form>
-                                    </div>
+                                    
                                 </div>
 
                             </div>
@@ -116,8 +112,8 @@
                                                     <td><fmt:formatNumber value = "${b.debt}" type = "currency"/></td>
                                                     <td>${b.dateinvoice} </td>
                                                     <td>${b.date} </td>
-                                                    <td><a href="#">Chi tiết hóa đơn</a> </td>
-                                                    <td><a href="deletebilled?id=${s.bid}" onclick="return confirm('Bạn có chắc là muốn xóa hóa đơn này không?')">Xóa</a></td>
+                                                    <td><a href="detailorder?id=${b.bid}">Chi tiết hóa đơn</a> </td>
+                                                    <td><a href="deletebilled?id=${b.bid}" onclick="return confirm('Bạn có chắc là muốn xóa hóa đơn này không?')">Xóa</a></td>
                                                 </tr>
                                             </tbody>
                                         </c:forEach>

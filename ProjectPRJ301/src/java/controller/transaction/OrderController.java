@@ -5,6 +5,7 @@
  */
 package controller.transaction;
 
+import Login.BaseAuthenticationController;
 import dal.CustomerDBContext;
 import dal.OrderDBContext;
 import java.io.IOException;
@@ -20,7 +21,7 @@ import model.Customer;
  *
  * @author win
  */
-public class OrderController extends HttpServlet {
+public class OrderController extends BaseAuthenticationController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,23 +34,40 @@ public class OrderController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String err ="";
+        String err = "";
         OrderDBContext db = new OrderDBContext();
-        ArrayList<Billed> billed = db.getOrder();
-        request.setAttribute("billed", billed);
+
         CustomerDBContext cdb = new CustomerDBContext();
         String search = request.getParameter("search");
-         ArrayList<Customer> customers = new ArrayList<>();
-        if("".equals(search)||search == null){
-        customers = cdb.getCustomerInOrder();
+        ArrayList<Customer> customers = new ArrayList<>();
+        final int page_sz = 10;
+        int page = 1;
+        String pageStr = request.getParameter("page");
+        if (pageStr != null) {
+            page = Integer.parseInt(pageStr);
         }
-        else{
-            customers = cdb.getCustomerbyNameInOrder(search);
+        int totalProducts = db.getTotalOrder(search);
+        int totalPage = totalProducts / page_sz;
+        if (totalProducts % page_sz != 0) {
+            totalPage += 1;
         }
-        if(customers.isEmpty()){
-            err ="Danh sánh rỗng!";
+        if ("".equals(search) || search == null) {
+            //customers = cdb.getCustomerInOrder();
+            customers = cdb.getCustomerInOrder(page, page_sz);
+            ArrayList<Billed> billed = db.getAllOrder();
+            request.setAttribute("billed", billed);
+        } else {
+            //customers = cdb.getCustomerbyNameInOrder(search);
+            customers = cdb.getCustomerbyNameInOrder(search, page, page_sz);
+            ArrayList<Billed> billed = db.getOrderByCustomerName(search);
+            request.setAttribute("billed", billed);
+        }
+        if (customers.isEmpty()) {
+            err = "Danh sánh rỗng!";
             request.setAttribute("err", err);
         }
+        request.setAttribute("totalPage", totalPage);
+        request.setAttribute("search", search);
         request.setAttribute("customers", customers);
         request.getRequestDispatcher("transaction/order.jsp").forward(request, response);
     }
@@ -64,7 +82,7 @@ public class OrderController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -78,7 +96,7 @@ public class OrderController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }

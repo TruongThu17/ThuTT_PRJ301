@@ -59,7 +59,8 @@
                 <div id="collapseT" class="collapse" aria-labelledby="heading" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/addbill">Lên Hóa Đơn</a>
-                        <a class="collapse-item" href="">Trả Hàng</a>
+                        <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/customer-refaud">Trả Hàng</a>
+                        <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/supplier-refaud">Trả Hàng Nhập</a>
                         <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/insertcustomer">Thêm Khách Hàng</a>
                         <a class="collapse-item" href="http://localhost:8080/ProjectPRJ301/importproduct">Nhập Hàng Hóa</a>
                     </div>
@@ -120,7 +121,7 @@
                     </div>
                 </div>
             </li>
-            <!-- Nav Item - quản lý -->
+            <!-- Nav Item - quản lý
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseB"
                    aria-expanded="true" aria-controls="collapse">
@@ -136,7 +137,7 @@
                         <a class="collapse-item" href="">Báo Cáo Năm</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
             
             <!-- Sidebar Toggler (Sidebar) -->

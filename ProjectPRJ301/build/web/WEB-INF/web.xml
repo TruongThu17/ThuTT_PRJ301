@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>filter.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>SupplierController</servlet-name>
         <servlet-class>controller.partner.SupplierController</servlet-class>
@@ -132,6 +140,46 @@
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>Login.LogoutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SettingPriceController</servlet-name>
+        <servlet-class>controller.commodity.SettingPriceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckOutController</servlet-name>
+        <servlet-class>controller.service.CheckOutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProduct</servlet-name>
+        <servlet-class>controller.commodity.EditProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerRefaudController</servlet-name>
+        <servlet-class>controller.service.CustomerRefaudController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddCustomerRefaud</servlet-name>
+        <servlet-class>controller.service.AddCustomerRefaud</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SupplierRefaud</servlet-name>
+        <servlet-class>controller.service.SupplierRefaud</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailOrder</servlet-name>
+        <servlet-class>controller.transaction.DetailOrder</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailRefaud</servlet-name>
+        <servlet-class>controller.transaction.DetailRefaud</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailRefaudProduct</servlet-name>
+        <servlet-class>controller.transaction.DetailRefaudProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSupplierRefaud</servlet-name>
+        <servlet-class>controller.service.AddSupplierRefaud</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SupplierController</servlet-name>
         <url-pattern>/supplier</url-pattern>
@@ -259,6 +307,46 @@
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SettingPriceController</servlet-name>
+        <url-pattern>/setting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOutController</servlet-name>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProduct</servlet-name>
+        <url-pattern>/editproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerRefaudController</servlet-name>
+        <url-pattern>/customer-refaud</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCustomerRefaud</servlet-name>
+        <url-pattern>/add-customer-refaud</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SupplierRefaud</servlet-name>
+        <url-pattern>/supplier-refaud</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailOrder</servlet-name>
+        <url-pattern>/detailorder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailRefaud</servlet-name>
+        <url-pattern>/detailrefaud</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailRefaudProduct</servlet-name>
+        <url-pattern>/detailrefaudproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSupplierRefaud</servlet-name>
+        <url-pattern>/add-supplier-refaud</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -5,6 +5,7 @@
  */
 package controller.commodity;
 
+import Login.BaseAuthenticationController;
 import dal.InforProductDBContext;
 import dal.ProductDBContext;
 import java.io.IOException;
@@ -15,13 +16,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.InforProduct;
+import model.Inventory;
 import model.Product;
 
 /**
  *
  * @author win
  */
-public class SeachProductController extends HttpServlet {
+public class SeachProductController extends BaseAuthenticationController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,20 +61,21 @@ public class SeachProductController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ProductDBContext db = new ProductDBContext();
         InforProductDBContext idb = new InforProductDBContext();
+        
         String searchKey = request.getParameter("searchKey");
         PrintWriter writer = response.getWriter();
         String result = "";
         if (searchKey != null) {
             Product p = db.getProductById(searchKey);
-            InforProduct in = null;
-            ArrayList<InforProduct> inforProduct = idb.getInforProduct();
-            for (InforProduct info : inforProduct) {
-                if (info.getPid().equals(p.getProid())) {
+            Inventory in = null;
+            ArrayList<Inventory> inforProduct = idb.checkInventory();
+            for (Inventory info : inforProduct) {
+                if (info.getId().equals(p.getProid())) {
                     in = info;
                     break;
                 }
@@ -80,7 +83,7 @@ public class SeachProductController extends HttpServlet {
             result += p.getProid() + "|";
             result += p.getPname() + "|";
             result += in.getUnit() + "|";
-            result += in.getSaleprice();
+            result += in.getPrice();
         }
         writer.print(result);
 
@@ -95,7 +98,7 @@ public class SeachProductController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ProductDBContext db = new ProductDBContext();
